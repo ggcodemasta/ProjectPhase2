@@ -12,9 +12,6 @@ namespace WebApplication1.Controllers
     {
         //Grant test commit
 
-
-
-
         public ActionResult Index()
         {
             CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
