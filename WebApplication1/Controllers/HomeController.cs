@@ -11,6 +11,7 @@ namespace WebApplication1.Controllers
     public class HomeController : Controller
     {
         //Grant test commit
+
         public ActionResult Index()
         {
             CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
