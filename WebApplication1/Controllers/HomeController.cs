@@ -16,6 +16,7 @@ namespace WebApplication1.Controllers
             CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
             return View(careerProfileRepository.GetAllProfiles());
         }
+        //cassie have make change.
 
         [HttpPost]
         public ActionResult DisplaySearchResults()
