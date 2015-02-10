@@ -1,0 +1,208 @@
+﻿
+@{
+    ViewBag.Title = "AdvancedSearch";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+<h2>Advanced Search</h2>
+
+@using (Html.BeginForm("DisplaySearchResults", "Home", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <div id="skills">
+            <h3>Languages Required</h3>
+            <hr />
+
+
+            @Html.Label("Ajax")
+            <input type="checkbox" name="Ajax" />
+            @Html.Label("C")
+            <input type="checkbox" name="C" />
+            @Html.Label("C#")
+            <input type="checkbox" name="C#" />
+            @Html.Label("C++")
+            <input type="checkbox" name="C++" />
+            @Html.Label("Ojective C")
+            <input type="checkbox" name="Ojective C" />
+            @Html.Label("ASP.NET")
+            <input type="checkbox" name="ASP.NET" />
+            @Html.Label("PHP")
+            <input type="checkbox" name="PHP" /><br />
+            @Html.Label("Ruby")
+            <input type="checkbox" name="Ruby" />
+            @Html.Label("Python")
+            <input type="checkbox" name="Python" />
+            @Html.Label("Perl")
+            <input type="checkbox" name="Perl" />
+            @Html.Label("XML")
+            <input type="checkbox" name="XML" />
+            @Html.Label("Javascript")
+            <input type="checkbox" name="Javascript" /><br />
+            @Html.Label("Java")
+            <input type="checkbox" name="Java" />
+            @Html.Label("SQL")
+            <input type="checkbox" name="SQL" />
+            @Html.Label("VisualBasic")
+            <input type="checkbox" name="VisualBasic" />
+            @Html.Label("Assembly")
+            <input type="checkbox" name="Linux" />
+            @Html.Label("AngularJS")
+            <input type="checkbox" name="AngularJS" />
+            <br />
+            <h3>Systems Knowledge</h3>
+            <br />
+            <input type="checkbox" name="Testing" />
+            @Html.Label("iOS")
+            <input type="checkbox" name="iOS" />
+            @Html.Label("Android")
+            <input type="checkbox" name="Android" />
+            @Html.Label("Linux")
+            <input type="checkbox" name="Linux" />
+            <br />
+        </div>
+        <hr />
+        <div id="location">
+            @Html.Label("Location Based In: ")
+            @Html.Editor("locationInput")
+            @Html.Label("Employee relocation?")
+            @Html.Label("yes")
+            <input type="checkbox" />
+            @Html.Label("no")
+            <input type="checkbox" />
+        </div>
+        <hr />
+     
+        <h3>Previous experience preferred?</h3>
+           <table class="table-condensed">
+               <th>Job</th>
+               <th>Industry</th>
+               <th>Title</th>
+               <th>Years of Experience</th>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <select name="industry1">
+                                <option value="1">Video Graphics</option>
+                                <option value="2">Development</option>
+                                <option value="3">Reverse Engineering</option>
+                                <option value="4">Database Analysis</option>
+                                <option value="5">Design</option>
+                                <option value="6">Testing</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="jobs1">
+                                <option value="1">Junior Developer</option>
+                                <option value="2">Senior Developer</option>
+                                <option value="3">Software Tester</option>
+                                <option value="4">Project Manager</option>
+                                <option value="5">Freelancer</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="Years1">
+                                <option value="1">1 to 2 years</option>
+                                <option value="2">2 to 3 years</option>
+                                <option value="3">3 to 4 years</option>
+                                <option value="4">4 to 5 years</option>
+                                <option value="4">5+ years</option>
+                            </select>
+                        </td>
+                        <td><input ="submit" value="extra comments here"/></td>
+                    </tr>
+                   <tr>
+                       <td></td>
+                       <td>OR</td>
+                   </tr>
+               <tr>
+                   <td>2</td>
+                   <td>
+                       <select name="industry2">
+                           <option value="1">Video Graphics</option>
+                           <option value="2">Development</option>
+                           <option value="3">Reverse Engineering</option>
+                           <option value="4">Database Analysis</option>
+                           <option value="5">Design</option>
+                           <option value="6">Testing</option>
+                       </select>
+                   </td>
+                   <td>
+                       <select name="jobs2">
+                           <option value="1">Junior Developer</option>
+                           <option value="2">Senior Developer</option>
+                           <option value="3">Software Tester</option>
+                           <option value="4">Project Manager</option>
+                           <option value="5">Freelancer</option>
+                       </select>
+                   </td>
+                   <td>
+                       <select name="Years2">
+                           <option value="1">1 to 2 years</option>
+                           <option value="2">2 to 3 years</option>
+                           <option value="3">3 to 4 years</option>
+                           <option value="4">4 to 5 years</option>
+                           <option value="4">5+ years</option>
+                       </select>
+                   </td>
+                   <td><input ="submit" value="extra comments here" /></td>
+               </tr>
+               <tr>
+                   <td></td>
+                   <td>OR</td>
+               </tr>
+
+               <tr>
+                   <td>3</td>
+                   <td>
+                       <select name="industry3">
+                           <option value="1">Video Graphics</option>
+                           <option value="2">Development</option>
+                           <option value="3">Reverse Engineering</option>
+                           <option value="4">Database Analysis</option>
+                           <option value="5">Design</option>
+                           <option value="6">Testing</option>
+                       </select>
+                   </td>
+                   <td>
+                       <select name="jobs3">
+                           <option value="1">Junior Developer</option>
+                           <option value="2">Senior Developer</option>
+                           <option value="3">Software Tester</option>
+                           <option value="4">Project Manager</option>
+                           <option value="5">Freelancer</option>
+                       </select>
+                   </td>
+                   <td>
+                       <select name="Years3">
+                           <option value="1">1 to 2 years</option>
+                           <option value="2">2 to 3 years</option>
+                           <option value="3">3 to 4 years</option>
+                           <option value="4">4 to 5 years</option>
+                           <option value="4">5+ years</option>
+                       </select>
+                   </td>
+                   <td><input ="submit" value="extra comments here" /></td>
+               </tr>
+
+           </table>
+ 
+        <hr />
+        <h3>Highest Education</h3>
+        <select name="education">
+            <option value="Doctorate">Doctorate</option>
+            <option value="Masters">Masters</option>
+            <option value="Bachelors">Bachelors</option>
+            <option value="Degree">Degree</option>
+            <option value="Certificate">Certificate</option>
+        </select>
+        <hr />
+        <p>
+            <input type="submit" value="Search!" class="btn btn-primary" />
+        </p>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Back to Index", "Index")
+</div>

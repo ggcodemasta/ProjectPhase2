@@ -1,0 +1,129 @@
+﻿@model IEnumerable<WebApplication1.ViewModels.CareerProfile>
+
+@{
+    ViewBag.Title = "AdminHome";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+<h2>AdminHome</h2>
+
+<p>
+    @Html.ActionLink("All Acounts", "AdminHome", "Login") | @Html.ActionLink("Premium Acounts", "AdminHome", "Login")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProfileID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.LinkedinURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PortfolioURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PictureURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Province)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Skills)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Industry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Company)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Years)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HighestEducation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Relocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyTitleYears)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProfileID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.LinkedinURL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PortfolioURL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PictureURL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Province)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Country)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Skills)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Industry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Company)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Years)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HighestEducation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Relocation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyTitleYears)
+        </td>*@
+        <td>
+            @Html.ActionLink("Edit", "Index", "Profile" ) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

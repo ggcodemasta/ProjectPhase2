@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "ContactProfile";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+<h2>Contact Michael</h2>
+
+<div class="contactForm">
+    <form role="form">
+        <div class="form-group">
+            <label for="employerEmail1">Employer Email address</label>
+            <input type="email" class="form-control" id="employerEmail1" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="employerMessage">Message to Michael</label>
+            <textarea rows="8" @*cols="50"*@ class="form-control" id="employerMessage"></textarea>
+            @*<input type="password" class="form-control" id="employerMessage" placeholder="Password">*@
+        </div>
+       
+        <a href="/Home/MessageSent"><button type="button" class="btn btn-primary">Submit</button></a>
+</form>
+</div>

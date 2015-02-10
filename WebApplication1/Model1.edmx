@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EmployeesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Career">
+          <Key>
+            <PropertyRef Name="careerID" />
+          </Key>
+          <Property Name="careerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="profileID" Type="int" Nullable="false" />
+          <Property Name="industry" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="company" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="jobTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="years" Type="int" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="profileID" />
+          </Key>
+          <Property Name="profileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="firstName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="lastName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="linkedinURL" Type="varchar" MaxLength="255" />
+          <Property Name="pictureURL" Type="varchar" MaxLength="255" />
+          <Property Name="portfolioURL" Type="varchar" MaxLength="255" />
+          <Property Name="highestEducation" Type="varchar" MaxLength="30" />
+          <Property Name="relocationYN" Type="varchar" MaxLength="10" />
+          <Property Name="country" Type="varchar" MaxLength="30" />
+          <Property Name="province" Type="varchar" MaxLength="30" />
+          <Property Name="city" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Employees.dbo.ProfileSkill' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ProfileSkill">
+          <Key>
+            <PropertyRef Name="profileID" />
+            <PropertyRef Name="skillID" />
+          </Key>
+          <Property Name="profileID" Type="int" Nullable="false" />
+          <Property Name="skillID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Skill">
+          <Key>
+            <PropertyRef Name="skillID" />
+          </Key>
+          <Property Name="skillID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="skillName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SvcProfile">
+          <Key>
+            <PropertyRef Name="svcProfileID" />
+          </Key>
+          <Property Name="svcProfileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="profileID" Type="int" Nullable="false" />
+          <Property Name="svcTypeID" Type="int" Nullable="false" />
+          <Property Name="billingDate" Type="datetime" Nullable="false" />
+          <Property Name="billingCode" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="billingMethod" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="svcStartDate" Type="datetime" />
+          <Property Name="svcEndDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SvcType">
+          <Key>
+            <PropertyRef Name="svcTypeID" />
+          </Key>
+          <Property Name="svcTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="svcName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="svcCharge" Type="money" Nullable="false" />
+          <Property Name="svcWeeks" Type="int" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__Career__profileI__145C0A3F">
+          <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+          <End Role="Career" Type="Self.Career" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="profileID" />
+            </Principal>
+            <Dependent Role="Career">
+              <PropertyRef Name="profileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProfileSk__profi__182C9B23">
+          <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+          <End Role="ProfileSkill" Type="Self.ProfileSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="profileID" />
+            </Principal>
+            <Dependent Role="ProfileSkill">
+              <PropertyRef Name="profileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProfileSk__skill__1920BF5C">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+          <End Role="ProfileSkill" Type="Self.ProfileSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="skillID" />
+            </Principal>
+            <Dependent Role="ProfileSkill">
+              <PropertyRef Name="skillID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SvcProfil__profi__1ED998B2">
+          <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+          <End Role="SvcProfile" Type="Self.SvcProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="profileID" />
+            </Principal>
+            <Dependent Role="SvcProfile">
+              <PropertyRef Name="profileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SvcProfil__svcTy__1FCDBCEB">
+          <End Role="SvcType" Type="Self.SvcType" Multiplicity="1" />
+          <End Role="SvcProfile" Type="Self.SvcProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SvcType">
+              <PropertyRef Name="svcTypeID" />
+            </Principal>
+            <Dependent Role="SvcProfile">
+              <PropertyRef Name="svcTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EmployeesModelStoreContainer">
+          <EntitySet Name="Career" EntityType="Self.Career" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Skill" EntityType="Self.Skill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SvcProfile" EntityType="Self.SvcProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SvcType" EntityType="Self.SvcType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfileSkill" EntityType="Self.ProfileSkill" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProfileSkill].[profileID] AS [profileID], 
+    [ProfileSkill].[skillID] AS [skillID]
+    FROM [dbo].[ProfileSkill] AS [ProfileSkill]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Career__profileI__145C0A3F" Association="Self.FK__Career__profileI__145C0A3F">
+            <End Role="Profile" EntitySet="Profile" />
+            <End Role="Career" EntitySet="Career" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProfileSk__profi__182C9B23" Association="Self.FK__ProfileSk__profi__182C9B23">
+            <End Role="Profile" EntitySet="Profile" />
+            <End Role="ProfileSkill" EntitySet="ProfileSkill" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProfileSk__skill__1920BF5C" Association="Self.FK__ProfileSk__skill__1920BF5C">
+            <End Role="Skill" EntitySet="Skill" />
+            <End Role="ProfileSkill" EntitySet="ProfileSkill" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SvcProfil__profi__1ED998B2" Association="Self.FK__SvcProfil__profi__1ED998B2">
+            <End Role="Profile" EntitySet="Profile" />
+            <End Role="SvcProfile" EntitySet="SvcProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SvcProfil__svcTy__1FCDBCEB" Association="Self.FK__SvcProfil__svcTy__1FCDBCEB">
+            <End Role="SvcType" EntitySet="SvcType" />
+            <End Role="SvcProfile" EntitySet="SvcProfile" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EmployeesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Career">
+          <Key>
+            <PropertyRef Name="careerID" />
+          </Key>
+          <Property Name="careerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="profileID" Type="Int32" Nullable="false" />
+          <Property Name="industry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="company" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="jobTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="years" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Profile" Relationship="Self.FK__Career__profileI__276EDEB3" FromRole="Career" ToRole="Profile" />
+        </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="profileID" />
+          </Key>
+          <Property Name="profileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="linkedinURL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="pictureURL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="portfolioURL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="highestEducation" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="relocationYN" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="country" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="province" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Careers" Relationship="Self.FK__Career__profileI__276EDEB3" FromRole="Profile" ToRole="Career" />
+          <NavigationProperty Name="SvcProfiles" Relationship="Self.FK__SvcProfil__profi__31EC6D26" FromRole="Profile" ToRole="SvcProfile" />
+          <NavigationProperty Name="Skills" Relationship="Self.ProfileSkill" FromRole="Profile" ToRole="Skill" />
+        </EntityType>
+        <EntityType Name="Skill">
+          <Key>
+            <PropertyRef Name="skillID" />
+          </Key>
+          <Property Name="skillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="skillName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Profiles" Relationship="Self.ProfileSkill" FromRole="Skill" ToRole="Profile" />
+        </EntityType>
+        <EntityType Name="SvcProfile">
+          <Key>
+            <PropertyRef Name="svcProfileID" />
+          </Key>
+          <Property Name="svcProfileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="profileID" Type="Int32" Nullable="false" />
+          <Property Name="svcTypeID" Type="Int32" Nullable="false" />
+          <Property Name="billingDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="billingCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="billingMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="svcStartDate" Type="DateTime" Precision="3" />
+          <Property Name="svcEndDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Profile" Relationship="Self.FK__SvcProfil__profi__31EC6D26" FromRole="SvcProfile" ToRole="Profile" />
+          <NavigationProperty Name="SvcType" Relationship="Self.FK__SvcProfil__svcTy__32E0915F" FromRole="SvcProfile" ToRole="SvcType" />
+        </EntityType>
+        <EntityType Name="SvcType">
+          <Key>
+            <PropertyRef Name="svcTypeID" />
+          </Key>
+          <Property Name="svcTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="svcName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="svcCharge" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="svcWeeks" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SvcProfiles" Relationship="Self.FK__SvcProfil__svcTy__32E0915F" FromRole="SvcType" ToRole="SvcProfile" />
+        </EntityType>
+        <Association Name="FK__Career__profileI__276EDEB3">
+          <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+          <End Role="Career" Type="Self.Career" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="profileID" />
+            </Principal>
+            <Dependent Role="Career">
+              <PropertyRef Name="profileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SvcProfil__profi__31EC6D26">
+          <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+          <End Role="SvcProfile" Type="Self.SvcProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="profileID" />
+            </Principal>
+            <Dependent Role="SvcProfile">
+              <PropertyRef Name="profileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SvcProfil__svcTy__32E0915F">
+          <End Role="SvcType" Type="Self.SvcType" Multiplicity="1" />
+          <End Role="SvcProfile" Type="Self.SvcProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SvcType">
+              <PropertyRef Name="svcTypeID" />
+            </Principal>
+            <Dependent Role="SvcProfile">
+              <PropertyRef Name="svcTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProfileSkill">
+          <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
+          <End Role="Skill" Type="Self.Skill" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="EmployeesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Careers" EntityType="Self.Career" />
+          <EntitySet Name="Profiles" EntityType="Self.Profile" />
+          <EntitySet Name="Skills" EntityType="Self.Skill" />
+          <EntitySet Name="SvcProfiles" EntityType="Self.SvcProfile" />
+          <EntitySet Name="SvcTypes" EntityType="Self.SvcType" />
+          <AssociationSet Name="FK__Career__profileI__276EDEB3" Association="Self.FK__Career__profileI__276EDEB3">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="Career" EntitySet="Careers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SvcProfil__profi__31EC6D26" Association="Self.FK__SvcProfil__profi__31EC6D26">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="SvcProfile" EntitySet="SvcProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SvcProfil__svcTy__32E0915F" Association="Self.FK__SvcProfil__svcTy__32E0915F">
+            <End Role="SvcType" EntitySet="SvcTypes" />
+            <End Role="SvcProfile" EntitySet="SvcProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="ProfileSkill" Association="Self.ProfileSkill">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="Skill" EntitySet="Skills" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EmployeesModelStoreContainer" CdmEntityContainer="EmployeesEntities">
+          <EntitySetMapping Name="Careers">
+            <EntityTypeMapping TypeName="EmployeesModel.Career">
+              <MappingFragment StoreEntitySet="Career">
+                <ScalarProperty Name="careerID" ColumnName="careerID" />
+                <ScalarProperty Name="profileID" ColumnName="profileID" />
+                <ScalarProperty Name="industry" ColumnName="industry" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="jobTitle" ColumnName="jobTitle" />
+                <ScalarProperty Name="years" ColumnName="years" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profiles">
+            <EntityTypeMapping TypeName="EmployeesModel.Profile">
+              <MappingFragment StoreEntitySet="Profile">
+                <ScalarProperty Name="profileID" ColumnName="profileID" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="linkedinURL" ColumnName="linkedinURL" />
+                <ScalarProperty Name="pictureURL" ColumnName="pictureURL" />
+                <ScalarProperty Name="portfolioURL" ColumnName="portfolioURL" />
+                <ScalarProperty Name="highestEducation" ColumnName="highestEducation" />
+                <ScalarProperty Name="relocationYN" ColumnName="relocationYN" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="province" ColumnName="province" />
+                <ScalarProperty Name="city" ColumnName="city" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Skills">
+            <EntityTypeMapping TypeName="EmployeesModel.Skill">
+              <MappingFragment StoreEntitySet="Skill">
+                <ScalarProperty Name="skillID" ColumnName="skillID" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="skillName" ColumnName="skillName" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SvcProfiles">
+            <EntityTypeMapping TypeName="EmployeesModel.SvcProfile">
+              <MappingFragment StoreEntitySet="SvcProfile">
+                <ScalarProperty Name="svcProfileID" ColumnName="svcProfileID" />
+                <ScalarProperty Name="profileID" ColumnName="profileID" />
+                <ScalarProperty Name="svcTypeID" ColumnName="svcTypeID" />
+                <ScalarProperty Name="billingDate" ColumnName="billingDate" />
+                <ScalarProperty Name="billingCode" ColumnName="billingCode" />
+                <ScalarProperty Name="billingMethod" ColumnName="billingMethod" />
+                <ScalarProperty Name="svcStartDate" ColumnName="svcStartDate" />
+                <ScalarProperty Name="svcEndDate" ColumnName="svcEndDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SvcTypes">
+            <EntityTypeMapping TypeName="EmployeesModel.SvcType">
+              <MappingFragment StoreEntitySet="SvcType">
+                <ScalarProperty Name="svcTypeID" ColumnName="svcTypeID" />
+                <ScalarProperty Name="svcName" ColumnName="svcName" />
+                <ScalarProperty Name="svcCharge" ColumnName="svcCharge" />
+                <ScalarProperty Name="svcWeeks" ColumnName="svcWeeks" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ProfileSkill" TypeName="EmployeesModel.ProfileSkill" StoreEntitySet="ProfileSkill">
+            <EndProperty Name="Profile">
+              <ScalarProperty Name="profileID" ColumnName="profileID" />
+            </EndProperty>
+            <EndProperty Name="Skill">
+              <ScalarProperty Name="skillID" ColumnName="skillID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

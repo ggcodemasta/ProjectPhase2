@@ -1,0 +1,160 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using WebApplication1.ViewModels;
+
+namespace WebApplication1.Models
+{
+    public class CareerProfileRepository
+    {
+        public CareerProfile FindProfile(int profileID)
+        {
+            IEnumerable<CareerProfile> allProfiles = GetAllProfiles();
+            var query = (from ap in allProfiles
+                                           where ap.ProfileID == profileID
+                                           select ap
+                                           ).FirstOrDefault();
+            return query;
+        }
+
+        public IEnumerable<CareerProfile> GetAllProfiles()
+        {
+            EmployeesEntities context = new EmployeesEntities();
+            var query = (from p in context.Profiles
+                         //from c in p.Careers
+                         //from s in p.Skills
+                         where p.country != null
+                         select new
+                         {
+                             ProfileID = p.profileID,
+                             FirstName = p.firstName,
+                             LastName = p.lastName,
+                             Linkedin = p.linkedinURL,
+                             Portfolio = p.portfolioURL,
+                             Picture = p.pictureURL,
+                             City = p.city,
+                             Province = p.province,
+                             Country = p.country,
+                             //Skills = s.skillName,
+                             //Industry = c.industry,
+                             //Company = c.company,
+                             //JobTitle = c.jobTitle,
+                             //Years = c.years,
+                             HighestEduction = p.highestEducation,
+                             Relocation = p.relocationYN
+
+                         });
+            List<CareerProfile> bac = new List<CareerProfile>();
+            foreach (var item in query)
+            {
+                bac.Add(new CareerProfile(item.ProfileID, item.FirstName, item.LastName, item.Linkedin,
+                    item.Portfolio, item.Picture, item.City, item.Province, item.Country, 
+                    //"",
+                    //item.Skills, item.Industry, item.Company, item.JobTitle, item.Years, 
+                    //"", "", "", 0, 
+                    item.HighestEduction, item.Relocation));
+            }
+            bac = GetSkills(bac);
+            bac = GetCareers(bac);
+
+            return bac;
+        }
+
+        private List<CareerProfile> GetSkills(List<CareerProfile> careerProfile)
+        {
+            EmployeesEntities context = new EmployeesEntities();
+            var query = (from p in context.Profiles
+                         from s in p.Skills
+                         select new
+                         {
+                             ProfileID = p.profileID,
+                             SkillID = s.skillID,
+                             SkillName = s.skillName
+                         });
+
+            List<CareerProfile> careerProfileSkill = careerProfile;
+            foreach (CareerProfile cp in careerProfileSkill)
+            {
+                string skills = "";
+                int counter = 0;
+
+                foreach (var item in query)
+                {
+                    if (item.ProfileID == cp.ProfileID)
+                    {
+                        if (counter > 0)
+                        {
+                            skills += " | " + item.SkillName;
+                        }
+                        else
+                        {
+                            skills += item.SkillName;
+                        }
+                        counter++;
+                    }
+                }
+                cp.Skills = skills;
+            }
+            return careerProfileSkill;
+        }
+
+        private List<CareerProfile> GetCareers(List<CareerProfile> careerProfile)
+        {
+            EmployeesEntities context = new EmployeesEntities();
+            var query = (from c in context.Careers
+                         //from c in p.Careers
+                         select new
+                         {
+                             ProfileID = c.profileID,
+                             Industry = c.industry,
+                             Company = c.company,
+                             JobTitle = c.jobTitle,
+                             Years = c.years
+                         });
+
+            List<CareerProfile> careerProfileCareer = careerProfile;
+            foreach (CareerProfile cp in careerProfileCareer)
+            {
+                string industry = "";
+                string companyTitleYears = "";
+                string company = "";
+                string jobTitle = "";
+                //int years = 0;
+
+                int counter = 0;
+
+                foreach (var item in query)
+                {
+                    if (item.ProfileID == cp.ProfileID)
+                    {
+                        if (counter > 0)
+                        {
+                            industry += "  |  " + item.Industry;
+                            company += "  |  " + item.Company;
+                            jobTitle += "  |  " + item.JobTitle;
+                            companyTitleYears += "  |  " + item.Company + "-" + item.JobTitle + "(" + item.Years + "years)";
+                            //years += item.Years;
+                        }
+                        else 
+                        {
+                            industry += item.Industry;
+                            company += item.Company;
+                            jobTitle += item.JobTitle;
+                            companyTitleYears += item.Company + "-" + item.JobTitle + "(" + item.Years + "years)";
+                        }
+                        counter++;
+                    }
+                }
+                cp.Industry = industry;
+                cp.Company = company;
+                cp.JobTitle = jobTitle;
+                cp.CompanyTitleYears = companyTitleYears;
+                //cp.Years = years;
+            }
+            return careerProfileCareer;
+        }
+
+
+    }
+}
