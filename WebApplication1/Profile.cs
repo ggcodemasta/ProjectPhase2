@@ -16,6 +16,7 @@ namespace WebApplication1
     {
         public Profile()
         {
+            this.Admins = new HashSet<Admin>();
             this.Careers = new HashSet<Career>();
             this.SvcProfiles = new HashSet<SvcProfile>();
             this.Skills = new HashSet<Skill>();
@@ -35,6 +36,7 @@ namespace WebApplication1
         public string province { get; set; }
         public string city { get; set; }
     
+        public virtual ICollection<Admin> Admins { get; set; }
         public virtual ICollection<Career> Careers { get; set; }
         public virtual ICollection<SvcProfile> SvcProfiles { get; set; }
         public virtual ICollection<Skill> Skills { get; set; }

@@ -4,7 +4,15 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/solid-theme/css/bootstrap.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="~/Content/solid-theme/css/style.css" rel="stylesheet" />
+    <link href="~/Content/solid-theme/css/font-awesome.min.css" rel="stylesheet" />
+
+
     <style>
         #mainLogo {
             padding: 10px 0;
@@ -95,7 +103,8 @@
     </style>
 </head>
 <body>
-    <div class="outsideContainer">
+    @*--OLD NAV BAR--
+        <div class="outsideContainer">
         <img src="~/Content/images/EmployeeArray-Logo.png" id="mainLogo" />
     </div>
     <nav class="navbar navbar-default outsideContainer" role="navigation">
@@ -109,71 +118,112 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="navbar-brand"><a href="/Home">Home</a></div>
-                @*<a class="navbar-brand" href="#">@Html.ActionLink("Home", "Index", new { /* id=item.PrimaryKey */ })</a>*@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    @*<li class="active"><a href="#">About [EA] <span class="sr-only">(current)</span></a></li>*@
                     <li><a href="/Home/About">About [EA]</a></li>
                     <li><a href="/Home/Search">Search</a></li>
                     <li><a href="/Profile/Index">Create Profile</a></li>
                     <li><a href="/Home/ContactUs">Contact [EA]</a></li>
-                    @*<li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Create Profile <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">One more separated link</a></li>
-                            </ul>
-                        </li>*@
                 </ul>
-                @*<form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>*@
                 <ul class="nav navbar-nav navbar-right">
-                    @*<li>@Html.ActionLink("Login", "Index", "Login")</li>*@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Login <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="~/Login/Index">Customer Login</a></li>
                             <li><a href="~/Login/AdminHome">Admin Login</a></li>
-                            @*<li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>*@
+
                         </ul>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
-    </nav>
-    <div class="outsideContainer">
-        @RenderBody()
+    </nav>*@
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/Home">EmployeeArray[ ]</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-right">
+                <ul class="nav navbar-nav">
+                    <li><a href="~/home/jobseekers">JOB SEEKERS</a></li>
+                    <li><a href="~/home/employers">EMPLOYERS</a></li>
+                    <li><a href="~/Home/Search">SEARCH</a></li>
+                    <li><a href="~/Login/index">LOGIN</a></li>
+                    @*<li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">PAGES <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="blog.html">BLOG</a></li>
+                            <li><a href="single-post.html">SINGLE POST</a></li>
+                            <li><a href="portfolio.html">PORTFOLIO</a></li>
+                            <li><a href="single-project.html">SINGLE PROJECT</a></li>
+                        </ul>
+                    </li>*@
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
     </div>
-    <div class="clearfix"></div>
-    <footer class="outsideContainer">
-        <div id="footerMain">
-            <ul class="nav navbar-nav" id="footerNav">
-                <li><a href="/Home">Home</a></li>
-                <li><a href="/Home/About">About [EA]</a></li>
-                <li><a href="/Home/Search">Search</a></li>
-                <li><a href="/Profile/Index">Create Profile</a></li>
-                <li><a href="/Home/ContactUs">Contact [EA]</a></li>
-            </ul>
-        </div>
-        <div id="footerRight">
 
-        </div>
 
-    </footer>
-    <script src="~/Scripts/bootstrap/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap/js/bootstrap.min.js"></script>
+    @*<div class="outsideContainer">*@
+        @RenderBody()
+    @*</div>
+    <div class="clearfix"></div>*@
+
+
+    <!-- *****************************************************************************************************************
+     FOOTER
+     ***************************************************************************************************************** -->
+    <div id="footerwrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h4>About</h4>
+                    <div class="hline-w"></div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Social Links</h4>
+                    <div class="hline-w"></div>
+                    <p>
+                        <a href="#"><i class="fa fa-dribbble"></i></a>
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-tumblr"></i></a>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Our Bunker</h4>
+                    <div class="hline-w"></div>
+                    <p>
+                        Some Ave, 987,<br />
+                        23890, New York,<br />
+                        United States.<br />
+                    </p>
+                </div>
+
+            </div><! --/row -->
+        </div><! --/container -->
+    </div><! --/footerwrap -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="~/Content/solid-theme/js/bootstrap.min.js"></script>
+    <script src="~/Content/solid-theme/js/retina-1.1.0.js"></script>
+    <script src="~/Content/solid-theme/js/jquery.hoverdir.js"></script>
+    <script src="~/Content/solid-theme/js/jquery.hoverex.min.js"></script>
+    <script src="~/Content/solid-theme/js/jquery.prettyPhoto.js"></script>
+    <script src="~/Content/solid-theme/js/jquery.isotope.min.js"></script>
+    <script src="~/Content/solid-theme/js/custom.js"></script>
 </body>
 </html>

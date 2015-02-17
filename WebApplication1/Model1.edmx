@@ -4,7 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="EmployeesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="EmployeesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="adminID" />
+          </Key>
+          <Property Name="adminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="profileID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Career">
           <Key>
             <PropertyRef Name="careerID" />
@@ -77,6 +84,18 @@ warning 6002: The table/view 'Employees.dbo.ProfileSkill' does not have a primar
           <Property Name="svcWeeks" Type="int" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="255" />
         </EntityType>
+        <Association Name="FK__Admin__profileID__22AA2996">
+          <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="profileID" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="profileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Career__profileI__145C0A3F">
           <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
           <End Role="Career" Type="Self.Career" Multiplicity="*" />
@@ -138,6 +157,7 @@ warning 6002: The table/view 'Employees.dbo.ProfileSkill' does not have a primar
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="EmployeesModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Career" EntityType="Self.Career" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Skill" EntityType="Self.Skill" Schema="dbo" store:Type="Tables" />
@@ -149,6 +169,10 @@ warning 6002: The table/view 'Employees.dbo.ProfileSkill' does not have a primar
     [ProfileSkill].[skillID] AS [skillID]
     FROM [dbo].[ProfileSkill] AS [ProfileSkill]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK__Admin__profileID__22AA2996" Association="Self.FK__Admin__profileID__22AA2996">
+            <End Role="Profile" EntitySet="Profile" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
           <AssociationSet Name="FK__Career__profileI__145C0A3F" Association="Self.FK__Career__profileI__145C0A3F">
             <End Role="Profile" EntitySet="Profile" />
             <End Role="Career" EntitySet="Career" />
@@ -170,10 +194,19 @@ warning 6002: The table/view 'Employees.dbo.ProfileSkill' does not have a primar
             <End Role="SvcProfile" EntitySet="SvcProfile" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="EmployeesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="EmployeesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="adminID" />
+          </Key>
+          <Property Name="adminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="profileID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Profile" Relationship="Self.FK__Admin__profileID__22AA2996" FromRole="Admin" ToRole="Profile" />
+        </EntityType>
         <EntityType Name="Career">
           <Key>
             <PropertyRef Name="careerID" />
@@ -185,7 +218,7 @@ warning 6002: The table/view 'Employees.dbo.ProfileSkill' does not have a primar
           <Property Name="jobTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="years" Type="Int32" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Profile" Relationship="Self.FK__Career__profileI__276EDEB3" FromRole="Career" ToRole="Profile" />
+          <NavigationProperty Name="Profile" Relationship="Self.FK__Career__profileI__145C0A3F" FromRole="Career" ToRole="Profile" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -204,8 +237,9 @@ warning 6002: The table/view 'Employees.dbo.ProfileSkill' does not have a primar
           <Property Name="country" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="province" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="city" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Careers" Relationship="Self.FK__Career__profileI__276EDEB3" FromRole="Profile" ToRole="Career" />
-          <NavigationProperty Name="SvcProfiles" Relationship="Self.FK__SvcProfil__profi__31EC6D26" FromRole="Profile" ToRole="SvcProfile" />
+          <NavigationProperty Name="Admins" Relationship="Self.FK__Admin__profileID__22AA2996" FromRole="Profile" ToRole="Admin" />
+          <NavigationProperty Name="Careers" Relationship="Self.FK__Career__profileI__145C0A3F" FromRole="Profile" ToRole="Career" />
+          <NavigationProperty Name="SvcProfiles" Relationship="Self.FK__SvcProfil__profi__1ED998B2" FromRole="Profile" ToRole="SvcProfile" />
           <NavigationProperty Name="Skills" Relationship="Self.ProfileSkill" FromRole="Profile" ToRole="Skill" />
         </EntityType>
         <EntityType Name="Skill">
@@ -230,8 +264,8 @@ warning 6002: The table/view 'Employees.dbo.ProfileSkill' does not have a primar
           <Property Name="billingMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="svcStartDate" Type="DateTime" Precision="3" />
           <Property Name="svcEndDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Profile" Relationship="Self.FK__SvcProfil__profi__31EC6D26" FromRole="SvcProfile" ToRole="Profile" />
-          <NavigationProperty Name="SvcType" Relationship="Self.FK__SvcProfil__svcTy__32E0915F" FromRole="SvcProfile" ToRole="SvcType" />
+          <NavigationProperty Name="Profile" Relationship="Self.FK__SvcProfil__profi__1ED998B2" FromRole="SvcProfile" ToRole="Profile" />
+          <NavigationProperty Name="SvcType" Relationship="Self.FK__SvcProfil__svcTy__1FCDBCEB" FromRole="SvcProfile" ToRole="SvcType" />
         </EntityType>
         <EntityType Name="SvcType">
           <Key>
@@ -242,9 +276,21 @@ warning 6002: The table/view 'Employees.dbo.ProfileSkill' does not have a primar
           <Property Name="svcCharge" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="svcWeeks" Type="Int32" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="SvcProfiles" Relationship="Self.FK__SvcProfil__svcTy__32E0915F" FromRole="SvcType" ToRole="SvcProfile" />
+          <NavigationProperty Name="SvcProfiles" Relationship="Self.FK__SvcProfil__svcTy__1FCDBCEB" FromRole="SvcType" ToRole="SvcProfile" />
         </EntityType>
-        <Association Name="FK__Career__profileI__276EDEB3">
+        <Association Name="FK__Admin__profileID__22AA2996">
+          <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="profileID" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="profileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Career__profileI__145C0A3F">
           <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
           <End Role="Career" Type="Self.Career" Multiplicity="*" />
           <ReferentialConstraint>
@@ -256,7 +302,7 @@ warning 6002: The table/view 'Employees.dbo.ProfileSkill' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SvcProfil__profi__31EC6D26">
+        <Association Name="FK__SvcProfil__profi__1ED998B2">
           <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
           <End Role="SvcProfile" Type="Self.SvcProfile" Multiplicity="*" />
           <ReferentialConstraint>
@@ -268,7 +314,7 @@ warning 6002: The table/view 'Employees.dbo.ProfileSkill' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SvcProfil__svcTy__32E0915F">
+        <Association Name="FK__SvcProfil__svcTy__1FCDBCEB">
           <End Role="SvcType" Type="Self.SvcType" Multiplicity="1" />
           <End Role="SvcProfile" Type="Self.SvcProfile" Multiplicity="*" />
           <ReferentialConstraint>
@@ -285,20 +331,25 @@ warning 6002: The table/view 'Employees.dbo.ProfileSkill' does not have a primar
           <End Role="Skill" Type="Self.Skill" Multiplicity="*" />
         </Association>
         <EntityContainer Name="EmployeesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="Careers" EntityType="Self.Career" />
           <EntitySet Name="Profiles" EntityType="Self.Profile" />
           <EntitySet Name="Skills" EntityType="Self.Skill" />
           <EntitySet Name="SvcProfiles" EntityType="Self.SvcProfile" />
           <EntitySet Name="SvcTypes" EntityType="Self.SvcType" />
-          <AssociationSet Name="FK__Career__profileI__276EDEB3" Association="Self.FK__Career__profileI__276EDEB3">
+          <AssociationSet Name="FK__Admin__profileID__22AA2996" Association="Self.FK__Admin__profileID__22AA2996">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="Admin" EntitySet="Admins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Career__profileI__145C0A3F" Association="Self.FK__Career__profileI__145C0A3F">
             <End Role="Profile" EntitySet="Profiles" />
             <End Role="Career" EntitySet="Careers" />
           </AssociationSet>
-          <AssociationSet Name="FK__SvcProfil__profi__31EC6D26" Association="Self.FK__SvcProfil__profi__31EC6D26">
+          <AssociationSet Name="FK__SvcProfil__profi__1ED998B2" Association="Self.FK__SvcProfil__profi__1ED998B2">
             <End Role="Profile" EntitySet="Profiles" />
             <End Role="SvcProfile" EntitySet="SvcProfiles" />
           </AssociationSet>
-          <AssociationSet Name="FK__SvcProfil__svcTy__32E0915F" Association="Self.FK__SvcProfil__svcTy__32E0915F">
+          <AssociationSet Name="FK__SvcProfil__svcTy__1FCDBCEB" Association="Self.FK__SvcProfil__svcTy__1FCDBCEB">
             <End Role="SvcType" EntitySet="SvcTypes" />
             <End Role="SvcProfile" EntitySet="SvcProfiles" />
           </AssociationSet>
@@ -313,6 +364,14 @@ warning 6002: The table/view 'Employees.dbo.ProfileSkill' does not have a primar
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EmployeesModelStoreContainer" CdmEntityContainer="EmployeesEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="EmployeesModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="adminID" ColumnName="adminID" />
+                <ScalarProperty Name="profileID" ColumnName="profileID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Careers">
             <EntityTypeMapping TypeName="EmployeesModel.Career">
               <MappingFragment StoreEntitySet="Career">

@@ -1,0 +1,89 @@
+﻿@model IEnumerable<WebApplication1.ViewModels.CareerProfile>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+<h2>Look for IT Professionals</h2>
+<br />
+
+<div class="resultsContainer">
+    <div class="quickSearch">
+        @using (Html.BeginForm("DisplaySearchResults", "Home", FormMethod.Post))
+        {
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <legend>Quick Search</legend>
+
+                <div id="location">
+                    Location:<br />
+                    <input type="text" name="location"><br />
+                </div>
+
+                <fieldset id="JobExp1">
+                    Industry:<br />
+                    <select name="industry1">
+                        <option value="1"></option>
+                        <option value="2">Advertising</option>
+                        <option value="3">Education</option>
+                        <option value="4">Financial</option>
+                        <option value="5">Start-up</option>
+                        <option value="6">Telecommunications</option>
+                        <option value="7">Video Game</option>
+                    </select><br />
+                    Job Title:<br />
+                    <select name="jobs1">
+                        <option value="1"></option>
+                        <option value="2">Freelancer</option>
+                        <option value="3">Junior Developer</option>
+                        <option value="4">Project Manager</option>
+                        <option value="5">Senior Developer</option>
+                        <option value="6">Software Tester</option>
+                        <option value="7">Supervisor</option>
+                        <option value="8">Team Lead</option>
+                    </select><br />
+                    Years of Experience:<br />
+                    <select name="Years1">
+                        <option value="1">1 to 2 years</option>
+                        <option value="2">2 to 3 years</option>
+                        <option value="3">3 to 4 years</option>
+                        <option value="4">4 to 5 years</option>
+                        <option value="4">5+ years</option>
+                    </select>
+                </fieldset>
+                <br />
+                <p>
+                    <input type="submit" value="Search" class="btn btn-default" />
+                </p>
+            </fieldset>
+        }
+        <div>
+            @Html.ActionLink("Advanced Search", "Search")
+        </div>
+    </div>
+
+    @foreach (var item in Model)
+    {
+        <div class="indexIndResultsContainer">
+            <div class="resultPic">
+                <img src="@Html.DisplayFor(modelItem => item.PictureURL)" width="100" height="110">
+            </div>
+            <div class="resultCopy">
+                <b>@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</b> | @Html.DisplayFor(modelItem => item.City), @Html.DisplayFor(modelItem => item.Country)<br />
+                Job Titles: @Html.DisplayFor(modelItem => item.JobTitle)<br />
+                Companies: @Html.DisplayFor(modelItem => item.Company)<br />
+                Industries: @Html.DisplayFor(modelItem => item.Industry)<br />
+                Skills: @Html.DisplayFor(modelItem => item.Skills)
+            </div>
+            <div class="resultLinks">
+                @Html.ActionLink("View Profile", "IndividualProfile", new { profileID = item.ProfileID })
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    }
+
+    <div class="clearfix"></div>
+</div>
+<br />

@@ -14,9 +14,23 @@ namespace WebApplication1.Controllers
 
         public ActionResult Index()
         {
-            CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
-            return View(careerProfileRepository.GetAllProfiles());
+            //CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
+            //return View(careerProfileRepository.GetAllProfiles());
+            return View();
         }
+        public ActionResult JobSeekers()
+        {
+            return View();
+        }
+        public ActionResult Employers()
+        {
+            return View();
+        }
+
+
+
+
+
         //cassie have make change.
 
         [HttpPost]

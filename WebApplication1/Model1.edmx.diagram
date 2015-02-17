@@ -4,15 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="58e6c74bc877485598200a096d0fe517" Name="Diagram1" ZoomLevel="52">
-        <EntityTypeShape EntityType="EmployeesModel.Career" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmployeesModel.Profile" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmployeesModel.Skill" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmployeesModel.SvcProfile" Width="1.5" PointX="6" PointY="5.375" IsExpanded="true" />
+      <Diagram DiagramId="ae8f97c3d77b46758598af54442c4f3c" Name="Diagram1">
+        <EntityTypeShape EntityType="EmployeesModel.Admin" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.Career" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.Profile" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.Skill" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.SvcProfile" Width="1.5" PointX="6" PointY="6.375" IsExpanded="true" />
         <EntityTypeShape EntityType="EmployeesModel.SvcType" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="EmployeesModel.FK__Career__profileI__276EDEB3" ManuallyRouted="false" />
-        <AssociationConnector Association="EmployeesModel.FK__SvcProfil__profi__31EC6D26" ManuallyRouted="false" />
-        <AssociationConnector Association="EmployeesModel.FK__SvcProfil__svcTy__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="EmployeesModel.FK__Admin__profileID__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="EmployeesModel.FK__Career__profileI__145C0A3F" ManuallyRouted="false" />
+        <AssociationConnector Association="EmployeesModel.FK__SvcProfil__profi__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="EmployeesModel.FK__SvcProfil__svcTy__1FCDBCEB" ManuallyRouted="false" />
         <AssociationConnector Association="EmployeesModel.ProfileSkill" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

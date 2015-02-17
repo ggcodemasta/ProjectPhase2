@@ -25,6 +25,7 @@ namespace WebApplication1
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Career> Careers { get; set; }
         public virtual DbSet<Profile> Profiles { get; set; }
         public virtual DbSet<Skill> Skills { get; set; }
