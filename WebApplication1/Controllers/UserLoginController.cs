@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace WebApplication1.Controllers
 {
-    public class ProfileController : Controller
+    public class UserLoginController : Controller
     {
         public ActionResult Index()
         {
@@ -15,9 +15,9 @@ namespace WebApplication1.Controllers
 
         public ActionResult Career()
         {
-            return View(); 
+            return View();
         }
-        public ActionResult Suscribe() 
+        public ActionResult Subscribe()
         {
             return View();
         }

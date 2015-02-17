@@ -179,23 +179,6 @@
     <Content Include="Content\solid-theme\js\retina-1.1.0.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <EntityDeploy Include="Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
-    <Content Include="Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
     <Content Include="Content\solid-theme\.DS_Store" />
     <Content Include="Content\solid-theme\css\.DS_Store" />
     <Content Include="Content\solid-theme\css\images\.DS_Store" />
@@ -214,6 +197,23 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\bootstrap\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -238,9 +238,9 @@
     <Compile Include="Career.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\UserLoginController.cs" />
     <Compile Include="Controllers\x_LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -284,30 +284,31 @@
     <Content Include="packages.config" />
     <Content Include="Scripts\bootstrap\config.json" />
     <Content Include="Views\Shared\LayoutMain.cshtml" />
-    <Content Include="Views\Login\x_Index.cshtml" />
-    <Content Include="Views\Home\Index-old.cshtml" />
+    <Content Include="Views\Admin\x_Index.cshtml" />
+    <Content Include="Views\Home\z_Index.cshtml" />
     <Content Include="Views\Home\DisplaySearchResults.cshtml" />
     <Content Include="Views\Home\IndividualProfile.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
-    <Content Include="Views\Login\AdminHome.cshtml" />
-    <Content Include="Views\Shared\Edit.cshtml" />
-    <Content Include="Views\Login\Delete.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Profile\Career.cshtml" />
-    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Admin\AdminHome.cshtml" />
+    <Content Include="Views\Shared\z_Edit.cshtml" />
+    <Content Include="Views\Admin\Delete.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\UserLogin\Career.cshtml" />
+    <Content Include="Views\UserLogin\Index.cshtml" />
     <Content Include="Views\Shared\Partials\ProfileLinks.cshtml" />
-    <Content Include="Views\Profile\Suscribe.cshtml" />
-    <Content Include="Views\Profile\Success.cshtml" />
+    <Content Include="Views\UserLogin\Subscribe.cshtml" />
+    <Content Include="Views\UserLogin\Success.cshtml" />
     <Content Include="Views\Home\ContactProfile.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="Views\Home\MessageSent.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\UserDelete.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\z_About.cshtml" />
+    <Content Include="Views\z__ViewStart.cshtml" />
+    <Content Include="Views\Shared\z_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\JobSeekers.cshtml" />
     <Content Include="Views\Home\Employers.cshtml" />
+    <Content Include="Views\x_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

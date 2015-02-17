@@ -10,7 +10,6 @@ namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
-        //Grant test commit
 
         public ActionResult Index()
         {
@@ -28,50 +27,59 @@ namespace WebApplication1.Controllers
         }
 
 
-
-
-
-        //cassie have make change.
-
-        [HttpPost]
-        public ActionResult DisplaySearchResults()
-        {
-            CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
-            return View(careerProfileRepository.GetAllProfiles());
-        }
-
-        public ActionResult IndividualProfile(int profileID)
-        {
-            CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
-            return View(careerProfileRepository.FindProfile(profileID));
-        }
-
         public ActionResult Search()
         {
             return View("Search");
         }
-        public ActionResult About() 
-        {
-            return View();
-        }
+
         public ActionResult ContactUs()
         {
             return View();
         }
 
-        public ActionResult ContactProfile()
+        public ActionResult Login()
         {
             return View();
         }
 
-        public ActionResult MessageSent()
-        {
-            return View();
+
+
+
+
+
+
+
+        //[HttpPost]
+        //public ActionResult DisplaySearchResults()
+        //{
+        //    CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
+        //    return View(careerProfileRepository.GetAllProfiles());
+        //}
+
+        //public ActionResult IndividualProfile(int profileID)
+        //{
+        //    CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
+        //    return View(careerProfileRepository.FindProfile(profileID));
+        //}
+
+        //public ActionResult About() 
+        //{
+        //    return View();
+        //}
+
+        //public ActionResult ContactProfile()
+        //{
+        //    return View();
+        //}
+
+        //public ActionResult MessageSent()
+        //{
+        //    return View();
            
-        }
-        public ActionResult UserDelete() 
-        {
-            return View();
-        }
+        //}
+        //public ActionResult UserDelete() 
+        //{
+        //    return View();
+        //}
 	}
 }
