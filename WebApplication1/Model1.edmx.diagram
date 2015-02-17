@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ae8f97c3d77b46758598af54442c4f3c" Name="Diagram1">
-        <EntityTypeShape EntityType="EmployeesModel.Admin" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmployeesModel.Career" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmployeesModel.Profile" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmployeesModel.Skill" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmployeesModel.SvcProfile" Width="1.5" PointX="6" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmployeesModel.SvcType" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="EmployeesModel.FK__Admin__profileID__22AA2996" ManuallyRouted="false" />
-        <AssociationConnector Association="EmployeesModel.FK__Career__profileI__145C0A3F" ManuallyRouted="false" />
-        <AssociationConnector Association="EmployeesModel.FK__SvcProfil__profi__1ED998B2" ManuallyRouted="false" />
-        <AssociationConnector Association="EmployeesModel.FK__SvcProfil__svcTy__1FCDBCEB" ManuallyRouted="false" />
-        <AssociationConnector Association="EmployeesModel.ProfileSkill" ManuallyRouted="false" />
-      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
