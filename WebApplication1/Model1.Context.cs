@@ -13,10 +13,10 @@ namespace WebApplication1
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Model1Container : DbContext
+    public partial class EmployeesEntities : DbContext
     {
-        public Model1Container()
-            : base("name=Model1Container")
+        public EmployeesEntities()
+            : base("name=EmployeesEntities")
         {
         }
     
@@ -25,5 +25,11 @@ namespace WebApplication1
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Career> Careers { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
+        public DbSet<Skill> Skills { get; set; }
+        public DbSet<SvcProfile> SvcProfiles { get; set; }
+        public DbSet<SvcType> SvcTypes { get; set; }
     }
 }
