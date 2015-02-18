@@ -42,7 +42,10 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-
+        public ActionResult About()
+        {
+            return View();
+        }
 
 
 
@@ -62,10 +65,7 @@ namespace WebApplication1.Controllers
         //    return View(careerProfileRepository.FindProfile(profileID));
         //}
 
-        //public ActionResult About() 
-        //{
-        //    return View();
-        //}
+
 
         //public ActionResult ContactProfile()
         //{

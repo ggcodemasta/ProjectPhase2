@@ -4,16 +4,92 @@
     Layout = "~/Views/Shared/LayoutMain.cshtml";
 }
 
+<style>
+    .extraPad{
+        padding: 50px 0;
+    }
+    .btn-themeEmp {
+        font-weight: bold;
+      
+    
+        color: #fff;
+        
+        background-color: #384452;
+        border-color: #384452;
+        margin: 4px;
+    }
+    .btn-themeEmp:hover,
+    .btn-themeEmp:focus,
+    .btn-themeEmp:active,
+    .btn-themeEmp.active,
+    .open .dropdown-toggle.themeEmp {
+        font-weight: bold;
+        color: #384452;
+        background-color: #fff;
+        border-color: #fff;
+    }
+    .advSearch:link, .advSearch:visited{
+                color: #2B2E31;
+    }
+    .advSearch:hover{
+            color: #fff;
+    }
+    .form-control:focus {
+        border-color: #2B2E31;
+    }
+</style>
+
 <!-- *****************************************************************************************************************
 BLUE WRAP
 ***************************************************************************************************************** -->
-<div id="blue">
+@*<div id="blue">
     <div class="container">
         <div class="row">
             <h3>Employers.</h3>
         </div><!-- /row -->
     </div> <!-- /container -->
-</div><!-- /blue -->
+</div><!-- /blue -->*@
+
+<!-- *****************************************************************************************************************
+HEADERWRAP
+***************************************************************************************************************** -->
+<div id="headerwrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <br />
+                <h3>It's your job to find the right people - it's our job to make it easier.</h3>
+                <h1>Find the right IT Talent on EmployeeArray[ ]</h1>
+                <h4>Just enter the Job Title and Location for your hire and instantly receive a list of qualified candidates.</h4>
+            </div>
+        </div>
+        <div class="row extraPad">
+            <div class="col-lg-8 col-lg-offset-2">
+                @*<img src="~/Content/solid-theme/img/browser.png" class="img-responsive">*@
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="jobTitle">Job Title</label>
+                        @*<input type="text" class="form-control" id="jobTitle" placeholder="Job Title">*@
+                        <select class="form-control" id="jobTitle">
+                            <option>Programmer</option>
+                            <option>Project Manager</option>
+                            <option>Network Administrator</option>
+                            <option>Quality Control</option>
+                            <option>Supervisor</option>
+                        </select>&nbsp;
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" id="location" placeholder="Vancouver, BC">
+                    </div>
+                    <button type="submit" class="btn btn-themeEmp">Quick Search</button>&nbsp;&nbsp;&nbsp;<a href="~/Home/Search" class="advSearch">Advanced Search</a>
+                </form>
+
+
+            </div>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /headerwrap -->
 
 <!-- *****************************************************************************************************************
  SERVICE LOGOS
@@ -25,19 +101,16 @@ BLUE WRAP
                 <i class="fa fa-check-square-o"></i>
                 <h4>Qualified Candidates</h4>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                <p><br /><a href="#" class="btn btn-theme">More Info</a></p>
             </div>
             <div class="col-md-4">
                 <i class="fa fa-bullseye"></i>
                 <h4>Powerful Search Engine</h4>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                <p><br /><a href="#" class="btn btn-theme">More Info</a></p>
             </div>
             <div class="col-md-4">
                 <i class="fa fa-clock-o"></i>
                 <h4>Save Time</h4>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                <p><br /><a href="#" class="btn btn-theme">More Info</a></p>
             </div>
         </div>
     </div><! --/container -->

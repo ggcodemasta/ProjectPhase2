@@ -294,7 +294,6 @@
     <Content Include="Views\Home\ContactProfile.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="Views\Home\MessageSent.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\UserDelete.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -308,6 +307,8 @@
     <Content Include="Views\UserLogin\Index.cshtml" />
     <Content Include="Views\UserLogin\Subscribe.cshtml" />
     <Content Include="Views\UserLogin\Success.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
