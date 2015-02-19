@@ -18,7 +18,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(Login login)
+        public ActionResult Index(z_Login login)
         {
             if (ModelState.IsValid)
             {
