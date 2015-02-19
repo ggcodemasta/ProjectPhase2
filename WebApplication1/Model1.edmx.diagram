@@ -4,18 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ab91aac5b37546f589ecdd1fc0b948a6" Name="Diagram1">
-        <EntityTypeShape EntityType="cassieEmployeesModel.Admin" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="cassieEmployeesModel.Career" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="cassieEmployeesModel.Profile" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="cassieEmployeesModel.Skill" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="cassieEmployeesModel.SvcProfile" Width="1.5" PointX="6" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="cassieEmployeesModel.SvcType" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="cassieEmployeesModel.FK__Admin__profileID__22AA2996" ManuallyRouted="false" />
-        <AssociationConnector Association="cassieEmployeesModel.FK__Career__profileI__145C0A3F" ManuallyRouted="false" />
-        <AssociationConnector Association="cassieEmployeesModel.FK__SvcProfil__profi__1ED998B2" ManuallyRouted="false" />
-        <AssociationConnector Association="cassieEmployeesModel.FK__SvcProfil__svcTy__1FCDBCEB" ManuallyRouted="false" />
-        <AssociationConnector Association="cassieEmployeesModel.ProfileSkill" ManuallyRouted="false" />
+      <Diagram DiagramId="d800d5bb696948ad91b011021dbcfec9" Name="Diagram1">
+        <EntityTypeShape EntityType="EmployeesModel.Admin" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.Career" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.Profile" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.Skill" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.SvcProfile" Width="1.5" PointX="6" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.SvcType" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="EmployeesModel.FK__Admin__profileID__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="EmployeesModel.FK__Career__profileI__145C0A3F" ManuallyRouted="false" />
+        <AssociationConnector Association="EmployeesModel.FK__SvcProfil__profi__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="EmployeesModel.FK__SvcProfil__svcTy__1FCDBCEB" ManuallyRouted="false" />
+        <AssociationConnector Association="EmployeesModel.ProfileSkill" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

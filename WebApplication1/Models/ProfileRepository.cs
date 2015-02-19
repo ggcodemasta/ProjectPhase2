@@ -17,5 +17,44 @@ namespace WebApplication1.Models
                              select p.profileID).SingleOrDefault();
             return profileID;
         }
+
+
+        public int AddProfile(Profile profile)
+        {
+            EmployeesEntities db = new EmployeesEntities();
+
+            db.Profiles.Add(profile);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return -1;
+            }
+            return 1;
+        }
+
+        public int HandleRegistration(Register register)
+        {
+            Profile profile = new Profile();
+
+            profile.email = register.Email;
+            // more... 
+            profile.password = "none";
+            profile.firstName = register.FirstName;
+            profile.lastName = register.LastName;
+            profile.linkedinURL = register.LinkedinURL;
+            profile.pictureURL = register.PictureURL;
+            profile.portfolioURL = register.PortfolioURL;
+            profile.highestEducation = register.HighestEducation;
+            profile.relocationYN = register.RelocationYN;
+            profile.country = register.Country;
+            profile.province = register.Province;
+            profile.city = register.City;
+
+            return AddProfile(profile);
+
+        }
     }
 }
