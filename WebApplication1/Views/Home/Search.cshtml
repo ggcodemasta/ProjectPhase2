@@ -34,11 +34,11 @@ BLUE WRAP
                     <div class="col-sm-6">
                         @*<input type="text" class="form-control" id="jobTitle" placeholder="Job Title">*@
                         <select class="form-control" id="jobTitle">
-                            <option>Programmer</option>
-                            <option>Project Manager</option>
-                            <option>Network Administrator</option>
-                            <option>Quality Control</option>
-                            <option>Supervisor</option>
+                            <option value="programmer">Programmer</option>
+                            <option value="manager">Project Manager</option>
+                            <option value="netadmin">Network Administrator</option>
+                            <option value="qualityctrl">Quality Control</option>
+                            <option value="supervisor">Supervisor</option>
                         </select>
                     </div>
                 <div class="col-sm-4">
@@ -48,10 +48,10 @@ BLUE WRAP
                 <label for="industry" class="col-sm-2 control-label">Industry</label>
                 <div class="col-sm-6">
                     <select class="form-control" id="industry">
-                        <option>All</option>
-                        <option>Video Game</option>
-                        <option>Telecommunications</option>
-                        <option>Banking</option>
+                        <option value="all">All</option>
+                        <option value="video game">Video Game</option>
+                        <option value="telecommunications">Telecommunications</option>
+                        <option value="banking">Banking</option>
                     </select>
                 </div>
                 <div class="col-sm-4">
@@ -100,15 +100,15 @@ BLUE WRAP
                 <label for="education" class="col-sm-2 control-label">Education</label>
                 <div class="col-sm-6">
                     <select class="form-control" id="education">
-                        <option>None</option>
-                        <option>High School</option>
-                        <option>Certificate</option>
-                        <option>Diploma</option>
-                        <option>Bachelors Degree</option>
-                        <option>Graduate Degree</option>
-                        <option>Graduate Degree</option>
-                        <option>Phd</option>
-                    </select> (minimum education requirement)
+                        <option value="any">None</option>
+                        <option value="highschool">High School</option>
+                        <option value="certificate">Certificate</option>
+                        <option value="diploma">Diploma</option>
+                        <option value="bachelor">Bachelors Degree</option>
+                        <option value="graduate">Graduate Degree</option>
+                        <option value="postgraduate">Post-Graduate Degree</option>
+                        <option value="phd">Phd</option>
+                    </select> (minimum education required)
                 </div>
                 <div class="col-sm-4">
                 </div>
@@ -117,11 +117,11 @@ BLUE WRAP
                 <label for="industry" class="col-sm-2 control-label">Experience</label>
                 <div class="col-sm-6">
                     <select class="form-control" id="industry">
-                        <option>None</option>
-                        <option>1-2 years</option>
-                        <option>3-4 years</option>
-                        <option>5-10 years</option>
-                        <option>10+ years</option>
+                        <option value="0">None</option>
+                        <option value="1">1-2 years</option>
+                        <option value="2">3-4 years</option>
+                        <option value="3">5-10 years</option>
+                        <option value="4">10+ years</option>
                     </select>
                 </div>
                 <div class="col-sm-4">
@@ -134,13 +134,14 @@ BLUE WRAP
                 <label for="platform" class="col-sm-2 control-label">Platforms</label>
                 <div class="col-sm-6">
                     <select multiple class="form-control" id="platform">
-                        <option>Windows</option>
-                        <option>Mac</option>
-                        <option>Linux</option>
-                        <option>Android</option>
-                        <option>iOS</option>
-                        <option>Windows Phone</option>
-                        <option>Blackberry</option>
+                        <option value="any">Any</option>
+                        <option value="windows">Windows</option>
+                        <option value="mac">Mac</option>
+                        <option value="linux">Linux</option>
+                        <option value="android">Android</option>
+                        <option value="ios">iOS</option>
+                        <option value="windowsphone">Windows Phone</option>
+                        <option value="blackberry">Blackberry</option>
                     </select>
                 </div>
                 <div class="col-sm-4">
@@ -154,21 +155,22 @@ BLUE WRAP
                 <label for="language" class="col-sm-2 control-label">Languages</label>
                 <div class="col-sm-6">
                     <select multiple class="form-control" id="language">
-                        <option>Ajax</option>
-                        <option>AngularJS</option>
-                        <option>ASP.NET</option>
-                        <option>C</option>
-                        <option>C++</option>
-                        <option>C#</option>
-                        <option>Java</option>
-                        <option>Javascript</option>
-                        <option>MySQL</option>
-                        <option>Objective C</option>
-                        <option>Perl</option>
-                        <option>PHP</option>
-                        <option>Python</option>
-                        <option>Ruby</option>
-                        <option>SQL Server</option>
+                        <option value="any">Any</option>
+                        <option value="ajax">Ajax</option>
+                        <option value="angularJS">AngularJS</option>
+                        <option value="asp.net">ASP.NET</option>
+                        <option value="c">C</option>
+                        <option value="c++">C++</option>
+                        <option value="c#">C#</option>
+                        <option value="java">Java</option>
+                        <option value="javascript">Javascript</option>
+                        <option value="mysql">MySQL</option>
+                        <option value="objectivec">Objective C</option>
+                        <option value="perl">Perl</option>
+                        <option value="php">PHP</option>
+                        <option value="python">Python</option>
+                        <option value="ruby">Ruby</option>
+                        <option value="sqlserver">SQL Server</option>
                     </select>
                 </div>
                 <div class="col-sm-4">
