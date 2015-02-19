@@ -8,7 +8,7 @@ namespace WebApplication1.Models
 {
     public class ProfileRepository
     {
-        public int GetProfileID(z_Login login)
+        public int GetProfileID(Login login)
         {
 
             EmployeesEntities db = new EmployeesEntities();
