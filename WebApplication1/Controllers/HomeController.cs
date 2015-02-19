@@ -59,11 +59,11 @@ namespace WebApplication1.Controllers
         //    return View(careerProfileRepository.GetAllProfiles());
         //}
 
-        //public ActionResult IndividualProfile(int profileID)
-        //{
-        //    CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
-        //    return View(careerProfileRepository.FindProfile(profileID));
-        //}
+        public ActionResult IndividualProfile(int profileID)
+        {
+            CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
+            return View(careerProfileRepository.FindProfile(profileID));
+        }
 
 
 
