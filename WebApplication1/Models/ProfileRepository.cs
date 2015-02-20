@@ -56,5 +56,27 @@ namespace WebApplication1.Models
             return AddProfile(profile);
 
         }
+
+        public int HandleJobSeekers(JobSeekers jobSeekers)
+        {
+            Profile profile = new Profile();
+
+            profile.email = jobSeekers.Email;
+            // more... 
+            profile.password = "none";
+            profile.firstName = jobSeekers.FirstName;
+            profile.lastName = jobSeekers.LastName;
+            profile.linkedinURL = jobSeekers.LinkedinURL;
+            profile.pictureURL = jobSeekers.PictureURL;
+            profile.portfolioURL = jobSeekers.PortfolioURL;
+            profile.highestEducation = jobSeekers.HighestEducation;
+            profile.relocationYN = jobSeekers.RelocationYN;
+            profile.country = jobSeekers.Country;
+            profile.province = jobSeekers.Province;
+            profile.city = jobSeekers.City;
+
+            return AddProfile(profile);
+
+        }
     }
 }

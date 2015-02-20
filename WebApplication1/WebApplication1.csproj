@@ -321,6 +321,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CareerProfile.cs" />
+    <Compile Include="ViewModels\JobSeekers.cs" />
     <Compile Include="ViewModels\Login.cs" />
     <Compile Include="ViewModels\Register.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />

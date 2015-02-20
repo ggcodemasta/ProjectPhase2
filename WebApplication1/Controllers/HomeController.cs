@@ -175,5 +175,47 @@ namespace WebApplication1.Controllers
         //{
         //    return View();
         //}
+
+
+        [HttpPost]
+        public ActionResult JobSeekers(JobSeekers jobSeekers)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("ShowMsg", new { msg = "[ERR] invalid input" });
+            }
+
+            var userStore = new UserStore<IdentityUser>();
+            var manager = new UserManager<IdentityUser>(userStore);
+            var identityUser = new IdentityUser()
+            {
+                UserName = jobSeekers.Email,
+                Email = jobSeekers.Email
+            };
+            IdentityResult result = manager.Create(identityUser, jobSeekers.Password);
+
+            if (result.Succeeded)
+            {
+                var authenticationManager
+                                  = HttpContext.Request.GetOwinContext().Authentication;
+                var userIdentity = manager.CreateIdentity(identityUser,
+                                           DefaultAuthenticationTypes.ApplicationCookie);
+                authenticationManager.SignIn(new AuthenticationProperties() { },
+                                             userIdentity);
+            }
+
+            ProfileRepository profileRepository = new ProfileRepository();
+
+            if (profileRepository.HandleJobSeekers(jobSeekers) < 0)
+            {
+                return RedirectToAction("ShowMsg", new { msg = "[FAIL] HandleRegistration" });
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
+      
+
 	}
 }

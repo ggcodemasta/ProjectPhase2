@@ -1,4 +1,4 @@
-﻿
+﻿ @model WebApplication1.ViewModels.JobSeekers
 @{
     ViewBag.Title = "JobSeekers";
     Layout = "~/Views/Shared/LayoutMain.cshtml";
@@ -7,6 +7,7 @@
     .seekerHead {
         text-align: center;
     }
+
     .btn-themeSeek {
         font-weight: bold;
         width: 160px !important;
@@ -16,18 +17,17 @@
         border-color: #00b3fe;
         margin: 4px;
     }
-    .btn-themeSeek:hover,
-    .btn-themeSeek:focus,
-    .btn-themeSeek:active,
-    .btn-themeSeek.active,
-    .open .dropdown-toggle.themeSeek {
-        font-weight: bold;
-        color: #fff;
-        background-color: #384452;
-        border-color: #384452;
-    }
 
-
+        .btn-themeSeek:hover,
+        .btn-themeSeek:focus,
+        .btn-themeSeek:active,
+        .btn-themeSeek.active,
+        .open .dropdown-toggle.themeSeek {
+            font-weight: bold;
+            color: #fff;
+            background-color: #384452;
+            border-color: #384452;
+        }
 </style>
 
 <!-- *****************************************************************************************************************
@@ -40,42 +40,78 @@ BLUE WRAP
         </div><!-- /row -->
     </div> <!-- /container -->
 </div><!-- /blue -->
-
 <!-- *****************************************************************************************************************
 AGENCY ABOUT
 ***************************************************************************************************************** -->
 <h2 class="seekerHead">Get your Resume in front of hundreds of Employers.</h2>
-<div class="container mtb">
- <div class="row">
-        <div class="col-lg-6">
-            <img class="img-responsive" src="~/Content/images/jobseekImage.jpg" alt="Get started - it's free.">
+@using (Html.BeginForm())
+{
+    @*
+        @Html.AntiForgeryToken()
+    *@
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @*
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProfileID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ProfileID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProfileID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Email">Email</label>
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
         </div>
 
-        <div class="col-lg-6">
-            <h3>Get started - it's free.</h3>
-            <br />
-            <form>
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="First Name">
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" placeholder="Last Name">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
-                <button type="submit" class="btn btn-themeSeek">Join Now</button>
-            </form>
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Password">Password</label>
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div><! --/row -->
-</div><! --/container -->
+        <div class="form-group">
+            <label class="control-label col-md-2" for="PasswordConfirm">Password Confirm</label>
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.PasswordConfirm, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PasswordConfirm, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="FirstName">First Name</label>
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="LastName">Last Name</label>
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Register" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+    </div>
+
 
 <!-- *****************************************************************************************************************
  SERVICE LOGOS
