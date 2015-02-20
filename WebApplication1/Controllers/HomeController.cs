@@ -147,14 +147,11 @@ namespace WebApplication1.Controllers
         }
 
 
-
-
-        //[HttpPost]
-        //public ActionResult DisplaySearchResults()
-        //{
-        //    CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
-        //    return View(careerProfileRepository.GetAllProfiles());
-        //}
+        public ActionResult DisplaySearchResults()
+        {
+            CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
+            return View(careerProfileRepository.GetAllProfiles());
+        }
 
         public ActionResult IndividualProfile(int profileID)
         {

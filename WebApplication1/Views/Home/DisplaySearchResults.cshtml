@@ -4,14 +4,50 @@
     ViewBag.Title = "DisplaySearchResults";
     Layout = "~/Views/Shared/LayoutMain.cshtml";
 }
+<!-- *****************************************************************************************************************
+     BLUE WRAP
+     ***************************************************************************************************************** -->
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Search Results.</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
 
-<h2>DisplaySearchResults</h2>
+<div class="container mtb">
+    @foreach (var item in Model)
+    {
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+        <div class="row">
+            <div class="col-sm-3 col-md-2 col-md-offset-1">
+                <img src="@Html.DisplayFor(modelItem => item.PictureURL)" width="150" height="165">
+            </div>
+            <div class="col-sm-9 col-md-8">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <b>@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</b> | @Html.DisplayFor(modelItem => item.City), @Html.DisplayFor(modelItem => item.Country)
+                    </div>
+                    <div class="col-sm-12">
+                        Work Experience: @Html.DisplayFor(modelItem => item.CompanyTitleYears)
+                    </div>
+                    <div class="col-sm-12">
+                        Industries: @Html.DisplayFor(modelItem => item.Industry)
+                    </div>
+                    <div class="col-sm-12">
+                        Skills: @Html.DisplayFor(modelItem => item.Skills)
+                    </div>
+                    <div class="col-sm-12">
+                        @Html.ActionLink("View Profile", "IndividualProfile", new { profileID = item.ProfileID }) | <a href="@Html.DisplayFor(modelItem => item.PortfolioURL)"> Portfolio link</a> | <a href="@Html.DisplayFor(modelItem => item.LinkedinURL)"> LinkedIn link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
-<div class="resultsContainer">
+
+@*<div class="resultsContainer">
     @foreach (var item in Model)
     {
 
@@ -33,4 +69,4 @@
     }
     <div class="clearfix"></div>
 
-</div>
+</div>*@

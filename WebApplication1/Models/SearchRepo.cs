@@ -35,7 +35,7 @@ namespace WebApplication1.Models
                            select p;
                           
             //filters by industries, jobtitle, years from both tables
-            var  = withoutindustry.Where(w => w.industry == industry);
+            //var  = withoutindustry.Where(w => w.industry == industry);
                           
         }
     }
