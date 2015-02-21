@@ -1,0 +1,128 @@
+﻿@model IEnumerable<WebApplication1.SvcType>
+
+@{
+    ViewBag.Title = "Premium";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+<link href="~/Content/custom.css" rel="stylesheet" />
+
+<!-- *****************************************************************************************************************
+BLUE WRAP
+***************************************************************************************************************** -->
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Premium Service.</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+
+<div class="container voffset5">
+    @*<h2> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span> </h2>*@
+    <div class="jumbotron voffset3">
+        <p>more... </p>
+        <p>
+            You must apply in person at a premium service centre if you want a decision on the same day as you apply to extend your 
+            visa or settle in....
+            
+        </p>
+    </div>
+    <div class="voffset5">
+        <h3>1. Service Types</h3>
+    </div>
+    <div class="container table-responsive voffset3">
+        <table class="table table-hover table-condensed table-striped">
+            <tr>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th class="text-center">Service Name</th>
+                <th class="text-center">Weeks</th>
+                <th class="text-center">Description</th>
+                <th class="text-center">Cost</th>
+                <th>&nbsp;</th>
+            </tr>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>&nbsp;</td>
+        <td>
+            <input type="radio" id="svcTypeID" name="svcTypeID" value="@(item.svcTypeID)" 
+                   @if (item.svcTypeID == 1) 
+                   {
+                       WriteLiteral("checked='checked'");
+                   } 
+                   />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.svcName)
+        </td>
+        <td class="text-center">
+            @Html.DisplayFor(modelItem => item.svcWeeks)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td class="text-right">
+            @string.Format("{0:C}", item.svcCharge) 
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+}
+        </table>
+    </div>
+    <div class="voffset5">
+        <h3>2. Payment</h3>
+        <div class="container">
+            <h4><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Pay using paypal</h4>
+            <form role="form" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="QB6NSTGYDFVMU">
+                <div class="col-xs-7 voffset3">
+                    <select name="os0" class="form-control">
+                        <option value="Basic Service (4 weeks)">Basic Service (4 weeks) $99.99 CAD</option>
+                        <option value="Short-Term Service (2 weeks)">Short-Term Service (2 weeks) $60.99 CAD</option>
+                        <option value="Long-Term Service (6 weeks)">Long-Term Service (6 weeks) $110.99 CAD</option>
+                    </select>
+                </div>
+                <div class="col-xs-7 voffset3">
+                    <input type="hidden" name="currency_code" value="CAD">
+                    <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                    <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                </div>
+            </form>
+        </div>
+        
+        <div class="container voffset4">
+            <h4><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Pay by credit card</h4>
+            <form role="form" data-toggle="validator" action="/Home/Thankyou">
+                <div class="form-group col-lg-7">
+                    <label>Card Number</label>
+                    <input type="number" class="form-control input-sm" name="card-number" id="card-number" 
+                           placeholder="Debit/Credit Card Number: (ex) 8571 8972 6773 8894"
+                           required>
+                </div>
+                <div class="form-group col-lg-7">
+                    <label>Name on Card</label>
+                    <input type="text" class="form-control input-sm" name="card-holder-name" id="card-holder-name" 
+                           placeholder="Card Holder's Name: (ex) Deanna Mcarthor" required>
+                </div>
+                <div class="form-group col-lg-7">
+                    <label>Expiration Date</label>
+                    <input type="number" class="form-control input-sm" name="expiry-month" id="expiry-month" placeholder="Month: (ex) 03" required>
+                    <input type="number" class="form-control input-sm" name="expiry-month" id="expiry-month" placeholder="Year: (ex) 2017" required>
+                </div>
+                <div class="form-group col-lg-7">
+                    <label>Card CVV</label>
+                    <input type="number" class="form-control input-sm" name="cvv" id="cvv" 
+                           placeholder="Security Code: (ex) 187" required>
+                </div>
+                <div class="form-group col-lg-12">
+                    <button type="submit" class="btn btn-warning">Pay Now</button>
+                </div>
+                
+            </form>
+        </div>
+        <div class="voffset5">&nbsp;</div>
+    </div>
+</div>
