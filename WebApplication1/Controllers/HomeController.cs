@@ -150,6 +150,8 @@ namespace WebApplication1.Controllers
         public ActionResult DisplaySearchResults()
         {
             CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
+            ViewBag.PremiumUsers = careerProfileRepository.GetAllPremiumProfiles();
+
             return View(careerProfileRepository.GetAllProfiles());
         }
 

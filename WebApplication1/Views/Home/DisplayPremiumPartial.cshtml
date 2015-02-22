@@ -1,0 +1,61 @@
+﻿@model List<WebApplication1.ViewModels.CareerProfile>
+
+@{
+    int totalCount = Model.Count;
+    var rng = new Random();
+    var values = Enumerable.Range(0, Model.Count).OrderBy(x => rng.Next()).ToArray();
+    int firstPremium = values[0];
+    int secondPremium = values[1];
+}
+
+<div class="row premiumBorder">
+    <div class="col-sm-3 col-md-2">
+        <img src="@Html.DisplayFor(model => Model[firstPremium].PictureURL)" width="150" height="165">
+    </div>
+    <div class="col-sm-9 col-md-10">
+        <div class="row">
+            <div class="col-sm-12">
+                <b>@Html.DisplayFor(model => Model[firstPremium].FirstName) @Html.DisplayFor(model => Model[firstPremium].LastName)</b> | @Html.DisplayFor(model => Model[firstPremium].City), @Html.DisplayFor(model => Model[firstPremium].Country)
+            </div>
+            <div class="col-sm-12">
+                Work Experience: @Html.DisplayFor(model => Model[firstPremium].CompanyTitleYears)
+            </div>
+            <div class="col-sm-12">
+                Industries: @Html.DisplayFor(model => Model[firstPremium].Industry)
+            </div>
+            <div class="col-sm-12">
+                Skills: @Html.DisplayFor(model => Model[firstPremium].Skills)
+            </div>
+            <div class="col-sm-12">
+                <br />
+                <b>@Html.ActionLink("View Profile", "IndividualProfile", new { profileID = Model[firstPremium].ProfileID })&nbsp;&nbsp;|&nbsp;&nbsp;<a href="@Html.DisplayFor(model => Model[firstPremium].PortfolioURL)"> Portfolio link</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="@Html.DisplayFor(model => Model[firstPremium].LinkedinURL)">LinkedIn link</a></b>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row premiumBorder">
+    <div class="col-sm-3 col-md-2">
+        <img src="@Html.DisplayFor(model => Model[secondPremium].PictureURL)" width="150" height="165">
+    </div>
+    <div class="col-sm-9 col-md-10">
+        <div class="row">
+            <div class="col-sm-12">
+                <b>@Html.DisplayFor(model => Model[secondPremium].FirstName) @Html.DisplayFor(model => Model[secondPremium].LastName)</b> | @Html.DisplayFor(model => Model[secondPremium].City), @Html.DisplayFor(model => Model[secondPremium].Country)
+            </div>
+            <div class="col-sm-12">
+                Work Experience: @Html.DisplayFor(model => Model[secondPremium].CompanyTitleYears)
+            </div>
+            <div class="col-sm-12">
+                Industries: @Html.DisplayFor(model => Model[secondPremium].Industry)
+            </div>
+            <div class="col-sm-12">
+                Skills: @Html.DisplayFor(model => Model[secondPremium].Skills)
+            </div>
+            <div class="col-sm-12">
+                <br />
+                <b>@Html.ActionLink("View Profile", "IndividualProfile", new { profileID = Model[secondPremium].ProfileID })&nbsp;&nbsp;|&nbsp;&nbsp;<a href="@Html.DisplayFor(model => Model[secondPremium].PortfolioURL)"> Portfolio link</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="@Html.DisplayFor(model => Model[secondPremium].LinkedinURL)">LinkedIn link</a></b>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="EmployeesModel.Profile" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EmployeesModel.Skill" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="EmployeesModel.SvcProfile" Width="1.5" PointX="6" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmployeesModel.SvcType" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.SvcType" Width="1.5" PointX="5.625" PointY="2.5" IsExpanded="true" />
         <AssociationConnector Association="EmployeesModel.FK__Admin__profileID__22AA2996" ManuallyRouted="false" />
         <AssociationConnector Association="EmployeesModel.FK__Career__profileI__145C0A3F" ManuallyRouted="false" />
         <AssociationConnector Association="EmployeesModel.FK__SvcProfil__profi__1ED998B2" ManuallyRouted="false" />
