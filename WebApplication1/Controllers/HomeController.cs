@@ -30,6 +30,16 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
+        //[HttpPost]
+        //public ActionResult Employers(string jobTitle, string city)
+        //{
+        //    CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
+        //    IEnumerable<int> quickSearchResults = careerProfileRepository.QuickSearchProfiles(jobTitle, city);
+
+        //    return RedirectToAction("DisplaySearchResults", "Home", new { displayList = quickSearchResults });
+        //}
+
+
 
 
         public ActionResult Search()
@@ -146,6 +156,19 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpPost]
+        public ActionResult DisplaySearchResults(string jobTitle, string city)
+        {
+            CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
+            ViewBag.PremiumUsers = careerProfileRepository.GetAllPremiumProfiles();
+
+            IEnumerable<CareerProfile> returnList = careerProfileRepository.QuickSearchProfiles(jobTitle, city);
+
+            return View(returnList);
+        }
+
+
+
 
         public ActionResult DisplaySearchResults()
         {
@@ -154,6 +177,7 @@ namespace WebApplication1.Controllers
 
             return View(careerProfileRepository.GetAllProfiles());
         }
+
 
         public ActionResult IndividualProfile(int profileID)
         {
