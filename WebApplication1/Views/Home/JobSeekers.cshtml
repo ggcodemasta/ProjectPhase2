@@ -1,4 +1,4 @@
-﻿ @model WebApplication1.ViewModels.JobSeekers
+﻿@model WebApplication1.ViewModels.JobSeekers
 @{
     ViewBag.Title = "JobSeekers";
     Layout = "~/Views/Shared/LayoutMain.cshtml";
@@ -7,7 +7,12 @@
     .seekerHead {
         text-align: center;
     }
-
+    .lessMarginLeft {
+        margin-left: -15px;
+    }
+    .lessPaddingLeft {
+        padding: 0 0;
+    }
     .btn-themeSeek {
         font-weight: bold;
         width: 160px !important;
@@ -17,17 +22,16 @@
         border-color: #00b3fe;
         margin: 4px;
     }
-
-        .btn-themeSeek:hover,
-        .btn-themeSeek:focus,
-        .btn-themeSeek:active,
-        .btn-themeSeek.active,
-        .open .dropdown-toggle.themeSeek {
-            font-weight: bold;
-            color: #fff;
-            background-color: #384452;
-            border-color: #384452;
-        }
+    .btn-themeSeek:hover,
+    .btn-themeSeek:focus,
+    .btn-themeSeek:active,
+    .btn-themeSeek.active,
+    .open .dropdown-toggle.themeSeek {
+        font-weight: bold;
+        color: #fff;
+        background-color: #384452;
+        border-color: #384452;
+    }
 </style>
 
 <!-- *****************************************************************************************************************
@@ -44,135 +48,115 @@ BLUE WRAP
 AGENCY ABOUT
 ***************************************************************************************************************** -->
 <h2 class="seekerHead">Get your Resume in front of hundreds of Employers.</h2>
-@using (Html.BeginForm())
-{
-    @*
-        @Html.AntiForgeryToken()
-    *@
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        @*
-            <div class="form-group">
-                @Html.LabelFor(model => model.ProfileID, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ProfileID, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ProfileID, "", new { @class = "text-danger" })
+<div class="container mtb">
+    <div class="row">
+        <div class="col-lg-6">
+            <img class="img-responsive" src="~/Content/images/jobseekImage.jpg" alt="Get started - it's free.">
+        </div>
+        <div class="col-lg-6">
+            <h3>Get started - it's free.</h3>
+            <br />
+            @using (Html.BeginForm())
+            {
+                @*
+                @Html.AntiForgeryToken()
+                *@
+                <div class="form">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class=" form-group">
+                        <label class="control-label" for="Firstname">First Name</label>
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for=" LastName">Last Name</label>
+                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="Email">Email address</label>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-lg-6 lessPaddingLeft">
+                        <label class="control-label" for="Password">Password</label>
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-lg-6 lessPaddingLeft">
+                        <label class="control-label" for="PasswordConfirm">Confirm Password</label>
+                        @Html.EditorFor(model => model.PasswordConfirm, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PasswordConfirm, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Join Now" class="btn btn-themeSeek" />
+                    </div>
                 </div>
-            </div>*@
-
-        <div class="form-group">
-            <label class="control-label col-md-2" for="Email">Email</label>
-            <div class="col-md-5">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2" for="Password">Password</label>
-            <div class="col-md-5">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-2" for="PasswordConfirm">Password Confirm</label>
-            <div class="col-md-5">
-                @Html.EditorFor(model => model.PasswordConfirm, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PasswordConfirm, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2" for="FirstName">First Name</label>
-            <div class="col-md-5">
-                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2" for="LastName">Last Name</label>
-            <div class="col-md-5">
-                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Register" class="btn btn-primary" />
-            </div>
+            }
         </div>
     </div>
-}
-    </div>
+</div>
 
+    <!-- *****************************************************************************************************************
+     SERVICE LOGOS
+     ***************************************************************************************************************** -->
+    <div id="service">
+        <div class="container">
+            <div class="row centered">
+                <div class="col-md-4">
+                    <i class="fa fa-eye"></i>
+                    <h4>Be Seen</h4>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fa fa-clock-o"></i>
+                    <h4>Save Time</h4>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fa fa-linkedin-square"></i>
+                    <h4>Connect Linkedin</h4>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                </div>
+            </div>
+        </div><! --/container -->
+    </div><! --/service -->
 
-<!-- *****************************************************************************************************************
- SERVICE LOGOS
- ***************************************************************************************************************** -->
-<div id="service">
-    <div class="container">
-        <div class="row centered">
-            <div class="col-md-4">
-                <i class="fa fa-eye"></i>
-                <h4>Be Seen</h4>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-            </div>
-            <div class="col-md-4">
-                <i class="fa fa-clock-o"></i>
-                <h4>Save Time</h4>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-            </div>
-            <div class="col-md-4">
-                <i class="fa fa-linkedin-square"></i>
-                <h4>Connect Linkedin</h4>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-            </div>
-        </div>
-    </div><! --/container -->
-</div><! --/service -->
+    <!-- *****************************************************************************************************************
+    TESTIMONIALS
+    ***************************************************************************************************************** -->
+    <div id="twrap">
+        <div class="container centered">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <i class="fa fa-comment-o"></i>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                    <h4><br />Marcel Newman</h4>
+                    <p>WEB DESIGNER - BLACKTIE.CO</p>
+                </div>
+            </div><! --/row -->
+        </div><! --/container -->
+    </div><! --/twrap -->
 
-<!-- *****************************************************************************************************************
-TESTIMONIALS
-***************************************************************************************************************** -->
-<div id="twrap">
-    <div class="container centered">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <i class="fa fa-comment-o"></i>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                <h4><br />Marcel Newman</h4>
-                <p>WEB DESIGNER - BLACKTIE.CO</p>
-            </div>
-        </div><! --/row -->
-    </div><! --/container -->
-</div><! --/twrap -->
-
-<!-- *****************************************************************************************************************
-OUR CLIENTS
-***************************************************************************************************************** -->
-<div id="cwrap">
-    <div class="container">
-        <div class="row centered">
-            <h3>COMPANIES USING EMPLOYEE ARRAY[ ]</h3>
-            <div class="col-lg-3 col-md-3 col-sm-3">
-                <img src="~/Content/solid-theme/img/clients/client01.png" class="img-responsive">
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3">
-                <img src="~/Content/solid-theme/img/clients/client02.png" class="img-responsive">
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3">
-                <img src="~/Content/solid-theme/img/clients/client03.png" class="img-responsive">
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3">
-                <img src="~/Content/solid-theme/img/clients/client04.png" class="img-responsive">
-            </div>
-        </div><! --/row -->
-    </div><! --/container -->
-</div><! --/cwrap -->
+    <!-- *****************************************************************************************************************
+    OUR CLIENTS
+    ***************************************************************************************************************** -->
+    <div id="cwrap">
+        <div class="container">
+            <div class="row centered">
+                <h3>COMPANIES USING EMPLOYEE ARRAY[ ]</h3>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <img src="~/Content/solid-theme/img/clients/client01.png" class="img-responsive">
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <img src="~/Content/solid-theme/img/clients/client02.png" class="img-responsive">
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <img src="~/Content/solid-theme/img/clients/client03.png" class="img-responsive">
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <img src="~/Content/solid-theme/img/clients/client04.png" class="img-responsive">
+                </div>
+            </div><! --/row -->
+        </div><! --/container -->
+    </div><! --/cwrap -->

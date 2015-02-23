@@ -8,14 +8,35 @@ namespace WebApplication1.Models
 {
     public class CareerProfileRepository
     {
+        //public CareerProfile FindProfile(int profileID)
+        //{
+        //    IEnumerable<CareerProfile> allProfiles = GetAllProfiles();
+        //    var query = (from ap in allProfiles
+        //                                   where ap.ProfileID == profileID
+        //                                   select ap
+        //                                   ).FirstOrDefault();
+        //    return query;
+        //}
+
         public CareerProfile FindProfile(int profileID)
         {
-            IEnumerable<CareerProfile> allProfiles = GetAllProfiles();
-            var query = (from ap in allProfiles
-                                           where ap.ProfileID == profileID
-                                           select ap
-                                           ).FirstOrDefault();
-            return query;
+            EmployeesEntities context = new EmployeesEntities();
+
+            IEnumerable<Profile> query = (from p in context.Profiles
+                         where p.profileID == profileID
+                         select p);
+
+            List<CareerProfile> bac = new List<CareerProfile>();
+            foreach (var item in query)
+            {
+                bac.Add(new CareerProfile(item.profileID, item.firstName, item.lastName, item.linkedinURL,
+                    item.portfolioURL, item.pictureURL, item.city, item.province, item.country,
+                    item.highestEducation, item.relocationYN));
+            }
+            bac = GetSkills(bac);
+            bac = GetCareers(bac);
+
+            return bac[0];
         }
 
         public IEnumerable<CareerProfile> GetAllProfiles()
@@ -60,6 +81,43 @@ namespace WebApplication1.Models
 
             return bac;
         }
+
+        public IEnumerable<CareerProfile> GetAllPremiumProfiles()
+        {
+            EmployeesEntities context = new EmployeesEntities();
+            var query = (from p in context.Profiles
+                         from svc in p.SvcProfiles
+                         where p.profileID == svc.profileID
+                         select new
+                         {
+                             ProfileID = p.profileID,
+                             FirstName = p.firstName,
+                             LastName = p.lastName,
+                             Linkedin = p.linkedinURL,
+                             Portfolio = p.portfolioURL,
+                             Picture = p.pictureURL,
+                             City = p.city,
+                             Province = p.province,
+                             Country = p.country,
+                             HighestEduction = p.highestEducation,
+                             Relocation = p.relocationYN
+
+                         });
+            List<CareerProfile> bac = new List<CareerProfile>();
+            foreach (var item in query)
+            {
+                bac.Add(new CareerProfile(item.ProfileID, item.FirstName, item.LastName, item.Linkedin,
+                    item.Portfolio, item.Picture, item.City, item.Province, item.Country,
+                    item.HighestEduction, item.Relocation));
+            }
+            bac = GetSkills(bac);
+            bac = GetCareers(bac);
+
+            return bac;
+        }
+
+
+
 
         private List<CareerProfile> GetSkills(List<CareerProfile> careerProfile)
         {
