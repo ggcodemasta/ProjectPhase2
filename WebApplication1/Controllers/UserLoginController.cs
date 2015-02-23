@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 using WebApplication1.Models;
+using WebApplication1.BusinessLogic;
 
 namespace WebApplication1.Controllers
 {
@@ -33,6 +35,69 @@ namespace WebApplication1.Controllers
         {
             SvcTypeRepository svcTypeRepository = new SvcTypeRepository();
             return View(svcTypeRepository.GetAllSvcType());
+        }
+
+        [HttpPost]
+        public ActionResult Premium(int svcTypeID = 0)
+        {
+            if (svcTypeID <= 0 )
+            {
+                 return RedirectToAction("ShowMsg", "Home",  new { msg = "[ERR] invalid input" });
+            }
+
+            SvcProfileRepository svcProfileRepository = new SvcProfileRepository();
+            if ( svcProfileRepository.HandleAddingSvcProfile(svcTypeID, "Credit Card") < 0)
+            {
+                return RedirectToAction("ShowMsg", "Home", new { msg = "[FAIL] HandleAddingSvcProfile" });
+            }
+
+            return RedirectToAction("MyPremium"); 
+        }
+
+        public ActionResult MyPremium(int? page)
+        {
+            // more... 
+            // const int ROW_CNT_PER_PAGE = 10; 
+            const int ROW_CNT_PER_PAGE = 2; 
+            int pageNumber = (page ?? 1);
+
+            SvcProfileRepository svcProfileRepository = new SvcProfileRepository();
+            IEnumerable<SvcProfile> mySvcProfiles = svcProfileRepository.HandleGettingManySvcProfilesByProfileID();
+            return View(mySvcProfiles.ToPagedList(pageNumber, ROW_CNT_PER_PAGE)); 
+        }
+
+        public ActionResult PaypalSuccess()
+        {
+            return RedirectToAction("MyPremium"); 
+        }
+
+        public ActionResult Paypal_IPN()
+        {
+            Paypal_IPN paypalIPN = new Paypal_IPN("test");
+            if (paypalIPN.TXN_ID != null)
+            {
+                string[] buff = paypalIPN.OptionSelection1.Split('.');
+                int svcTypeID = Int32.Parse(buff[0]);
+                SvcProfileRepository svcProfileRepository = new SvcProfileRepository();
+                svcProfileRepository.HandleAddingSvcProfile(svcTypeID, "PayPal", paypalIPN.Custom);
+                ViewBag.msg = "IPN is Not Null";
+            }
+            else
+            {
+                ViewBag.msg = "IPN.TXN_ID is null";
+            }
+            
+
+            /*
+            // TEST
+            string optionSelection1 = "1.Basic Service (4 weeks)";
+            string[] buff = optionSelection1.Split('.');
+            int svcTypeID = Int32.Parse(buff[0]);
+            SvcProfileRepository svcProfileRepository = new SvcProfileRepository();
+            svcProfileRepository.HandleAddingSvcProfile(svcTypeID, "PayPal", "user1@gmail.com");
+            ViewBag.msg = "TEST"; */
+
+            return View(); 
         }
     }
 }

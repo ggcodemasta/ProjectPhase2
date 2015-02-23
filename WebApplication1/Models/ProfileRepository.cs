@@ -18,6 +18,11 @@ namespace WebApplication1.Models
             return profileID;
         }
 
+        public int GetProfileIDByEmail(string email)
+        {
+            EmployeesEntities db = new EmployeesEntities();
+            return db.Profiles.Where(r => r.email == email).Select(r => r.profileID).SingleOrDefault();
+        }
 
         public int AddProfile(Profile profile)
         {

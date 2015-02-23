@@ -12,5 +12,11 @@ namespace WebApplication1.Models
             EmployeesEntities db = new EmployeesEntities();
             return db.SvcTypes.OrderBy(r => r.svcTypeID).ToList();
         }
+
+        public SvcType GetOneSvcType(int svcTypeID)
+        {
+            EmployeesEntities db = new EmployeesEntities();
+            return db.SvcTypes.Where(r => r.svcTypeID == svcTypeID).SingleOrDefault();
+        }
     }
 }
