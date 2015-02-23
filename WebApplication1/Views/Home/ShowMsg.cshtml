@@ -3,12 +3,19 @@
     ViewBag.Title = "ShowMsg";
     Layout = "~/Views/Shared/LayoutMain.cshtml";
 }
+<link href="~/Content/custom.css" rel="stylesheet" />
+<!-- *****************************************************************************************************************
+BLUE WRAP
+***************************************************************************************************************** -->
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Message</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
 
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<div class="container">
-    <h2>Message</h2>
-    <hr />
+<div class="container voffset5">
     @if (ViewBag.msg != null)
     {
         <div class="alert alert-info" role="alert">
@@ -17,6 +24,8 @@
         </div>
     }
 </div>
+
+<div class="voffset7"></div>
 
 
 

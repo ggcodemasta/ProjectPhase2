@@ -11,7 +11,7 @@
     <!-- Custom styles for this template -->
     <link href="~/Content/solid-theme/css/style.css" rel="stylesheet" />
     <link href="~/Content/solid-theme/css/font-awesome.min.css" rel="stylesheet" />
-
+    <link href="~/Content/custom.css" rel="stylesheet" />
 
     <style>
         /*#mainLogo {
@@ -168,6 +168,16 @@
         </ul>
     </li>
     <li><a href="~/Home/Logout">LOGOUT (@HttpContext.Current.User.Identity.Name)</a></li>
+    if (HttpContext.Current.User.IsInRole("Admin"))
+    {
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">ADMIN<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="/Admin/AddRole">ADD ROLE</a></li>
+                <li><a href="/Admin/AddUserToRole">ADD USER TO ROLE</a></li>
+            </ul>
+        </li>
+    }
 }
 else
 {
@@ -181,6 +191,7 @@ else
         </ul>
     </li>
 }
+
                     
                     @*<li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">PAGES <b class="caret"></b></a>

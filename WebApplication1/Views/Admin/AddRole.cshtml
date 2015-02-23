@@ -1,0 +1,92 @@
+﻿@model WebApplication1.AspNetRole
+
+@using WebApplication1.Models
+
+@{
+    ViewBag.Title = "AddRole";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+<link href="~/Content/custom.css" rel="stylesheet" />
+<!-- *****************************************************************************************************************
+BLUE WRAP
+***************************************************************************************************************** -->
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Add Role</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+
+
+<div class="container">
+    <h4><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Current Roles</h4>
+    <table class="table table-condensed table-striped">
+        <tr>
+            <th class="col-md-2">Role ID</th>
+            <th class="col-md-5">Role Name</th>
+        </tr>
+        @{
+            IEnumerable<AspNetRole> allRoles = ViewBag.AllRoles;
+            foreach (AspNetRole eachRole in allRoles)
+            {
+                <tr>
+                    <td>@(eachRole.Id)</td>
+                    <td>@(eachRole.Name)</td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+
+    <div class="container voffset5">
+        <h4><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Adding Roles</h4>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label class="control-label col-md-2">New Role ID</label>
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Id, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control",
+                       @placeholder = "ex) 1 "
+                   }
+               })
+                        @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">New Role Name</label>
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Name, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control",
+                       @placeholder = "ex) Admin"
+                   }
+               })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Add" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+<div class="voffset5">&nbsp;</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

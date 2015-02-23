@@ -56,9 +56,7 @@ namespace WebApplication1.Controllers
 
         public ActionResult MyPremium(int? page)
         {
-            // more... 
-            // const int ROW_CNT_PER_PAGE = 10; 
-            const int ROW_CNT_PER_PAGE = 2; 
+            const int ROW_CNT_PER_PAGE = 10; 
             int pageNumber = (page ?? 1);
 
             SvcProfileRepository svcProfileRepository = new SvcProfileRepository();
@@ -86,7 +84,6 @@ namespace WebApplication1.Controllers
             {
                 ViewBag.msg = "IPN.TXN_ID is null";
             }
-            
 
             /*
             // TEST
