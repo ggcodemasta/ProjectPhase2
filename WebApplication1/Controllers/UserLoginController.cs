@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
-
+using WebApplication1.ViewModels;
 using WebApplication1.Models;
 using WebApplication1.BusinessLogic;
 
@@ -16,11 +16,7 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
-
-        public ActionResult Career()
-        {
-            return View();
-        }
+ 
         public ActionResult Subscribe()
         {
             return View();
@@ -99,5 +95,9 @@ namespace WebApplication1.Controllers
 
             return View(); 
         }
+
+ 
+   
+
     }
 }

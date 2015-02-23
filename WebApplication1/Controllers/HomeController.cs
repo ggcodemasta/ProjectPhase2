@@ -241,6 +241,63 @@ namespace WebApplication1.Controllers
         }
 
 
+        public ActionResult Career()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Career(Careers careers)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("ShowMsg", new { msg = "[ERR] invalid input" });
+            }
+
+
+            CareerRepository careerRepository = new CareerRepository();
+
+            careers.CareerID = 0;
+            string email = HttpContext.User.Identity.Name; // userid
+
+            EmployeesEntities db = new EmployeesEntities();
+            int profileID = (from p in db.Profiles
+                             where p.email == email
+                             select p.profileID).SingleOrDefault();
+
+
+            careers.ProfileID = profileID;
+
+
+            if (careerRepository.HandleCareer(careers) < 0)
+            {
+                return RedirectToAction("ShowMsg", new { msg = "[FAIL] HandleCareer" });
+            }
+
+            return RedirectToAction("ViewCareers", "Home");
+        }
+
+        public ActionResult ViewCareers()
+        {
+            CareerRepository careerRepository = new CareerRepository();
+
+            string email = HttpContext.User.Identity.Name; // userid
+
+            EmployeesEntities db = new EmployeesEntities();
+            int profileID = (from p in db.Profiles
+                             where p.email == email
+                             select p.profileID).SingleOrDefault();
+
+            // int profileID = 1;
+
+            IEnumerable<Career> allCareers = careerRepository.GetManyCareers(profileID);
+
+
+            return View(allCareers);
+        }
+
+
+
       
 
 	}

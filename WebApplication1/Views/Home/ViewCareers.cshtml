@@ -1,0 +1,84 @@
+﻿@model IEnumerable<WebApplication1.Career>
+
+@{
+    ViewBag.Title = "Career";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+<!-- *****************************************************************************************************************
+BLUE WRAP
+***************************************************************************************************************** -->
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Career.</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+@Html.Partial("~/Views/Shared/Partials/ProfileLinks.cshtml")
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ViewCareers</title>
+</head>
+<body>
+ 
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.industry)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.jobTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.years)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Profile.email)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.industry)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.company)
+                </td>
+                <td>
+                    gd
+                    @Html.DisplayFor(modelItem => item.jobTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.years)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Profile.email)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "CareerEdit", new { id = item.careerID }) |
+                    @Html.ActionLink("Delete", "CareerDelete", new { id = item.careerID }) 
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>
