@@ -8,15 +8,6 @@ namespace WebApplication1.Models
 {
     public class CareerProfileRepository
     {
-        //public CareerProfile FindProfile(int profileID)
-        //{
-        //    IEnumerable<CareerProfile> allProfiles = GetAllProfiles();
-        //    var query = (from ap in allProfiles
-        //                                   where ap.ProfileID == profileID
-        //                                   select ap
-        //                                   ).FirstOrDefault();
-        //    return query;
-        //}
 
         public CareerProfile FindProfile(int profileID)
         {
@@ -82,6 +73,7 @@ namespace WebApplication1.Models
             return bac;
         }
 
+
         public IEnumerable<CareerProfile> GetAllPremiumProfiles()
         {
             EmployeesEntities context = new EmployeesEntities();
@@ -116,6 +108,56 @@ namespace WebApplication1.Models
             return bac;
         }
 
+
+        public IEnumerable<CareerProfile> QuickSearchProfiles(string jobTitle, string city)
+        {
+            List<CareerProfile> bac = new List<CareerProfile>();
+
+            IEnumerable<CareerProfile> allProfiles = GetAllProfiles();
+
+            if(jobTitle == "" && city == "")
+            {
+                foreach (CareerProfile cp in allProfiles)
+                {
+                    return (allProfiles);
+                }
+                
+            }
+            else if (jobTitle == "" && city != "")
+            {
+                foreach (CareerProfile cp in allProfiles)
+                {
+                    if (cp.City.Trim().ToLower() == city.Trim().ToLower())
+                    {
+                        bac.Add(cp);
+                    }
+                }
+
+            }
+            else if (city == "" && jobTitle != "")
+            {
+                foreach (CareerProfile cp in allProfiles)
+                {
+                    if (cp.JobTitle.IndexOf(jobTitle, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
+                    {
+                        bac.Add(cp);
+                    }
+                }
+
+            }
+            else
+            {
+                foreach (CareerProfile cp in allProfiles)
+                {
+                    if (cp.City.Trim().ToLower() == city.Trim().ToLower() && cp.JobTitle.IndexOf(jobTitle, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
+                    {
+                        bac.Add(cp);
+                    }
+                }
+            }
+
+            return bac;
+        }
 
 
 

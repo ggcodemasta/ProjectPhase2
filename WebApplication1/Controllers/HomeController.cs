@@ -30,6 +30,16 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
+        //[HttpPost]
+        //public ActionResult Employers(string jobTitle, string city)
+        //{
+        //    CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
+        //    IEnumerable<int> quickSearchResults = careerProfileRepository.QuickSearchProfiles(jobTitle, city);
+
+        //    return RedirectToAction("DisplaySearchResults", "Home", new { displayList = quickSearchResults });
+        //}
+
+
 
 
         public ActionResult Search()
@@ -146,6 +156,19 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpPost]
+        public ActionResult DisplaySearchResults(string jobTitle, string city)
+        {
+            CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
+            ViewBag.PremiumUsers = careerProfileRepository.GetAllPremiumProfiles();
+
+            IEnumerable<CareerProfile> returnList = careerProfileRepository.QuickSearchProfiles(jobTitle, city);
+
+            return View(returnList);
+        }
+
+
+
 
         public ActionResult DisplaySearchResults()
         {
@@ -154,6 +177,7 @@ namespace WebApplication1.Controllers
 
             return View(careerProfileRepository.GetAllProfiles());
         }
+
 
         public ActionResult IndividualProfile(int profileID)
         {
@@ -215,6 +239,63 @@ namespace WebApplication1.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+
+        public ActionResult Career()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Career(Careers careers)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("ShowMsg", new { msg = "[ERR] invalid input" });
+            }
+
+
+            CareerRepository careerRepository = new CareerRepository();
+
+            careers.CareerID = 0;
+            string email = HttpContext.User.Identity.Name; // userid
+
+            EmployeesEntities db = new EmployeesEntities();
+            int profileID = (from p in db.Profiles
+                             where p.email == email
+                             select p.profileID).SingleOrDefault();
+
+
+            careers.ProfileID = profileID;
+
+
+            if (careerRepository.HandleCareer(careers) < 0)
+            {
+                return RedirectToAction("ShowMsg", new { msg = "[FAIL] HandleCareer" });
+            }
+
+            return RedirectToAction("ViewCareers", "Home");
+        }
+
+        public ActionResult ViewCareers()
+        {
+            CareerRepository careerRepository = new CareerRepository();
+
+            string email = HttpContext.User.Identity.Name; // userid
+
+            EmployeesEntities db = new EmployeesEntities();
+            int profileID = (from p in db.Profiles
+                             where p.email == email
+                             select p.profileID).SingleOrDefault();
+
+            // int profileID = 1;
+
+            IEnumerable<Career> allCareers = careerRepository.GetManyCareers(profileID);
+
+
+            return View(allCareers);
+        }
+
 
 
       

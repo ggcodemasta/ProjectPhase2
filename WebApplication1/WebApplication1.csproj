@@ -326,6 +326,7 @@
     <Compile Include="Models\AspNetUserRolesRepository.cs" />
     <Compile Include="Models\AspNetUsersRepository.cs" />
     <Compile Include="Models\CareerProfileRepository.cs" />
+    <Compile Include="Models\CareerRepository.cs" />
     <Compile Include="Models\ProfileRepository.cs" />
     <Compile Include="Models\SearchRepo.cs" />
     <Compile Include="Models\SvcProfileRepository.cs" />
@@ -350,6 +351,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CareerProfile.cs" />
+    <Compile Include="ViewModels\Careers.cs" />
     <Compile Include="ViewModels\JobSeekers.cs" />
     <Compile Include="ViewModels\Login.cs" />
     <Compile Include="ViewModels\Register.cs" />
@@ -381,7 +383,7 @@
     <Content Include="Views\Admin\AdminHome.cshtml" />
     <Content Include="Views\Admin\Delete.cshtml" />
     <Content Include="Views\Admin\x_Index.cshtml" />
-    <Content Include="Views\UserLogin\Career.cshtml" />
+    <Content Include="Views\Home\Career.cshtml" />
     <Content Include="Views\UserLogin\Index.cshtml" />
     <Content Include="Views\UserLogin\Subscribe.cshtml" />
     <Content Include="Views\UserLogin\Success.cshtml" />
@@ -396,6 +398,7 @@
     <Content Include="Views\Home\DisplayPremiumPartial.cshtml" />
     <Content Include="Views\UserLogin\MyPremium.cshtml" />
     <Content Include="Views\UserLogin\Paypal_IPN.cshtml" />
+    <Content Include="Views\Home\ViewCareers.cshtml" />
     <Content Include="Views\Admin\AddRole.cshtml" />
     <Content Include="Views\Admin\AddUserToRole.cshtml" />
     <None Include="Web.Debug.config">
