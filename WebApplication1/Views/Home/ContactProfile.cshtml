@@ -3,21 +3,101 @@
     ViewBag.Title = "ContactProfile";
     Layout = "~/Views/Shared/LayoutMain.cshtml";
 }
+<style>
+    .searchResults {
+        padding-bottom: 80px;
+    }
+    .listingBorder {
+        border: 1px #384452 solid;
+        padding: 10px 0;
+        margin: 10px 0;
+    }
+    .premiumBorder {
+        border: 1px #00b3fe solid;
+        padding: 10px 0;
+        margin: 10px 0;
+    }
+    .premiumLine{
+        margin: 15px 0 -15px 0;
+        text-align: center; 
+        border-top: 2px solid #00b3fe;
+    }
+    .premiumTitle {
+        display: inline-block; 
+        position: relative; 
+        top: -10px; 
+        background-color: white; 
+        color: #384452; 
+        font-weight: bold; 
+        padding: 0px 10px;
+    }
+    .errorMsg {
+        color: red;
+    }
+</style>
 
-<h2>Contact Michael</h2>
 
-<div class="contactForm">
-    <form role="form">
-        <div class="form-group">
-            <label for="employerEmail1">Employer Email address</label>
-            <input type="email" class="form-control" id="employerEmail1" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-            <label for="employerMessage">Message to Michael</label>
-            <textarea rows="8" @*cols="50"*@ class="form-control" id="employerMessage"></textarea>
-            @*<input type="password" class="form-control" id="employerMessage" placeholder="Password">*@
-        </div>
-       
-        <a href="/Home/MessageSent"><button type="button" class="btn btn-primary">Submit</button></a>
-</form>
+<!-- *****************************************************************************************************************
+     BLUE WRAP
+     ***************************************************************************************************************** -->
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Contact Profile.</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+
+
+<!-- *****************************************************************************************************************
+     CONTACT FORMS
+     ***************************************************************************************************************** -->
+
+
+<div class="container mtb">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h4 class="errorMsg">@Html.Raw(ViewBag.Response)</h4>
+            <h4>Get In Touch with @Html.Raw(ViewBag.firstName) @Html.Raw(ViewBag.lastName)!</h4>
+            <div class="hline"></div>
+            <p>Make sure to provide as many details as possible about your company and the employment opportunity in order to increase response rates.</p>
+            <form action="~/home/ContactProfile" method="post">
+                <div class="form-group">
+                    <label for="senderName">Your Name</label>
+                    <input type="text" class="form-control" id="senderName" name="senderName">
+                </div>
+                <div class="form-group">
+                    <label for="companyName">Your Company Name</label>
+                    <input type="text" class="form-control" id="companyName" name="companyName">
+                </div>
+                <div class="form-group">
+                    <label for="senderEmail">You Email address</label>
+                    <input type="email" class="form-control" id="senderEmail" name="senderEmail">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" class="form-control" id="subject" name="subject">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea class="form-control" id="message" name="message" rows="5"></textarea>
+                </div>
+
+                <input type="hidden" name="profileID" id="profileID"  value="@Html.Raw(ViewBag.profileID)" />
+                <input type="hidden" name="firstName" id="firstName" value="@Html.Raw(ViewBag.firstName)" />
+                <input type="hidden" name="lastName" id="lastName" value="@Html.Raw(ViewBag.lastName)" />
+                <button type="submit" class="btn btn-theme">Send</button>
+            </form>
+        </div><! --/col-lg-8 -->
+    </div><! --/row -->
+</div><! --/container -->
+
+<div class="container searchResults">
+    <div class="premiumLine">
+        <div class="premiumTitle">Premium Profiles</div>
+    </div>
+    @Html.Partial("DisplayPremiumPartial", new ViewDataDictionary(ViewBag.PremiumUsers))
+    <div class="premiumLine">
+        <div class="premiumTitle"></div>
+    </div>
 </div>

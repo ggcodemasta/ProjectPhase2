@@ -10,6 +10,7 @@ using Microsoft.Owin.Security;
 
 using WebApplication1.Models;
 using WebApplication1.ViewModels;
+using WebApplication1.BusinessLogic;
 
 namespace WebApplication1.Controllers
 {
@@ -167,13 +168,13 @@ namespace WebApplication1.Controllers
             return View(returnList);
         }
 
-            [HttpPost]
-        public ActionResult DisplaySearchResults(string jobTitle.....)
-        {
-            SearchRepo srepo = new SearchRepo();
-                srepo.SearchResults()
-            return View(returnList);
-        }
+        //    [HttpPost]
+        //public ActionResult DisplaySearchResults(string jobTitle.....)
+        //{
+        //    SearchRepo srepo = new SearchRepo();
+        //        srepo.SearchResults()
+        //    return View(returnList);
+        //}
 
 
         public ActionResult DisplaySearchResults()
@@ -192,17 +193,6 @@ namespace WebApplication1.Controllers
         }
 
 
-
-        //public ActionResult ContactProfile()
-        //{
-        //    return View();
-        //}
-
-        //public ActionResult MessageSent()
-        //{
-        //    return View();
-           
-        //}
         //public ActionResult UserDelete() 
         //{
         //    return View();
@@ -303,7 +293,56 @@ namespace WebApplication1.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult ContactProfile(string profileID, string firstName, string lastName)
+        {
+            CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
+            ViewBag.PremiumUsers = careerProfileRepository.GetAllPremiumProfiles();
 
+            ViewBag.profileID = profileID;
+            ViewBag.firstName = firstName;
+            ViewBag.lastName = lastName;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ContactProfile(string profileID, string senderName, string companyName, string senderEmail, string subject, string message, string firstName, string lastName)
+        {
+            CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
+            ViewBag.PremiumUsers = careerProfileRepository.GetAllPremiumProfiles();
+
+            ProfileRepository pr = new ProfileRepository();
+            string sendToEmail = pr.GetProfileEmail(Int32.Parse(profileID));
+
+            MailHelper mailer = new MailHelper();
+            string response = mailer.EmailFromArvixe(
+                                       new Message(senderName, companyName, senderEmail, subject, message, sendToEmail));
+
+            if (response.IndexOf("Success", StringComparison.CurrentCultureIgnoreCase) > -1)
+            {
+                return RedirectToAction("MessageSent", "Home");
+            }
+            else
+            {
+                ViewBag.Response = "Error - Message Not Sent: " + response;
+
+                ViewBag.profileID = profileID;
+                ViewBag.firstName = firstName;
+                ViewBag.lastName = lastName;
+                return View();
+            }
+            
+        }
+
+        public ActionResult MessageSent()
+        {
+            CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
+            ViewBag.PremiumUsers = careerProfileRepository.GetAllPremiumProfiles();
+
+            return View();
+
+        }
       
 
 	}

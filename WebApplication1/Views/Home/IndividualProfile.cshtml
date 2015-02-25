@@ -23,6 +23,7 @@
 </div><!-- /blue -->
 
 <div class="container individualProfile">
+    <a href="javascript:void(0);" onclick="history.go(-1);">Return to search results</a>
     <h2>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h2>
     <h4><a href="@Html.DisplayFor(model => model.PortfolioURL)"> Portfolio link</a> | <a href="@Html.DisplayFor(model => model.LinkedinURL)"> LinkedIn link</a></h4>
     @*<h4>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName) Profile</h4>*@
@@ -33,11 +34,10 @@
             <img src="@Html.DisplayFor(model => model.PictureURL)" width="200" height="220">
             <div>
                 <br />
-                <a href="/Home/ContactProfile"><button type="button" class="btn btn-primary">Contact @Html.DisplayFor(model => model.FirstName)</button></a>
+                <a href="/Home/ContactProfile?profileID=@Html.DisplayFor(model => model.ProfileID)&firstName=@Html.DisplayFor(model => model.FirstName)&lastName=@Html.DisplayFor(model => model.LastName)"><button type="button" class="btn btn-primary">Contact @Html.DisplayFor(model => model.FirstName)</button></a>
             </div>
             <p>
-                @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
-                @Html.ActionLink("Back to List", "Index")
+                <a href="javascript:void(0);" onclick="history.go(-1);">Return to search results</a>
             </p>
         </div>
         <div class="col-sm-8 col-md-9">

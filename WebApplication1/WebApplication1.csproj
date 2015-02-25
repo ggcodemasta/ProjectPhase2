@@ -293,6 +293,7 @@
     <Compile Include="AspNetUserLogin.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="BusinessLogic\MailHelper.cs" />
     <Compile Include="BusinessLogic\Paypal_IPN.cs" />
     <Compile Include="Career.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -327,6 +328,7 @@
     <Compile Include="Models\AspNetUsersRepository.cs" />
     <Compile Include="Models\CareerProfileRepository.cs" />
     <Compile Include="Models\CareerRepository.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\ProfileRepository.cs" />
     <Compile Include="Models\SearchRepo.cs" />
     <Compile Include="Models\SvcProfileRepository.cs" />

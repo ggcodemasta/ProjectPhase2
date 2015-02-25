@@ -4,12 +4,62 @@
     Layout = "~/Views/Shared/LayoutMain.cshtml";
 }
 
-<br />
-<h3>Message has been sent</h3>
-<br />
-<div>
-    <a href="/Home"><button type="button" class="btn btn-primary">Return to [EA] Home</button></a>
-</div>
-<br />
-<br />
+<style>
+    .searchResults {
+        padding-bottom: 80px;
+    }
+    .listingBorder {
+        border: 1px #384452 solid;
+        padding: 10px 0;
+        margin: 10px 0;
+    }
+    .premiumBorder {
+        border: 1px #00b3fe solid;
+        padding: 10px 0;
+        margin: 10px 0;
+    }
+    .premiumLine{
+        margin: 15px 0 -15px 0;
+        text-align: center; 
+        border-top: 2px solid #00b3fe;
+    }
+    .premiumTitle {
+        display: inline-block; 
+        position: relative; 
+        top: -10px; 
+        background-color: white; 
+        color: #384452; 
+        font-weight: bold; 
+        padding: 0px 10px;
+    }
+</style>
+<!-- *****************************************************************************************************************
+     BLUE WRAP
+     ***************************************************************************************************************** -->
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Message Confirmation.</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
 
+
+<div class="container mtb">
+    <h3>Your Message has been sent</h3>
+    <br />
+    <div>
+        Return to the <a href="~/Home/Search">Search Page.</a>
+    </div>
+    <br />
+</div>
+
+<div class="container searchResults">
+    <div class="premiumLine">
+        <div class="premiumTitle">Premium Profiles</div>
+    </div>
+    @Html.Partial("DisplayPremiumPartial", new ViewDataDictionary(ViewBag.PremiumUsers))
+    <div class="premiumLine">
+        <div class="premiumTitle"></div>
+    </div>
+</div>
