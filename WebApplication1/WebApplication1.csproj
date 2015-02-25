@@ -129,6 +129,7 @@
     <Content Include="Content\custom.css" />
     <Content Include="Content\images\EmployeeArray-Logo.png" />
     <Content Include="Content\images\jobseekImage.jpg" />
+    <Content Include="Content\images\person-placeholder2.jpg" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\solid-theme\css\bootstrap.css" />

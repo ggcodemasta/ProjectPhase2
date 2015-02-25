@@ -20,6 +20,10 @@ namespace WebApplication1.Models
             List<CareerProfile> bac = new List<CareerProfile>();
             foreach (var item in query)
             {
+                if (item.pictureURL == null || item.pictureURL.IndexOf(".jpg", 0, StringComparison.CurrentCultureIgnoreCase) == -1 && item.pictureURL.IndexOf(".png", 0, StringComparison.CurrentCultureIgnoreCase) == -1)
+                {
+                    item.pictureURL = "/Content/images/person-placeholder2.jpg";
+                }
                 bac.Add(new CareerProfile(item.profileID, item.firstName, item.lastName, item.linkedinURL,
                     item.portfolioURL, item.pictureURL, item.city, item.province, item.country,
                     item.highestEducation, item.relocationYN));
@@ -60,12 +64,25 @@ namespace WebApplication1.Models
             List<CareerProfile> bac = new List<CareerProfile>();
             foreach (var item in query)
             {
-                bac.Add(new CareerProfile(item.ProfileID, item.FirstName, item.LastName, item.Linkedin,
-                    item.Portfolio, item.Picture, item.City, item.Province, item.Country, 
-                    //"",
-                    //item.Skills, item.Industry, item.Company, item.JobTitle, item.Years, 
-                    //"", "", "", 0, 
+                if (item.Picture == null || item.Picture.IndexOf(".jpg", 0, StringComparison.CurrentCultureIgnoreCase) == -1 && item.Picture.IndexOf(".png", 0, StringComparison.CurrentCultureIgnoreCase) == -1)
+                {
+                    bac.Add(new CareerProfile(item.ProfileID, item.FirstName, item.LastName, item.Linkedin,
+                    item.Portfolio, "/Content/images/person-placeholder2.jpg", item.City, item.Province, item.Country,
+                        //"",
+                        //item.Skills, item.Industry, item.Company, item.JobTitle, item.Years, 
+                        //"", "", "", 0, 
                     item.HighestEduction, item.Relocation));
+                }
+                else
+                {
+                    bac.Add(new CareerProfile(item.ProfileID, item.FirstName, item.LastName, item.Linkedin,
+                    item.Portfolio, item.Picture, item.City, item.Province, item.Country,
+                        //"",
+                        //item.Skills, item.Industry, item.Company, item.JobTitle, item.Years, 
+                        //"", "", "", 0, 
+                    item.HighestEduction, item.Relocation));
+                }
+                
             }
             bac = GetSkills(bac);
             bac = GetCareers(bac);
@@ -93,14 +110,25 @@ namespace WebApplication1.Models
                              Country = p.country,
                              HighestEduction = p.highestEducation,
                              Relocation = p.relocationYN
-
                          });
             List<CareerProfile> bac = new List<CareerProfile>();
             foreach (var item in query)
             {
-                bac.Add(new CareerProfile(item.ProfileID, item.FirstName, item.LastName, item.Linkedin,
+                if (item.Picture == null || item.Picture.IndexOf(".jpg", 0, StringComparison.CurrentCultureIgnoreCase) == -1 && item.Picture.IndexOf(".png", 0, StringComparison.CurrentCultureIgnoreCase) == -1)
+                {
+                    bac.Add(new CareerProfile(item.ProfileID, item.FirstName, item.LastName, item.Linkedin,
+                    item.Portfolio, "/Content/images/person-placeholder2.jpg", item.City, item.Province, item.Country,
+                    item.HighestEduction, item.Relocation));
+                }
+                else
+                {
+                    bac.Add(new CareerProfile(item.ProfileID, item.FirstName, item.LastName, item.Linkedin,
                     item.Portfolio, item.Picture, item.City, item.Province, item.Country,
                     item.HighestEduction, item.Relocation));
+                }
+
+
+                
             }
             bac = GetSkills(bac);
             bac = GetCareers(bac);
