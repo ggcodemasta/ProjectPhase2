@@ -1,0 +1,84 @@
+﻿@model IEnumerable<WebApplication1.ViewModels.CareerProfile>
+
+@{
+    ViewBag.Title = "SearchResults";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+
+<style>
+    .searchResults {
+        padding-bottom: 80px;
+    }
+
+    .listingBorder {
+        border: 1px #384452 solid;
+        padding: 10px 0;
+        margin: 10px 0;
+    }
+
+    .premiumBorder {
+        border: 1px #00b3fe solid;
+        padding: 10px 0;
+        margin: 10px 0;
+    }
+
+    .premiumLine {
+        margin: 15px 0 -15px 0;
+        text-align: center;
+        border-top: 2px solid #00b3fe;
+    }
+
+    .premiumTitle {
+        display: inline-block;
+        position: relative;
+        top: -10px;
+        background-color: white;
+        color: #384452;
+        font-weight: bold;
+        padding: 0px 10px;
+    }
+</style>
+<!-- *****************************************************************************************************************
+     BLUE WRAP
+     ***************************************************************************************************************** -->
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Search Results.</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+
+
+    @foreach (var item in Model)
+    {
+
+        <div class="row listingBorder">
+            <div class="col-sm-3 col-md-2">
+                <img src="@Html.DisplayFor(modelItem => item.PictureURL)" width="150" height="165">
+            </div>
+            <div class="col-sm-9 col-md-10">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <b>@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</b> | @Html.DisplayFor(modelItem => item.City), @Html.DisplayFor(modelItem => item.Country)
+                    </div>
+                    <div class="col-sm-12">
+                        Work Experience: @Html.DisplayFor(modelItem => item.CompanyTitleYears)
+                    </div>
+                    <div class="col-sm-12">
+                        Industries: @Html.DisplayFor(modelItem => item.Industry)
+                    </div>
+                    <div class="col-sm-12">
+                        Skills: @Html.DisplayFor(modelItem => item.Skills)
+                    </div>
+                    <div class="col-sm-12">
+                        <br />
+                        <b>@Html.ActionLink("View Profile", "IndividualProfile", new { profileID = item.ProfileID })&nbsp;&nbsp;|&nbsp;&nbsp;<a href="@Html.DisplayFor(modelItem => item.PortfolioURL)"> Portfolio link</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="@Html.DisplayFor(modelItem => item.LinkedinURL)"> LinkedIn link</a></b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+

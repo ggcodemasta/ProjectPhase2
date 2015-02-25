@@ -23,7 +23,7 @@ BLUE WRAP
 
 
 <div class="container verticalSpace">
-    @using (Html.BeginForm("Index", "Profile"))
+    @using (Html.BeginForm("SearchResults", "Home"))
     {
         @Html.AntiForgeryToken()
 
@@ -33,12 +33,14 @@ BLUE WRAP
                 <label for="jobTitle" class="col-sm-2 control-label">Job Title</label>
                     <div class="col-sm-6">
                         @*<input type="text" class="form-control" id="jobTitle" placeholder="Job Title">*@
-                        <select class="form-control" id="jobTitle">
-                            <option value="programmer">Programmer</option>
+                        <select class="form-control" name="jobTitle">
+                            <option value="analyst">Analyst</option>
                             <option value="manager">Project Manager</option>
-                            <option value="netadmin">Network Administrator</option>
-                            <option value="qualityctrl">Quality Control</option>
+                            <option value="netadmin">Tester</option>
                             <option value="supervisor">Supervisor</option>
+                            <option value="developer">Front end Developer</option>
+                            <option value="developer">Back end Developer</option>
+                            <option value="developer">Full Stack Developer</option>
                         </select>
                     </div>
                 <div class="col-sm-4">
@@ -47,11 +49,20 @@ BLUE WRAP
             <div class="form-group">
                 <label for="industry" class="col-sm-2 control-label">Industry</label>
                 <div class="col-sm-6">
-                    <select class="form-control" id="industry">
+                    <select class="form-control" name="industry">
                         <option value="all">All</option>
-                        <option value="video game">Video Game</option>
+                        <option value="videogame">Video Game</option>
                         <option value="telecommunications">Telecommunications</option>
+                        <option value="network">Networking</option>
+                        <option value="hardware">Computer Hardware</option>
                         <option value="banking">Banking</option>
+                        <option value="education">Educational services</option>
+                        <option value="healthsocial">Health Care and Social Services</option>
+                        <option value="retail">Retail</option>
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="finance">Finance</option>
+                        <option value="transportation">Transportation</option>
+
                     </select>
                 </div>
                 <div class="col-sm-4">
@@ -63,7 +74,7 @@ BLUE WRAP
             <div class="form-group">
                 <label for="country" class="col-sm-2 control-label">Country</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="country" placeholder="Canada">
+                    <input type="text" class="form-control" name="country" placeholder="Canada">
                 </div>
                 <div class="col-sm-4">
                 </div>
@@ -71,7 +82,7 @@ BLUE WRAP
             <div class="form-group">
                 <label for="province" class="col-sm-2 control-label">Province</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="province" placeholder="Alberta">
+                    <input type="text" class="form-control" name="province" placeholder="Alberta">
                 </div>
                 <div class="col-sm-4">
                 </div>
@@ -79,7 +90,7 @@ BLUE WRAP
             <div class="form-group">
                 <label for="city" class="col-sm-2 control-label">City</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="city" placeholder="Calgary">
+                    <input type="text" class="form-control" name="city" placeholder="Calgary">
                 </div>
                 <div class="col-sm-4">
                 </div>
@@ -88,7 +99,7 @@ BLUE WRAP
                 <div class="col-sm-offset-2 col-sm-10">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" id="rememberMe"> Include candidates willing to relocate.
+                            <input type="checkbox" name="relocate"> Include candidates willing to relocate.
                         </label>
                     </div>
                 </div>
@@ -99,7 +110,7 @@ BLUE WRAP
             <div class="form-group">
                 <label for="education" class="col-sm-2 control-label">Education</label>
                 <div class="col-sm-6">
-                    <select class="form-control" id="education">
+                    <select class="form-control" name="education">
                         <option value="any">None</option>
                         <option value="highschool">High School</option>
                         <option value="certificate">Certificate</option>
@@ -116,7 +127,7 @@ BLUE WRAP
             <div class="form-group">
                 <label for="industry" class="col-sm-2 control-label">Experience</label>
                 <div class="col-sm-6">
-                    <select class="form-control" id="industry">
+                    <select class="form-control" name="experience">
                         <option value="0">None</option>
                         <option value="1">1-2 years</option>
                         <option value="2">3-4 years</option>
@@ -133,7 +144,7 @@ BLUE WRAP
             <div class="form-group">
                 <label for="platform" class="col-sm-2 control-label">Platforms</label>
                 <div class="col-sm-6">
-                    <select multiple class="form-control" id="platform">
+                    <select multiple class="form-control" name="platform">
                         <option value="any">Any</option>
                         <option value="windows">Windows</option>
                         <option value="mac">Mac</option>
@@ -154,23 +165,32 @@ BLUE WRAP
             <div class="form-group">
                 <label for="language" class="col-sm-2 control-label">Languages</label>
                 <div class="col-sm-6">
-                    <select multiple class="form-control" id="language">
+                    <select multiple class="form-control" name="language">
                         <option value="any">Any</option>
                         <option value="ajax">Ajax</option>
                         <option value="angularJS">AngularJS</option>
+                        <option value="aspectc++">AspectC++</option>
+                        <option value="assembly">Assembly</option>
                         <option value="asp.net">ASP.NET</option>
+                        <option value="basic">BASIC</option>
                         <option value="c">C</option>
                         <option value="c++">C++</option>
                         <option value="c#">C#</option>
+                        <option value="crimm">C-RIMM</option>
+                        <option value="fortran">Fortran</option>
                         <option value="java">Java</option>
                         <option value="javascript">Javascript</option>
                         <option value="mysql">MySQL</option>
+                        <option value="node">Node</option>
                         <option value="objectivec">Objective C</option>
                         <option value="perl">Perl</option>
                         <option value="php">PHP</option>
                         <option value="python">Python</option>
                         <option value="ruby">Ruby</option>
                         <option value="sqlserver">SQL Server</option>
+                        <option value="sql">SQL</option>
+                        <option value="vb">Visual Basic</option>
+ 
                     </select>
                 </div>
                 <div class="col-sm-4">
