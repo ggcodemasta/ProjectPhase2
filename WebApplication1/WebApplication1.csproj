@@ -331,6 +331,9 @@
     <Compile Include="Models\SearchRepo.cs" />
     <Compile Include="Models\SvcProfileRepository.cs" />
     <Compile Include="Models\SvcTypeRepository.cs" />
+    <Compile Include="Platform.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Profile.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

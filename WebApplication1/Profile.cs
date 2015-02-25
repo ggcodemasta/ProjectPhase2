@@ -20,6 +20,7 @@ namespace WebApplication1
             this.Careers = new HashSet<Career>();
             this.SvcProfiles = new HashSet<SvcProfile>();
             this.Skills = new HashSet<Skill>();
+            this.Platforms = new HashSet<Platform>();
         }
     
         public int profileID { get; set; }
@@ -40,5 +41,6 @@ namespace WebApplication1
         public virtual ICollection<Career> Careers { get; set; }
         public virtual ICollection<SvcProfile> SvcProfiles { get; set; }
         public virtual ICollection<Skill> Skills { get; set; }
+        public virtual ICollection<Platform> Platforms { get; set; }
     }
 }

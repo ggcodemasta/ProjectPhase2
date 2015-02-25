@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="05544176628645ec97a47dddb2b68392" Name="Diagram1">
-        <EntityTypeShape EntityType="EmployeesModel.Admin" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.Admin" Width="1.5" PointX="3.25" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="EmployeesModel.Career" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
         <EntityTypeShape EntityType="EmployeesModel.Profile" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EmployeesModel.Skill" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
@@ -24,6 +24,8 @@
         <AssociationConnector Association="EmployeesModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="EmployeesModel.AspNetUserRoles" ManuallyRouted="false" />
         <AssociationConnector Association="EmployeesModel.ProfileSkill" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EmployeesModel.Platform" Width="1.5" PointX="0.75" PointY="3.25" />
+        <AssociationConnector Association="EmployeesModel.ProfilePlatform" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

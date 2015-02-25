@@ -82,10 +82,10 @@ GO
 
 CREATE TABLE ProfileSkill
 (
-	profileID INTEGER NOT NULL,
-	skillID INTEGER NOT NULL,
-	FOREIGN KEY(profileID) REFERENCES Profile(profileID),
-	FOREIGN KEY(skillID) REFERENCES Skill(skillID)
+		profileID INTEGER NOT NULL,
+		skillID INTEGER NOT NULL,
+		FOREIGN KEY(profileID) REFERENCES Profile(profileID),
+		FOREIGN KEY(skillID) REFERENCES Skill(skillID)
 );
 GO
 

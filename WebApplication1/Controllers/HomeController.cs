@@ -167,7 +167,13 @@ namespace WebApplication1.Controllers
             return View(returnList);
         }
 
-
+            [HttpPost]
+        public ActionResult DisplaySearchResults(string jobTitle.....)
+        {
+            SearchRepo srepo = new SearchRepo();
+                srepo.SearchResults()
+            return View(returnList);
+        }
 
 
         public ActionResult DisplaySearchResults()
