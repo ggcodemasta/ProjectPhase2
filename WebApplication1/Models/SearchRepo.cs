@@ -18,49 +18,81 @@ namespace WebApplication1.Models
     public class SearchRepo
     {
         public List<CareerProfile> SearchResults(string jobtitle, string industry, string country,
-            string province, string city, string relocate, string education, int yearmin, int yearmax, List<string> platforms, List<string> languages)
+            string province, string city, string relocate, string education, string experience, List<string> platforms, List<string> languages)
         {
             List<Profile> asd = new List<Profile>();
             List<int> removeNonMatches = new List<int>();
             List<int> removeNonMatchesLanguges = new List<int>();
 
             EmployeesEntities context = new EmployeesEntities();
-            var withoutindustry = from c in context.Careers
-                                  where c.jobTitle == jobtitle
-                                  where c.years >= yearmin
-                                  where c.years <= yearmax
-                                  select c;
-            if (industry != "all")
+
+            int yearmin = 0;
+            int yearmax = 0;
+            switch (experience)
             {
-                var withindustry = withoutindustry.Where(w => w.industry == industry);
+                case "0":
+                    yearmin = 0;
+                    yearmax = 200;
+                    break;
+                case "1":
+                    yearmin = 1;
+                    yearmax = 2;
+                    break;
+                case "2":
+                    yearmin = 3;
+                    yearmax = 4;
+                    break;
+                case "3":
+                    yearmin = 5;
+                    yearmax = 10;
+                    break;
+                case "4":
+                    yearmin = 10;
+                    yearmax = 200;
+                    break;
             }
 
-            var filter1 = from c in context.Careers
+
+            var filter1 = (from c in context.Careers
                           let p = c.Profile
                           from s in p.Skills
-                          where c.jobTitle == jobtitle
-                          where c.industry == industry
-                          where p.highestEducation == education
+                          //where p.highestEducation == education
                           where c.years >= yearmin
                           where c.years <= yearmax
-                          select p;
-            if (relocate == "no")
+                          select p);
+            if (jobtitle != "all") { 
+                     
+                    filter1 = (from p in filter1
+                              from c in p.Careers
+                              where c.jobTitle == jobtitle
+                              select p);
+            }
+
+            if (industry != "all")
             {
-                try
-                {
-                    var locationfilter = (from l in filter1
-                                          where l.country == country
-                                          where l.province == province
-                                          where l.city == city
-                                          select l).ToList();
+                    filter1 = (from p in filter1
+                              from c in p.Careers
+                              where c.industry == industry
+                              select p);
+            }
+
+            if (relocate != "on")
+            {
+                //try
+                //{
+                    var locationfilter = (from p in filter1
+                                          where p.country == country
+                                          where p.province == province
+                                          where p.city == city
+                                          select p).ToList();
 
                     asd.AddRange(locationfilter);
-                }
-                catch (ArgumentNullException ane)
-                {
-                    //to return?
-                    // string errormsg = "Sorry, no one matched your results in the given area, please try again.";
-                }
+                //}
+                //catch (ArgumentNullException ane)
+                //{
+                //    //to return?
+                //    // string errormsg = "Sorry, no one matched your results in the given area, please try again.";
+                //}
             }
             if (platforms[0] != "any")
             {

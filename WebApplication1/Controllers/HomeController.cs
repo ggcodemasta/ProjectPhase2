@@ -52,34 +52,9 @@ namespace WebApplication1.Controllers
                string experience, List<string> platform, List<string> language)
         {
             SearchRepo srepo = new SearchRepo();
-            int yearmin = 0;
-            int yearmax = 0;
-            switch (experience)
-            {
-                case "0":
-                    yearmin = 0;
-                    yearmax = 200;
-                    break;
-                case "1":
-                    yearmin = 1;
-                    yearmax = 2;
-                    break;
-                case "2":
-                    yearmin = 3;
-                    yearmax = 4;
-                    break;
-                case "3":
-                    yearmin = 5;
-                    yearmax = 10;
-                    break;
-                case "4":
-                    yearmin = 10;
-                    yearmax = 200;
-                    break;
-            }
-
+           
             List<CareerProfile> results = srepo.
-                SearchResults(jobTitle, industry, country, province, city, relocate, education, yearmin, yearmax, platform, language);
+                SearchResults(jobTitle, industry, country, province, city, relocate, education, experience, platform, language);
             return View(results);
         }
 
