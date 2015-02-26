@@ -430,6 +430,7 @@
     <Content Include="Views\Admin\AddUserToRole.cshtml" />
     <Content Include="Views\Home\SearchResults.cshtml" />
     <Content Include="Views\Home\WebAPI.cshtml" />
+    <Content Include="Views\Home\BasicInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

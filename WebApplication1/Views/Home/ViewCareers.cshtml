@@ -43,9 +43,7 @@ BLUE WRAP
             <th>
                 @Html.DisplayNameFor(model => model.description)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Profile.email)
-            </th>
+
             <th></th>
         </tr>
 
@@ -67,9 +65,6 @@ BLUE WRAP
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Profile.email)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "CareerEdit", new { id = item.careerID }) |
