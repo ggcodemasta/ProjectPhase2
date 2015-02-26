@@ -11,9 +11,11 @@ using System.Web.Http.Description;
 using WebApplication1;
 using WebApplication1.ViewModels;
 using WebApplication1.Models;
+using System.Web.Http.Cors;
 
 namespace WebApplication1.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ProfilesController : ApiController
     {
         private EmployeesEntities db = new EmployeesEntities();

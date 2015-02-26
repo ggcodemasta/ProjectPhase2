@@ -7,7 +7,7 @@
 <style>
     .verticalSpace{
         min-height: 454px;
-
+        padding-bottom: 75px;
     }
 </style>
 
@@ -28,11 +28,34 @@
 <div class="container verticalSpace">
     <!--Show all manufacturers-->
     <div>
-        <h3>Tap Into the Power of EmployeeArray[ ] with our Developer API</h3>
+        <h4>Tap Into the Power of EmployeeArray[ ] with our Developer API</h4>
         <p>Get access to all of our job seeker profiles using the EA[ ] API. Simply use the HTML & jQuery script below to get a list of all our job seekers.</p>
         <div class="form-group">
-            <textarea class="form-control" id="htmlSample" rows="3"></textarea>
-            <textarea class="form-control" id="jquerySample" rows="3"></textarea>
+            <textarea class="form-control" id="htmlSample" rows="6">
+                Html Sample Code:
+
+                <h4>Sample: All EmployeeArray[ ] Profiles</h4>
+                <p>You may need to wait a few seconds to see the list.</p>
+                <ul id="profiles" /></textarea>
+            <textarea class="form-control" id="jquerySample" rows="18">
+                jQuery Sample Code:
+
+                function updateList() {
+                    // Send an AJAX request
+                    $.getJSON(webApiURL, null,
+                    function (data) {
+                        $("#profiles").replaceWith("<ul id='profiles' />");
+                        // On success, 'data' contains a list of profiles.
+                        data.forEach(function (val) {
+                        // Format the text to display.
+                        var str = "Name: " + val.FirstName + " " + val.LastName + " Location: " + val.City + ", " + val.Province + " Job Titles: " + val.JobTitle + " Profile URL: http://localhost:31220/home/IndividualProfile?profileID=" + val.ProfileID;
+
+                        // Add a list item for the profiles.
+                        $('<li />', { text: str }).appendTo($('#profiles'));
+                        });
+                    })
+                }
+            </textarea>
 
         </div>
     </div>
@@ -47,7 +70,7 @@
         </div>*@
 
         <br />
-        <h4>Sample: All EmployeeArray[ ] Profiles</h4>
+        <h4>Sample Results: All EmployeeArray[ ] Profiles</h4>
         <p>You may need to wait a few seconds to see the list.</p>
         <ul id="profiles" />
     </div>
