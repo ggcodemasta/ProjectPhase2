@@ -164,11 +164,17 @@ namespace WebApplication1.Models
                     var query = (from p in context.Profiles
                                  where p.profileID == item
                                  select p).FirstOrDefault();
+
+                    if (query.pictureURL == null || query.pictureURL.IndexOf(".jpg", 0, StringComparison.CurrentCultureIgnoreCase) == -1 && query.pictureURL.IndexOf(".png", 0, StringComparison.CurrentCultureIgnoreCase) == -1)
+                    {
+                        query.pictureURL = "/Content/images/person-placeholder2.jpg";
+                    }
+
                     candidates.Add(new CareerProfile(query.profileID, query.firstName, query.lastName, query.linkedinURL,
                         query.portfolioURL, query.pictureURL, query.city, query.province, query.country,
                         query.highestEducation, query.relocationYN));
                 }
-
+                
                 return candidates;
 
         }
