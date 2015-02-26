@@ -27,6 +27,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Premium()
         {
             SvcTypeRepository svcTypeRepository = new SvcTypeRepository();
@@ -34,6 +35,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Premium(int svcTypeID = 0)
         {
             if (svcTypeID <= 0 )
@@ -50,6 +52,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction("MyPremium"); 
         }
 
+        [Authorize]
         public ActionResult MyPremium(int? page)
         {
             const int ROW_CNT_PER_PAGE = 10; 
@@ -92,9 +95,5 @@ namespace WebApplication1.Controllers
 
             return View(); 
         }
-
- 
-   
-
     }
 }

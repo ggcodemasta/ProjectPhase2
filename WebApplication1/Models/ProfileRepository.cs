@@ -93,5 +93,10 @@ namespace WebApplication1.Models
             return AddProfile(profile);
 
         }
+        public IEnumerable<Profile> GetAllProfiles()
+        {
+            EmployeesEntities db = new EmployeesEntities();
+            return db.Profiles.ToList();
+        }
     }
 }

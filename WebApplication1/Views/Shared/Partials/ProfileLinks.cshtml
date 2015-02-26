@@ -1,9 +1,21 @@
-﻿<h4>&nbsp; 
+﻿<div class="container">
+    <ul class="nav nav-tabs nav-justified">
+        <li role="presentation"
+            @if (Request.FilePath.ToString() == "/Home/Register") { WriteLiteral("class='active'"); }>
+            <a href="/Home/Register">Profile</a>
+        </li>
 
-    <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="/Home/Career">ADD NEW</a></li>
-        <li role="presentation"><a href="/Home/ViewCareers">View Career</a></li>
- 
+        <li role="presentation"
+            @if (Request.FilePath.ToString() == "/Home/Career") { WriteLiteral("class='active'"); }>
+            <a href="/Home/Career">CAREER</a>
+        </li>
+        <li role="presentation"
+            @if (Request.FilePath.ToString() == "/UserLogin/Premium") { WriteLiteral("class='active'"); }>
+            <a href="/UserLogin/Premium">TRY PREMIUM SVC</a>
+        </li>
+        <li role="presentation"
+            @if (Request.FilePath.ToString() == "/UserLogin/MyPremium") { WriteLiteral("class='active'"); }>
+            <a href="/UserLogin/MyPremium">MY PREMIUM SVC</a>
+        </li>
     </ul>
-
-</h4>
+</div>

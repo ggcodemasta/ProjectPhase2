@@ -1,0 +1,81 @@
+﻿@model PagedList.IPagedList<WebApplication1.Profile>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@*
+    @model IEnumerable<WebApplication1.Profile>
+*@
+
+@using System.Text.RegularExpressions
+@{
+    ViewBag.Title = "ShowAllUser";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+<!-- *****************************************************************************************************************
+BLUE WRAP
+***************************************************************************************************************** -->
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>All Users</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-condensed table-hover table-striped">
+            <tr>
+                <th></th>
+                <th>Profile ID</th>
+                <th>Picture</th>
+                <th>Email</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>LinkedIn</th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td></td>
+                    <td>
+                        <a href="/home/IndividualProfile?profileID=@(item.profileID)">@item.profileID</a>
+                    </td>
+                    <td>
+                        <a href="/home/IndividualProfile?profileID=@(item.profileID)">
+                            @if (item.pictureURL != null && Regex.IsMatch(item.pictureURL, @"https?://"))
+                            {
+
+                                <img height="50" width="50" class="img-responsive" src="@(item.pictureURL)" />
+                            }
+                            else
+                            {
+                                @item.pictureURL
+                            }
+                        </a>
+                    </td>
+                    <td>
+                    <a href="/home/IndividualProfile?profileID=@(item.profileID)">@Html.DisplayFor(modelItem => item.email)</a>
+                    </td>
+                    <td> @Html.DisplayFor(modelItem => item.firstName)</td>
+                    <td> @Html.DisplayFor(modelItem => item.lastName)</td>
+                    <td>
+                        @if(item.linkedinURL != null)
+                        {
+                           
+                            <a href="@(item.linkedinURL)" target="_blank">LinkedIn</a>
+                        } 
+                    </td>
+                    <td></td>
+                </tr>
+            }
+
+        </table>
+        <div class="text-center">
+            @Html.PagedListPager(Model, page => Url.Action("ShowAllUser", new { page }))
+        </div>
+    </div>
+</div>

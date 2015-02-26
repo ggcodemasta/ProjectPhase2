@@ -158,15 +158,16 @@
                     <li><a href="~/Home/Search">SEARCH</a></li>
 @if (HttpContext.Current.User.Identity.IsAuthenticated)
 {
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">PROFILE <b class="caret"></b></a>
+    <li><a href="/Home/Register">PROFILE</a></li>
+    @*<li class="dropdown">
+        <a href="/Home/Register" class="dropdown-toggle" data-toggle="dropdown">PROFILE <b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li><a href="~/Home/Register">BASIC INFORMATION</a></li>
             <li><a href="~/Home/Career">CAREER</a></li>
             <li><a href="~/UserLogin/Premium">TRY PREMIUM SVC</a></li>
             <li><a href="/UserLogin/MyPremium">MY PREMIUM SVC</a></li>
         </ul>
-    </li>
+    </li>*@
     <li><a href="~/Home/Logout">LOGOUT (@HttpContext.Current.User.Identity.Name)</a></li>
     if (HttpContext.Current.User.IsInRole("Admin"))
     {
@@ -175,6 +176,8 @@
             <ul class="dropdown-menu">
                 <li><a href="/Admin/AddRole">ADD ROLE</a></li>
                 <li><a href="/Admin/AddUserToRole">ADD USER TO ROLE</a></li>
+                <li><a href="/Admin/ShowAllUser">ALL USERS</a></li>
+                <li><a href="/Admin/ShowAllPremiumUser">ALL PREMIUM USERS</a></li>
             </ul>
         </li>
     }

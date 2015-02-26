@@ -1,0 +1,82 @@
+﻿@model PagedList.IPagedList<WebApplication1.ViewModels.SvcProfileDetails>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@*
+    @model IEnumerable<WebApplication1.ViewModels.SvcProfileDetails>
+*@
+
+@{
+    ViewBag.Title = "ShowAllPremiumUser";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+<!-- *****************************************************************************************************************
+BLUE WRAP
+***************************************************************************************************************** -->
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>All Premium Users</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+
+<div class="container">
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <th></th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Billing</th>
+                <th>Svc</th>
+                <th>Billing Date</th>
+                <th>Svc Start Date</th>
+                <th>Svc End Date</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td></td>
+                    <td>
+                        <a href="/home/IndividualProfile?profileID=@(item.ProfileID)">
+                            @Html.DisplayFor(modelItem => item.SvcProfileID)
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/home/IndividualProfile?profileID=@(item.ProfileID)">
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BillingMethod)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SvcName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BillingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SvcStartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SvcEndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td></td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div class="text-center">
+        @Html.PagedListPager(Model, page => Url.Action("ShowAllPremiumUser", new { page }))
+    </div>
+</div>
