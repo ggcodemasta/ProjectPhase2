@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "WebAPI";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+<style>
+    .verticalSpace{
+        min-height: 454px;
+
+    }
+</style>
+
+<!-- *****************************************************************************************************************
+     BLUE WRAP
+     ***************************************************************************************************************** -->
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Employee Array[ ] API.</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+
+
+
+
+<div class="container verticalSpace">
+    <!--Show all manufacturers-->
+    <div>
+        <h3>Tap Into the Power of EmployeeArray[ ] with our Developer API</h3>
+        <p>Get access to all of our job seeker profiles using the EA[ ] API. Simply use the HTML & jQuery script below to get a list of all our job seekers.</p>
+        <div class="form-group">
+            <textarea class="form-control" id="htmlSample" rows="3"></textarea>
+            <textarea class="form-control" id="jquerySample" rows="3"></textarea>
+
+        </div>
+    </div>
+    <div>
+        <br />
+        <!--Search profile by ID-->
+        @*<div>
+            <label for="profileIdFind">Find Profile by ID:</label>
+            <input type="text" id="profileIdFind" size="5" />
+            <input type="button" value="Search" onclick="find();" />
+            <p id="profileFind" />
+        </div>*@
+
+        <br />
+        <h4>Sample: All EmployeeArray[ ] Profiles</h4>
+        <p>You may need to wait a few seconds to see the list.</p>
+        <ul id="profiles" />
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+<script src="~/Scripts/app.js"></script>
+

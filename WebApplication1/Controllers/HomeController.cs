@@ -369,6 +369,13 @@ namespace WebApplication1.Controllers
             return View();
 
         }
+
+
+        public ActionResult WebAPI()
+        {
+
+            return View();
+        }
       
 
 	}

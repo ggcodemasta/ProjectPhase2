@@ -283,6 +283,32 @@ namespace WebApplication1.Models
             return careerProfileCareer;
         }
 
+        public IEnumerable<CareerProfile> APIGetAllProfiles()
+        {
+            EmployeesEntities context = new EmployeesEntities();
+            var query = (from p in context.Profiles
+                         where p.country != null
+                         select new
+                         {
+                             ProfileID = p.profileID,
+                             FirstName = p.firstName,
+                             LastName = p.lastName,
+                             City = p.city,
+                             Province = p.province,
+                             Country = p.country,
+                         });
+            List<CareerProfile> bac = new List<CareerProfile>();
+            foreach (var item in query)
+            {
+
+                bac.Add(new CareerProfile(item.ProfileID, item.FirstName, item.LastName, item.City, item.Province, item.Country));
+            }
+            bac = GetCareers(bac);
+
+            return bac;
+        }
+
+
 
     }
 }
