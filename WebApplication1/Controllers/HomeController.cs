@@ -370,6 +370,42 @@ namespace WebApplication1.Controllers
             return View();
 
         }
+
+
+        public ActionResult WebAPI()
+        {
+
+            return View();
+        }
+        public ActionResult BasicInfo()
+        {
+            ProfileRepository profileRepository = new ProfileRepository();
+
+            string email = HttpContext.User.Identity.Name; // userid
+
+
+
+            Profile currentProfile = profileRepository.GetProfile(email);
+
+            return View(currentProfile);
+        }
+
+        [HttpPost]
+        public ActionResult BasicInfo(Profile profile)
+        {
+
+
+            ProfileRepository profileRepository = new ProfileRepository();
+            string email = HttpContext.User.Identity.Name; // userid
+
+            if (profileRepository.SaveProfile(profile, email) < 0)
+            {
+                return RedirectToAction("ShowMsg", new { msg = "[FAIL] HandleCareer" });
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
       
 
 	}

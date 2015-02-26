@@ -66,5 +66,18 @@ namespace WebApplication1.ViewModels
             HighestEducation = highestEduction;
             Relocation = relocation;
         }
+
+        public CareerProfile(int profileID, string firstName, string lastName, string city, string province, string country)
+        {
+            ProfileID = profileID;
+            FirstName = firstName;
+            LastName = lastName;
+            City = city;
+            Province = province;
+            Country = country;
+        }
+
+
+
     }
 }
