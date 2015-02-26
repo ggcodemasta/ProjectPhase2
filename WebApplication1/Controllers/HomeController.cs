@@ -377,6 +377,8 @@ namespace WebApplication1.Controllers
 
             return View();
         }
+
+        [Authorize]
         public ActionResult BasicInfo()
         {
             ProfileRepository profileRepository = new ProfileRepository();
@@ -391,6 +393,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult BasicInfo(Profile profile)
         {
 
