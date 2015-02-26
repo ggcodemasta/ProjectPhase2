@@ -406,7 +406,8 @@
     <Content Include="Views\Home\ViewCareers.cshtml" />
     <Content Include="Views\Admin\AddRole.cshtml" />
     <Content Include="Views\Admin\AddUserToRole.cshtml" />
-    <Content Include="Views\Home\SearchResults.cshtml" />
+    <Content Include="Views\Home\SearchError.cshtml" />
+    <Content Include="Views\Home\AdvancedSearchResults.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

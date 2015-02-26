@@ -41,21 +41,36 @@ namespace WebApplication1.Controllers
         //}
 
 
-
+        public ActionResult SearchError()
+        {
+            return View("SearchError");
+        }
 
         public ActionResult Search()
         {
             return View("Search");
         }
-        public ActionResult SearchResults(string jobTitle, string industry,
+        public ActionResult AdvancedSearchResults(string jobTitle, string industry,
                 string country, string city, string province, string relocate, string education,
                string experience, List<string> platform, List<string> language)
         {
             SearchRepo srepo = new SearchRepo();
-           
-            List<CareerProfile> results = srepo.
-                SearchResults(jobTitle, industry, country, province, city, relocate, education, experience, platform, language);
-            return View(results);
+            CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
+            ViewBag.PremiumUsers = careerProfileRepository.GetAllPremiumProfiles();
+            try
+            {
+                List<CareerProfile> results = srepo.
+                    AdvancedSearchQuery(jobTitle, industry, country, province, city, relocate, education, experience, platform, language);
+                if (results.Count < 1) 
+                {
+                    return View("SearchError"); 
+                }
+                return View(results);
+            }
+            catch (NullReferenceException nre)
+            {
+                return View("SearchError");
+            }
         }
 
         public ActionResult ContactUs()
