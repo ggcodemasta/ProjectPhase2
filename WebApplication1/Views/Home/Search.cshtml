@@ -23,7 +23,7 @@ BLUE WRAP
 
 
 <div class="container verticalSpace">
-    @using (Html.BeginForm("SearchResults", "Home"))
+    @using (Html.BeginForm("AdvancedSearchResults", "Home"))
     {
         @Html.AntiForgeryToken()
 
@@ -34,9 +34,10 @@ BLUE WRAP
                     <div class="col-sm-6">
                         @*<input type="text" class="form-control" id="jobTitle" placeholder="Job Title">*@
                         <select class="form-control" name="jobTitle">
+                            <option value="all">All</option>
                             <option value="analyst">Analyst</option>
                             <option value="manager">Project Manager</option>
-                            <option value="netadmin">Tester</option>
+                            <option value="tester">Tester</option>
                             <option value="supervisor">Supervisor</option>
                             <option value="developer">Front end Developer</option>
                             <option value="developer">Back end Developer</option>
@@ -111,7 +112,7 @@ BLUE WRAP
                 <label for="education" class="col-sm-2 control-label">Education</label>
                 <div class="col-sm-6">
                     <select class="form-control" name="education">
-                        <option value="any">None</option>
+                        <option value="none">None</option>
                         <option value="highschool">High School</option>
                         <option value="certificate">Certificate</option>
                         <option value="diploma">Diploma</option>
@@ -145,7 +146,7 @@ BLUE WRAP
                 <label for="platform" class="col-sm-2 control-label">Platforms</label>
                 <div class="col-sm-6">
                     <select multiple class="form-control" name="platform">
-                        <option value="any">Any</option>
+                        <option value="all">all</option>
                         <option value="windows">Windows</option>
                         <option value="mac">Mac</option>
                         <option value="linux">Linux</option>
@@ -166,7 +167,7 @@ BLUE WRAP
                 <label for="language" class="col-sm-2 control-label">Languages</label>
                 <div class="col-sm-6">
                     <select multiple class="form-control" name="language">
-                        <option value="any">Any</option>
+                        <option value="all">All</option>
                         <option value="ajax">Ajax</option>
                         <option value="angularJS">AngularJS</option>
                         <option value="aspectc++">AspectC++</option>
@@ -201,7 +202,7 @@ BLUE WRAP
             <hr />
 
 
-            <div class="form-group">
+            @*<div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <div class="checkbox">
                         <label>
@@ -209,7 +210,7 @@ BLUE WRAP
                         </label>
                     </div>
                 </div>
-            </div>
+            </div>*@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-default">Search</button>

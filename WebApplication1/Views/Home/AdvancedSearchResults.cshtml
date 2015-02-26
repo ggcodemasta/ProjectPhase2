@@ -1,10 +1,9 @@
 ﻿@model IEnumerable<WebApplication1.ViewModels.CareerProfile>
 
 @{
-    ViewBag.Title = "SearchResults";
+    ViewBag.Title = "DisplaySearchResults";
     Layout = "~/Views/Shared/LayoutMain.cshtml";
 }
-
 
 <style>
     .searchResults {
@@ -50,6 +49,14 @@
     </div> <!-- /container -->
 </div><!-- /blue -->
 
+<div class="container searchResults">
+    <div class="premiumLine">
+        <div class="premiumTitle">Premium Profiles</div>
+    </div>
+    @Html.Partial("DisplayPremiumPartial", new ViewDataDictionary(ViewBag.PremiumUsers))
+    <div class="premiumLine">
+        <div class="premiumTitle"></div>
+    </div>
 
     @foreach (var item in Model)
     {
@@ -80,5 +87,5 @@
             </div>
         </div>
     }
-
+</div>
 
