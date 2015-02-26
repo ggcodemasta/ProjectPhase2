@@ -55,7 +55,6 @@ namespace WebApplication1.Models
 
                 var filterbasic = (from c in context.Careers
                                    let p = c.Profile
-                                   from s in p.Skills
                                    //where p.highestEducation == education
                                    where c.years >= yearmin
                                    where c.years <= yearmax

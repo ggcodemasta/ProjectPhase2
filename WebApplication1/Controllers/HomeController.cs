@@ -40,7 +40,7 @@ namespace WebApplication1.Controllers
         //    return RedirectToAction("DisplaySearchResults", "Home", new { displayList = quickSearchResults });
         //}
 
-
+        [HttpGet]
         public ActionResult SearchError()
         {
             return View("SearchError");
@@ -57,6 +57,7 @@ namespace WebApplication1.Controllers
             SearchRepo srepo = new SearchRepo();
             CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
             ViewBag.PremiumUsers = careerProfileRepository.GetAllPremiumProfiles();
+            
             try
             {
                 List<CareerProfile> results = srepo.

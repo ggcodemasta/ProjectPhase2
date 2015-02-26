@@ -435,12 +435,12 @@
     <Content Include="Views\Home\ViewCareers.cshtml" />
     <Content Include="Views\Admin\AddRole.cshtml" />
     <Content Include="Views\Admin\AddUserToRole.cshtml" />
-    <Content Include="Views\Home\SearchResults.cshtml" />
     <Content Include="Views\Admin\ShowAllUser.cshtml" />
     <Content Include="Views\Admin\ShowAllPremiumUser.cshtml" />
     <Content Include="Views\Home\WebAPI.cshtml" />
     <Content Include="Views\Home\BasicInfo.cshtml" />
     <Content Include="Views\Shared\Partials\ProfileTab.cshtml" />
+    <Content Include="Views\Home\SearchError.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
