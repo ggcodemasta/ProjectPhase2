@@ -1,25 +1,22 @@
-﻿<div class="container">
-    <ul class="nav nav-tabs nav-justified">
-        <li role="presentation"
-            @if (Request.FilePath.ToString() == "/Home/Register") { WriteLiteral("class='active'"); }>
-            <a href="/Home/Register">Profile</a>
-        </li>
+﻿@*
+    <h4>
+        &nbsp;
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="/Home/ViewCareers">View Career</a></li>
+            <li role="presentation"><a href="/Home/Career">ADD NEW</a></li>
+        </ul>
+    </h4>*@
 
+<div class="container voffset3">
+    <ul class="nav nav-pills">
         <li role="presentation"
+            @if (Request.FilePath.ToString() == "/Home/ViewCareers") { WriteLiteral("class='active'"); }>
+            <a href="/Home/ViewCareers">View Career</a>
+        </li>
+        <li role="presentation" 
             @if (Request.FilePath.ToString() == "/Home/Career") { WriteLiteral("class='active'"); }>
-            <a href="/Home/Career">CAREER</a>
+            <a href="/Home/Career">ADD NEW</a>
         </li>
-        <li role="presentation"
-            @if (Request.FilePath.ToString() == "/UserLogin/Premium") { WriteLiteral("class='active'"); }>
-            <a href="/UserLogin/Premium">TRY PREMIUM SVC</a>
-        </li>
-        <li role="presentation"
-            @if (Request.FilePath.ToString() == "/UserLogin/MyPremium") { WriteLiteral("class='active'"); }>
-            <a href="/UserLogin/MyPremium">MY PREMIUM SVC</a>
-        </li>
-    <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="/Home/ViewCareers">View Career</a></li>
-        <li role="presentation"><a href="/Home/Career">ADD NEW</a></li>
- 
     </ul>
 </div>
+<div class="voffset5">&nbsp;</div>

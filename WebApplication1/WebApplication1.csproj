@@ -440,6 +440,7 @@
     <Content Include="Views\Admin\ShowAllPremiumUser.cshtml" />
     <Content Include="Views\Home\WebAPI.cshtml" />
     <Content Include="Views\Home\BasicInfo.cshtml" />
+    <Content Include="Views\Shared\Partials\ProfileTab.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
