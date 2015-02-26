@@ -8,7 +8,7 @@
 <style>
     .verticalSpace {
         padding-top: 50px;
-        min-height: 280px;
+        min-height: 408px;
     }
 </style>
 
@@ -23,19 +23,22 @@ BLUE WRAP
     </div> <!-- /container -->
 </div><!-- /blue -->
 
-
-
 <div class="container verticalSpace">
-    @*<p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <h2><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</h2>
-        <hr />*@
-
     @using (Html.BeginForm())
     {
-        @*
-            @Html.AntiForgeryToken()
-        *@
+        @Html.AntiForgeryToken()
+        
+        <div class="row">
+            <div class="col-md-2">&nbsp;</div>
+            <div class="col-md-5">
+                <div class="alert alert-info" role="alert">
+                    [TEST ID] <br />
+                    (ID) user1@gmail.com<br /> (PW) 12341234 <br />
+                    
+                </div>
+            </div>
+        </div>
+        
         <div class="form-horizontal">
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -58,7 +61,6 @@ BLUE WRAP
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Login" class="btn btn-primary" />
-                    <br />-- For TEST -- <br />(ID) user1@gmail.com<br /> (PW) 12341234
                 </div>
             </div>
         </div>

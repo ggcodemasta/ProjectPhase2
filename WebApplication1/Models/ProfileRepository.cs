@@ -93,5 +93,51 @@ namespace WebApplication1.Models
             return AddProfile(profile);
 
         }
+
+        public Profile GetProfile(string email)
+        {
+
+            EmployeesEntities db = new EmployeesEntities();
+            return db.Profiles.Where(r => r.email == email).SingleOrDefault();
+        }
+
+        public int SaveProfile(Profile basicInfo, string email)
+        {
+            EmployeesEntities db = new EmployeesEntities();
+
+            Profile profile = new Profile();
+
+            profile = db.Profiles.Where(r => r.email == email).SingleOrDefault();
+            profile.email = basicInfo.email;
+            // more... 
+            profile.password = "none";
+            profile.firstName = basicInfo.firstName;
+            profile.lastName = basicInfo.lastName;
+            profile.linkedinURL = basicInfo.linkedinURL;
+            profile.pictureURL = basicInfo.pictureURL;
+            profile.portfolioURL = basicInfo.portfolioURL;
+            profile.highestEducation = basicInfo.highestEducation;
+            profile.relocationYN = basicInfo.relocationYN;
+            profile.country = basicInfo.country;
+            profile.province = basicInfo.province;
+            profile.city = basicInfo.city;
+            try
+            {
+
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return -1;
+            }
+            return 1;
+
+
+        }
+        public IEnumerable<Profile> GetAllProfiles()
+        {
+            EmployeesEntities db = new EmployeesEntities();
+            return db.Profiles.ToList();
+        }
     }
 }

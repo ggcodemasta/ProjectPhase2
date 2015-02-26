@@ -15,17 +15,11 @@ BLUE WRAP
         </div><!-- /row -->
     </div> <!-- /container -->
 </div><!-- /blue -->
+
+@Html.Partial("~/Views/Shared/Partials/ProfileTab.cshtml")
 @Html.Partial("~/Views/Shared/Partials/ProfileLinks.cshtml")
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ViewCareers</title>
-</head>
-<body>
- 
+<div class="container">
     <table class="table">
         <tr>
             <th>
@@ -43,9 +37,7 @@ BLUE WRAP
             <th>
                 @Html.DisplayNameFor(model => model.description)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Profile.email)
-            </th>
+
             <th></th>
         </tr>
 
@@ -69,16 +61,11 @@ BLUE WRAP
                     @Html.DisplayFor(modelItem => item.description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Profile.email)
-                </td>
-                <td>
                     @Html.ActionLink("Edit", "CareerEdit", new { id = item.careerID }) |
-                    @Html.ActionLink("Delete", "CareerDelete", new { id = item.careerID }) 
+                    @Html.ActionLink("Delete", "CareerDelete", new { id = item.careerID })
 
                 </td>
             </tr>
         }
-
     </table>
-</body>
-</html>
+</div>

@@ -7,6 +7,8 @@ using System.Web.Routing;
 using System.Web.Helpers;
 using System.Threading;
 using System.Security.Principal;
+using System.Web.Http;
+
 
 namespace WebApplication1
 {
@@ -14,6 +16,11 @@ namespace WebApplication1
     {
         protected void Application_Start()
         {
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings
+            .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
+
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             AntiForgeryConfig.SuppressIdentityHeuristicChecks = true;

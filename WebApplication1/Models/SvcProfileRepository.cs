@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+using WebApplication1.ViewModels; 
+
 namespace WebApplication1.Models
 {
     public class SvcProfileRepository
@@ -64,6 +66,31 @@ namespace WebApplication1.Models
             ProfileRepository profileRepository = new ProfileRepository();
             int profileID = profileRepository.GetProfileIDByEmail(HttpContext.Current.User.Identity.Name);
             return GetManySvcProfilesByProfileID(profileID);
+        }
+
+        public IEnumerable<SvcProfileDetails> GetAllSvcProfileDetails()
+        {
+            EmployeesEntities db = new EmployeesEntities();
+            IEnumerable<SvcProfileDetails> allSvcProfileDetails = (from p in db.Profiles
+                                                                   from sp in p.SvcProfiles
+                                                                   where p.profileID == sp.profileID
+                                                                   orderby sp.svcProfileID descending
+                                                                   select new SvcProfileDetails
+                                                                   {
+                                                                       SvcProfileID = sp.svcProfileID,
+                                                                       ProfileID = sp.profileID,
+                                                                       SvcTypeID = sp.svcTypeID,
+                                                                       SvcName = sp.SvcType.svcName,
+                                                                       BillingDate = sp.billingDate,
+                                                                       BillingMethod = sp.billingMethod,
+                                                                       SvcStartDate = sp.svcStartDate,
+                                                                       SvcEndDate = sp.svcEndDate,
+                                                                       Email = p.email,
+                                                                       FirstName = p.firstName,
+                                                                       LastName = p.lastName
+                                                                   }).ToList();
+
+            return allSvcProfileDetails;
         }
 
     }

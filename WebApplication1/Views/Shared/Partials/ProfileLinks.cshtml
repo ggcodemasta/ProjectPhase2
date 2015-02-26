@@ -1,9 +1,22 @@
-﻿<h4>&nbsp; 
+﻿@*
+    <h4>
+        &nbsp;
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="/Home/ViewCareers">View Career</a></li>
+            <li role="presentation"><a href="/Home/Career">ADD NEW</a></li>
+        </ul>
+    </h4>*@
 
-    <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="/Home/Career">ADD NEW</a></li>
-        <li role="presentation"><a href="/Home/ViewCareers">View Career</a></li>
- 
+<div class="container voffset3">
+    <ul class="nav nav-pills">
+        <li role="presentation"
+            @if (Request.FilePath.ToString() == "/Home/ViewCareers") { WriteLiteral("class='active'"); }>
+            <a href="/Home/ViewCareers">View Career</a>
+        </li>
+        <li role="presentation" 
+            @if (Request.FilePath.ToString() == "/Home/Career") { WriteLiteral("class='active'"); }>
+            <a href="/Home/Career">ADD NEW</a>
+        </li>
     </ul>
-
-</h4>
+</div>
+<div class="voffset5">&nbsp;</div>
