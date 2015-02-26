@@ -1,4 +1,4 @@
-﻿var webApiURL = "http://localhost:31220/api/Profiles/";
+﻿var webApiURL = "http://ea.greepinetree1.com/api/Profiles/";
 
 // List all manufacturers when the browser loads.
 $(document).ready(function () {
@@ -12,7 +12,7 @@ function updateList() {
         // On success, 'data' contains a list of profiles. 
         data.forEach(function (val) {
             // Format the text to display. 
-            var str = "Name: " + val.FirstName + " " + val.LastName + " Location: " + val.City + ", " + val.Province + " Job Titles: " + val.JobTitle + " Profile URL: http://localhost:31220/home/IndividualProfile?profileID=" + val.ProfileID;
+            var str = "Name: " + val.FirstName + " " + val.LastName + " Location: " + val.City + ", " + val.Province + " Job Titles: " + val.JobTitle + " Profile URL: http://ea.greepinetree1.com/home/IndividualProfile?profileID=" + val.ProfileID;
 
             // Add a list item for the manufacturer. 
             $('<li/>', { text: str }).appendTo($('#profiles'));
