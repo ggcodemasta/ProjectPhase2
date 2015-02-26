@@ -397,7 +397,7 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("ShowMsg", new { msg = "[FAIL] HandleCareer" });
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Career", "Home");
         }
 
       
