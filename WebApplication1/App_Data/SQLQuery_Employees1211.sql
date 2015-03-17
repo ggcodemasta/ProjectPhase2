@@ -74,9 +74,7 @@ GO
 CREATE TABLE Skill
 (
 	skillID	INTEGER IDENTITY(1,1) PRIMARY KEY,
-	category VARCHAR(50) NOT NULL,
 	skillName VARCHAR(50) NOT NULL,
-	description VARCHAR(255),
 );
 GO
 
@@ -86,6 +84,21 @@ CREATE TABLE ProfileSkill
 		skillID INTEGER NOT NULL,
 		FOREIGN KEY(profileID) REFERENCES Profile(profileID),
 		FOREIGN KEY(skillID) REFERENCES Skill(skillID)
+);
+GO
+
+CREATE TABLE Platform
+(
+	platformID	INTEGER IDENTITY(1,1) PRIMARY KEY,
+	platformName VARCHAR(50) NOT NULL,
+);
+
+CREATE TABLE ProfilePlatform
+(
+		profileID INTEGER NOT NULL,
+		platformID INTEGER NOT NULL,
+		FOREIGN KEY(profileID) REFERENCES Profile(profileID),
+		FOREIGN KEY(platformID) REFERENCES Platform(platformIDID)
 );
 GO
 
@@ -298,6 +311,42 @@ INSERT INTO platform VALUES ('Android')
 INSERT INTO platform VALUES ('iOS')
 INSERT INTO platform VALUES ('Windows Phone')
 INSERT INTO platform VALUES ('Blackberry')
+
+
+
+INSERT INTO profileskill VALUES ('1','1')
+INSERT INTO profileskill VALUES ('1','2')
+INSERT INTO profileskill VALUES ('1','3')
+INSERT INTO profileskill VALUES ('1','4')
+INSERT INTO profileskill VALUES ('1','5')
+INSERT INTO profileplatform VALUES ('1','1')
+INSERT INTO profileplatform VALUES ('1','2')
+INSERT INTO profileplatform VALUES ('1','3')
+INSERT INTO profileplatform VALUES ('1','4')
+INSERT INTO profileplatform VALUES ('1','5')
+
+
+INSERT INTO profileskill VALUES ('2','1')
+INSERT INTO profileskill VALUES ('2','2')
+INSERT INTO profileskill VALUES ('2','3')
+INSERT INTO profileskill VALUES ('2','4')
+INSERT INTO profileskill VALUES ('2','5')
+INSERT INTO profileplatform VALUES ('2','1')
+INSERT INTO profileplatform VALUES ('2','2')
+INSERT INTO profileplatform VALUES ('2','3')
+INSERT INTO profileplatform VALUES ('2','4')
+INSERT INTO profileplatform VALUES ('2','5')
+
+INSERT INTO profileskill VALUES ('3','1')
+INSERT INTO profileskill VALUES ('3','2')
+INSERT INTO profileskill VALUES ('3','3')
+INSERT INTO profileskill VALUES ('3','4')
+INSERT INTO profileskill VALUES ('3','5')
+INSERT INTO profileplatform VALUES ('3','1')
+INSERT INTO profileplatform VALUES ('3','2')
+INSERT INTO profileplatform VALUES ('3','3')
+INSERT INTO profileplatform VALUES ('3','4')
+INSERT INTO profileplatform VALUES ('3','5')
 
 
 -- SHOW DATA  ----------------------------

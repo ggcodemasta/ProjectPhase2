@@ -5,13 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="05544176628645ec97a47dddb2b68392" Name="Diagram1" ZoomLevel="95">
-        <EntityTypeShape EntityType="EmployeesModel.Admin" Width="1.5" PointX="3.25" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmployeesModel.Career" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmployeesModel.Profile" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmployeesModel.Skill" Width="1.5" PointX="2.875" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmployeesModel.SvcProfile" Width="1.5" PointX="6" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmployeesModel.SvcType" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmployeesModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.Admin" Width="1.5" PointX="0.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.Career" Width="1.5" PointX="4.375" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.Profile" Width="1.5" PointX="1.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.Skill" Width="1.5" PointX="1.625" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.SvcProfile" Width="1.5" PointX="2.875" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.SvcType" Width="1.5" PointX="5.875" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.C__MigrationHistory" Width="1.5" PointX="11.25" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="EmployeesModel.AspNetRole" Width="1.5" PointX="8.75" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="EmployeesModel.AspNetUserClaim" Width="1.5" PointX="13.25" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="EmployeesModel.AspNetUserLogin" Width="1.5" PointX="13.25" PointY="4.625" IsExpanded="true" />
@@ -24,21 +24,12 @@
         <AssociationConnector Association="EmployeesModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="EmployeesModel.AspNetUserRoles" ManuallyRouted="false" />
         <AssociationConnector Association="EmployeesModel.ProfileSkill" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="EmployeesModel.Platform" Width="1.5" PointX="0.75" PointY="3.25" />
+        <EntityTypeShape EntityType="EmployeesModel.Platform" Width="1.5" PointX="3.375" PointY="10.625" />
         <AssociationConnector Association="EmployeesModel.ProfilePlatform" />
-        <EntityTypeShape EntityType="EmployeesModel.Industry" Width="1.5" PointX="6.375" PointY="3.375" />
-        <AssociationConnector Association="EmployeesModel.fk_industry" ManuallyRouted="true" >
-          <ConnectorPoint PointX="6.375" PointY="4.0901126780702288" />
-          <ConnectorPoint PointX="6" PointY="5.3149816460479515" />
-          <ConnectorPoint PointX="6" PointY="5.2141043859208347" />
-          <ConnectorPoint PointX="5.114583333333333" PointY="5.2141043859208338" />
-          <ConnectorPoint PointX="4.947916666666667" PointY="5.2141043859208347" />
-          <ConnectorPoint PointX="4.677083333333333" PointY="5.2141043859208338" />
-          <ConnectorPoint PointX="4.510416666666667" PointY="5.2141043859208347" />
-          <ConnectorPoint PointX="3.5" PointY="5.2141043859208347" />
-          <ConnectorPoint PointX="3.5" PointY="5.75" />
+        <EntityTypeShape EntityType="EmployeesModel.Industry" Width="1.5" PointX="4.875" PointY="3.875" />
+        <AssociationConnector Association="EmployeesModel.fk_industry" ManuallyRouted="false" >
         </AssociationConnector>
-        <EntityTypeShape EntityType="EmployeesModel.Jobtitle" Width="1.5" PointX="6.375" PointY="5.25" />
+        <EntityTypeShape EntityType="EmployeesModel.Jobtitle" Width="1.5" PointX="6.5" PointY="6.625" />
         <AssociationConnector Association="EmployeesModel.FK__Career__jobTitle__5EBF139D" />
       </Diagram>
     </edmx:Diagrams>
