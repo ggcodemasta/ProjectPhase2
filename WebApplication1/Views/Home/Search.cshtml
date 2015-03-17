@@ -32,16 +32,15 @@ BLUE WRAP
             <div class="form-group">
                 <label for="jobTitle" class="col-sm-2 control-label">Job Title</label>
                     <div class="col-sm-6">
-                        @*<input type="text" class="form-control" id="jobTitle" placeholder="Job Title">*@
+                      
                         <select class="form-control" name="jobTitle">
-                            <option value="all">All</option>
-                            <option value="analyst">Analyst</option>
-                            <option value="manager">Project Manager</option>
-                            <option value="tester">Tester</option>
-                            <option value="supervisor">Supervisor</option>
-                            <option value="developer">Front end Developer</option>
-                            <option value="developer">Back end Developer</option>
-                            <option value="developer">Full Stack Developer</option>
+                            <option value="ALL">ALL</option>
+                            @{
+                                for (int i = 0; i < ViewBag.jobtitles.Count; i++)
+                                {
+                                     <option value="@ViewBag.jobtitles[i]">@ViewBag.jobtitles[i]</option>
+                                }
+                            }
                         </select>
                     </div>
                 <div class="col-sm-4">
@@ -50,20 +49,14 @@ BLUE WRAP
             <div class="form-group">
                 <label for="industry" class="col-sm-2 control-label">Industry</label>
                 <div class="col-sm-6">
+                
                     <select class="form-control" name="industry">
-                        <option value="all">All</option>
-                        <option value="videogame">Video Game</option>
-                        <option value="telecommunications">Telecommunications</option>
-                        <option value="network">Networking</option>
-                        <option value="hardware">Computer Hardware</option>
-                        <option value="banking">Banking</option>
-                        <option value="education">Educational services</option>
-                        <option value="healthsocial">Health Care and Social Services</option>
-                        <option value="retail">Retail</option>
-                        <option value="manufacturing">Manufacturing</option>
-                        <option value="finance">Finance</option>
-                        <option value="transportation">Transportation</option>
-
+                        <option value="ALL">ALL</option>
+                        @{
+                            for (int i = 0; i < ViewBag.industries.Count; i++) { 
+                                    <option value="@ViewBag.industries[i]">@ViewBag.industries[i]</option>
+                            }
+                        }
                     </select>
                 </div>
                 <div class="col-sm-4">
@@ -112,7 +105,7 @@ BLUE WRAP
                 <label for="education" class="col-sm-2 control-label">Education</label>
                 <div class="col-sm-6">
                     <select class="form-control" name="education">
-                        <option value="none">None</option>
+                        <option value="none required">None</option>
                         <option value="highschool">High School</option>
                         <option value="certificate">Certificate</option>
                         <option value="diploma">Diploma</option>
@@ -146,14 +139,13 @@ BLUE WRAP
                 <label for="platform" class="col-sm-2 control-label">Platforms</label>
                 <div class="col-sm-6">
                     <select multiple class="form-control" name="platform">
-                        <option value="all">all</option>
-                        <option value="windows">Windows</option>
-                        <option value="mac">Mac</option>
-                        <option value="linux">Linux</option>
-                        <option value="android">Android</option>
-                        <option value="ios">iOS</option>
-                        <option value="windowsphone">Windows Phone</option>
-                        <option value="blackberry">Blackberry</option>
+                        <option value="ALL">ALL</option>
+                        @{  
+                            for (int i = 0; i < ViewBag.platforms.Count; i++)
+                            {
+                            <option value="@ViewBag.platforms[i]">@ViewBag.platforms[i]</option>
+                            }
+                        }
                     </select>
                 </div>
                 <div class="col-sm-4">
@@ -167,31 +159,13 @@ BLUE WRAP
                 <label for="language" class="col-sm-2 control-label">Languages</label>
                 <div class="col-sm-6">
                     <select multiple class="form-control" name="language">
-                        <option value="all">All</option>
-                        <option value="ajax">Ajax</option>
-                        <option value="angularJS">AngularJS</option>
-                        <option value="aspectc++">AspectC++</option>
-                        <option value="assembly">Assembly</option>
-                        <option value="asp.net">ASP.NET</option>
-                        <option value="basic">BASIC</option>
-                        <option value="c">C</option>
-                        <option value="c++">C++</option>
-                        <option value="c#">C#</option>
-                        <option value="crimm">C-RIMM</option>
-                        <option value="fortran">Fortran</option>
-                        <option value="java">Java</option>
-                        <option value="javascript">Javascript</option>
-                        <option value="mysql">MySQL</option>
-                        <option value="node">Node</option>
-                        <option value="objectivec">Objective C</option>
-                        <option value="perl">Perl</option>
-                        <option value="php">PHP</option>
-                        <option value="python">Python</option>
-                        <option value="ruby">Ruby</option>
-                        <option value="sqlserver">SQL Server</option>
-                        <option value="sql">SQL</option>
-                        <option value="vb">Visual Basic</option>
- 
+                        <option value="ALL">ALL</option>
+                        @{
+                            for (int i = 0; i < ViewBag.skills.Count; i++)
+                            {
+                             <option value="@ViewBag.skills[i]">@ViewBag.skills[i]</option>
+                            }
+                        }
                     </select>
                 </div>
                 <div class="col-sm-4">

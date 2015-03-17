@@ -23,5 +23,7 @@ namespace WebApplication1
         public string description { get; set; }
     
         public virtual Profile Profile { get; set; }
+        public virtual Industry Industry1 { get; set; }
+        public virtual Jobtitle Jobtitle1 { get; set; }
     }
 }

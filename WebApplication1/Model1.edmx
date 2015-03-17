@@ -24,6 +24,18 @@
           <Property Name="years" Type="int" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="Industry">
+          <Key>
+            <PropertyRef Name="industryName" />
+          </Key>
+          <Property Name="industryName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Jobtitle">
+          <Key>
+            <PropertyRef Name="jobTitle" />
+          </Key>
+          <Property Name="jobTitle" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Platform">
           <Key>
             <PropertyRef Name="platformID" />
@@ -74,9 +86,7 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
             <PropertyRef Name="skillID" />
           </Key>
           <Property Name="skillID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="category" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="skillName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="description" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="SvcProfile">
           <Key>
@@ -171,6 +181,30 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
             </Principal>
             <Dependent Role="Admin">
               <PropertyRef Name="profileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Career__industry__693CA210">
+          <End Role="Industry" Type="Self.Industry" Multiplicity="1" />
+          <End Role="Career" Type="Self.Career" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industry">
+              <PropertyRef Name="industryName" />
+            </Principal>
+            <Dependent Role="Career">
+              <PropertyRef Name="industry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Career__jobTitle__68487DD7">
+          <End Role="Jobtitle" Type="Self.Jobtitle" Multiplicity="1" />
+          <End Role="Career" Type="Self.Career" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jobtitle">
+              <PropertyRef Name="jobTitle" />
+            </Principal>
+            <Dependent Role="Career">
+              <PropertyRef Name="jobTitle" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -317,6 +351,8 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
         <EntityContainer Name="EmployeesModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="cassie" store:Type="Tables" />
           <EntitySet Name="Career" EntityType="Self.Career" Schema="cassie" store:Type="Tables" />
+          <EntitySet Name="Industry" EntityType="Self.Industry" Schema="cassie" store:Type="Tables" />
+          <EntitySet Name="Jobtitle" EntityType="Self.Jobtitle" Schema="cassie" store:Type="Tables" />
           <EntitySet Name="Platform" EntityType="Self.Platform" Schema="cassie" store:Type="Tables" />
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="cassie" store:Type="Tables" />
           <EntitySet Name="Skill" EntityType="Self.Skill" Schema="cassie" store:Type="Tables" />
@@ -343,6 +379,14 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
           <AssociationSet Name="FK__Admin__profileID__22AA2996" Association="Self.FK__Admin__profileID__22AA2996">
             <End Role="Profile" EntitySet="Profile" />
             <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Career__industry__693CA210" Association="Self.FK__Career__industry__693CA210">
+            <End Role="Industry" EntitySet="Industry" />
+            <End Role="Career" EntitySet="Career" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Career__jobTitle__68487DD7" Association="Self.FK__Career__jobTitle__68487DD7">
+            <End Role="Jobtitle" EntitySet="Jobtitle" />
+            <End Role="Career" EntitySet="Career" />
           </AssociationSet>
           <AssociationSet Name="FK__Career__profileI__145C0A3F" Association="Self.FK__Career__profileI__145C0A3F">
             <End Role="Profile" EntitySet="Profile" />
@@ -413,6 +457,8 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
           <Property Name="years" Type="Int32" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Profile" Relationship="Self.FK__Career__profileI__145C0A3F" FromRole="Career" ToRole="Profile" />
+          <NavigationProperty Name="Industry1" Relationship="EmployeesModel.fk_industry" FromRole="Career" ToRole="Industry" />
+          <NavigationProperty Name="Jobtitle1" Relationship="EmployeesModel.FK__Career__jobTitle__5EBF139D" FromRole="Career" ToRole="Jobtitle" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -442,9 +488,7 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
             <PropertyRef Name="skillID" />
           </Key>
           <Property Name="skillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="skillName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Profiles" Relationship="Self.ProfileSkill" FromRole="Skill" ToRole="Profile" />
         </EntityType>
         <EntityType Name="SvcProfile">
@@ -665,6 +709,16 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
             <End Role="Platform" EntitySet="Platforms" />
             <End Role="Profile" EntitySet="Profiles" />
           </AssociationSet>
+          <EntitySet Name="Industries" EntityType="EmployeesModel.Industry" />
+          <AssociationSet Name="fk_industry" Association="EmployeesModel.fk_industry">
+            <End Role="Industry" EntitySet="Industries" />
+            <End Role="Career" EntitySet="Careers" />
+          </AssociationSet>
+          <EntitySet Name="Jobtitles" EntityType="EmployeesModel.Jobtitle" />
+          <AssociationSet Name="FK__Career__jobTitle__5EBF139D" Association="EmployeesModel.FK__Career__jobTitle__5EBF139D">
+            <End Role="Jobtitle" EntitySet="Jobtitles" />
+            <End Role="Career" EntitySet="Careers" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Platform">
           <Key>
@@ -677,6 +731,44 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
         <Association Name="ProfilePlatform">
           <End Type="EmployeesModel.Platform" Role="Platform" Multiplicity="*" />
           <End Type="EmployeesModel.Profile" Role="Profile" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Industry">
+          <Key>
+            <PropertyRef Name="industryName" />
+          </Key>
+          <Property Name="industryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Careers" Relationship="EmployeesModel.fk_industry" FromRole="Industry" ToRole="Career" />
+        </EntityType>
+        <Association Name="fk_industry">
+          <End Type="EmployeesModel.Industry" Role="Industry" Multiplicity="1" />
+          <End Type="EmployeesModel.Career" Role="Career" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industry">
+              <PropertyRef Name="industryName" />
+            </Principal>
+            <Dependent Role="Career">
+              <PropertyRef Name="industry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Jobtitle">
+          <Key>
+            <PropertyRef Name="jobTitle1" />
+          </Key>
+          <Property Name="jobTitle1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Careers" Relationship="EmployeesModel.FK__Career__jobTitle__5EBF139D" FromRole="Jobtitle" ToRole="Career" />
+        </EntityType>
+        <Association Name="FK__Career__jobTitle__5EBF139D">
+          <End Type="EmployeesModel.Jobtitle" Role="Jobtitle" Multiplicity="1" />
+          <End Type="EmployeesModel.Career" Role="Career" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jobtitle">
+              <PropertyRef Name="jobTitle1" />
+            </Principal>
+            <Dependent Role="Career">
+              <PropertyRef Name="jobTitle" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -728,9 +820,7 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
             <EntityTypeMapping TypeName="EmployeesModel.Skill">
               <MappingFragment StoreEntitySet="Skill">
                 <ScalarProperty Name="skillID" ColumnName="skillID" />
-                <ScalarProperty Name="category" ColumnName="category" />
                 <ScalarProperty Name="skillName" ColumnName="skillName" />
-                <ScalarProperty Name="description" ColumnName="description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -846,6 +936,20 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
               <ScalarProperty Name="platformID" ColumnName="platformID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Industries">
+            <EntityTypeMapping TypeName="EmployeesModel.Industry">
+              <MappingFragment StoreEntitySet="Industry">
+                <ScalarProperty Name="industryName" ColumnName="industryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobtitles">
+            <EntityTypeMapping TypeName="EmployeesModel.Jobtitle">
+              <MappingFragment StoreEntitySet="Jobtitle">
+                <ScalarProperty Name="jobTitle1" ColumnName="jobTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -37,5 +37,7 @@ namespace WebApplication1
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Platform> Platforms { get; set; }
+        public virtual DbSet<Industry> Industries { get; set; }
+        public virtual DbSet<Jobtitle> Jobtitles { get; set; }
     }
 }

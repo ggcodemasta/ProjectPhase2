@@ -23,7 +23,13 @@ namespace WebApplication1.Models
             List<Profile> profilelist = new List<Profile>();
             List<int> removenonmatchesindustry = new List<int>();
             List<int> removeNonMatchesLanguges = new List<int>();
-
+            //string relocation ="";
+            //if (relocate != null)
+            //{
+            //    relocation = "yes";
+            //}else {
+            //    relocation = "no";
+            //}
             EmployeesEntities context = new EmployeesEntities();
 
                 int yearmin = 0;
@@ -85,22 +91,34 @@ namespace WebApplication1.Models
                     filterindustry = filterjobtitles;
                 }
 
-                IQueryable<Profile> filterlocation;
-                if (relocate != "on")
+                IQueryable<Profile> filterlocation1;
+
+                if (relocate == "on")
                 {
-                    filterlocation = (from p in filterindustry
+                    //query for those in the area
+                    filterlocation1 = (from p in filterindustry
+                                      where p.country == country
+                                      where p.province == province
+                                      where p.city == city 
+                                      select p);
+                    //query for those not in area but willing to relocate
+                    var filterlocation2 = (from p in filterindustry
+                                       where p.relocationYN == "yes"
+                                       select p).ToList();
+                    filterlocation2.AddRange(filterlocation1);
+                        profilelist.AddRange(filterlocation2);
+                  
+                }
+                else
+                {//only get those in the area
+                    filterlocation1 = (from p in filterindustry
                                       where p.country == country
                                       where p.province == province
                                       where p.city == city
                                       select p);
+                    profilelist.AddRange(filterlocation1);
+                }
 
-                    profilelist.AddRange(filterlocation);
-                  
-                }
-                else
-                {
-                    filterlocation = filterindustry;
-                }
                 if (platforms[0] != "all")
                 {
 
@@ -121,7 +139,7 @@ namespace WebApplication1.Models
                 }
                 else
                 {
-                    var platformfilter = (from p in filterlocation
+                    var platformfilter = (from p in profilelist
                                           select p.profileID).ToList();
                     removenonmatchesindustry.AddRange(platformfilter);
                 }

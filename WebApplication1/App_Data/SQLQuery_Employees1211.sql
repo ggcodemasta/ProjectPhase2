@@ -220,6 +220,86 @@ INSERT INTO Admin( profileID ) VALUES( 5 );
 INSERT INTO Admin( profileID ) VALUES( 6 );
 INSERT INTO Admin( profileID ) VALUES( 7 );
 
+CREATE TABLE Industry
+(
+	industryName VARCHAR(50) PRIMARY KEY,
+);
+GO 
+CREATE TABLE Jobtitle
+(
+	jobTitle VARCHAR(50) PRIMARY KEY,
+);
+GO 
+-------------------------------------------------------------------- updated Tues 3/17  -----------------------------------------------------------
+ALTER TABLE Career
+ADD FOREIGN KEY (jobTitle)
+REFERENCES Jobtitle (jobTitle)
+
+ALTER TABLE Career
+ADD FOREIGN KEY (industry)
+REFERENCES Industry (industryName)
+
+INSERT INTO Jobtitle VALUES ('Analyst')
+INSERT INTO Jobtitle VALUES ('Project Manager')
+INSERT INTO Jobtitle VALUES ('Tester')
+INSERT INTO Jobtitle VALUES ('Supervisor')
+INSERT INTO Jobtitle VALUES ('Front end Developer')
+INSERT INTO Jobtitle VALUES ('Back end Developer')
+INSERT INTO Jobtitle VALUES ('Full Stack Developer')
+
+
+INSERT INTO Industry VALUES ('Video Game','')
+INSERT INTO Industry VALUES ('Telecommunications','')
+INSERT INTO Industry VALUES ('Networking','')
+INSERT INTO Industry VALUES ('Computer Hardware','')
+INSERT INTO Industry VALUES ('Banking','')
+INSERT INTO Industry VALUES ('Educational services','')
+INSERT INTO Industry VALUES ('Health Care and Social Services','')
+INSERT INTO Industry VALUES ('Retail','')
+INSERT INTO Industry VALUES ('Manufacturing','')
+INSERT INTO Industry VALUES ('Finance','')
+INSERT INTO Industry VALUES ('Transportation','')
+
+INSERT INTO skill VALUES('Ajax')
+INSERT INTO skill VALUES('AngularJS')
+INSERT INTO skill VALUES('AspectC++')
+INSERT INTO skill VALUES('Assembly')
+INSERT INTO skill VALUES('ASP.NET')
+INSERT INTO skill VALUES('BASIC')
+INSERT INTO skill VALUES('C')
+INSERT INTO skill VALUES('C++')
+INSERT INTO skill VALUES('C#')
+INSERT INTO skill VALUES('C-RIMM')
+INSERT INTO skill VALUES('CSS')
+INSERT INTO skill VALUES('Fortran')
+INSERT INTO skill VALUES('Java')
+INSERT INTO skill VALUES('Javascript')
+INSERT INTO skill VALUES('MySQL')
+INSERT INTO skill VALUES('NodeJS')
+INSERT INTO skill VALUES('Objective C')
+INSERT INTO skill VALUES('Perl')
+INSERT INTO skill VALUES('PHP')
+INSERT INTO skill VALUES('Python')
+INSERT INTO skill VALUES('Ruby')
+INSERT INTO skill VALUES('SQL/Variations')
+INSERT INTO skill VALUES('Visual Basic')
+INSERT INTO skill VALUES('XML')
+INSERT INTO skill VALUES('Laravel')
+INSERT INTO skill VALUES('Adobe Suite')
+INSERT INTO skill VALUES('JQuery')
+INSERT INTO skill VALUES('Json')
+INSERT INTO skill VALUES('Twitter BootStrap')
+
+
+INSERT INTO platform VALUES ('Windows')
+INSERT INTO platform VALUES ('Mac')
+INSERT INTO platform VALUES ('Linux')
+INSERT INTO platform VALUES ('Android')
+INSERT INTO platform VALUES ('iOS')
+INSERT INTO platform VALUES ('Windows Phone')
+INSERT INTO platform VALUES ('Blackberry')
+
+
 -- SHOW DATA  ----------------------------
 SELECT * FROM Profile;
 SELECT * FROM Career;

@@ -11,11 +11,14 @@ using Microsoft.Owin.Security;
 using WebApplication1.Models;
 using WebApplication1.ViewModels;
 using WebApplication1.BusinessLogic;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
+       
 
         public ActionResult Index()
         {
@@ -48,6 +51,11 @@ namespace WebApplication1.Controllers
 
         public ActionResult Search()
         {
+            DropdownPopulateRepo repo = new DropdownPopulateRepo();
+            ViewBag.industries =  repo.GetIndustries();
+            ViewBag.platforms = repo.GetPlatforms();
+            ViewBag.jobtitles = repo.GetJobtitles();
+            ViewBag.skills = repo.GetSkills();
             return View("Search");
         }
         public ActionResult AdvancedSearchResults(string jobTitle, string industry,

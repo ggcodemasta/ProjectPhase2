@@ -12,10 +12,10 @@ namespace WebApplication1.Models
         public CareerProfile FindProfile(int profileID)
         {
             EmployeesEntities context = new EmployeesEntities();
-
+           
             IEnumerable<Profile> query = (from p in context.Profiles
-                         where p.profileID == profileID
-                         select p);
+                                          where p.profileID == profileID
+                                          select p);
 
             List<CareerProfile> bac = new List<CareerProfile>();
             foreach (var item in query)
@@ -82,7 +82,7 @@ namespace WebApplication1.Models
                         //"", "", "", 0, 
                     item.HighestEduction, item.Relocation));
                 }
-                
+
             }
             bac = GetSkills(bac);
             bac = GetCareers(bac);
@@ -128,7 +128,7 @@ namespace WebApplication1.Models
                 }
 
 
-                
+
             }
             bac = GetSkills(bac);
             bac = GetCareers(bac);
@@ -143,13 +143,13 @@ namespace WebApplication1.Models
 
             IEnumerable<CareerProfile> allProfiles = GetAllProfiles();
 
-            if(jobTitle == "" && city == "")
+            if (jobTitle == "" && city == "")
             {
                 foreach (CareerProfile cp in allProfiles)
                 {
                     return (allProfiles);
                 }
-                
+
             }
             else if (jobTitle == "" && city != "")
             {
@@ -264,7 +264,7 @@ namespace WebApplication1.Models
                             companyTitleYears += "  |  " + item.Company + "-" + item.JobTitle + "(" + item.Years + "years)";
                             //years += item.Years;
                         }
-                        else 
+                        else
                         {
                             industry += item.Industry;
                             company += item.Company;

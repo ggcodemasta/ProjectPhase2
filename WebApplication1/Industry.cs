@@ -12,16 +12,15 @@ namespace WebApplication1
     using System;
     using System.Collections.Generic;
     
-    public partial class Skill
+    public partial class Industry
     {
-        public Skill()
+        public Industry()
         {
-            this.Profiles = new HashSet<Profile>();
+            this.Careers = new HashSet<Career>();
         }
     
-        public int skillID { get; set; }
-        public string skillName { get; set; }
+        public string industryName { get; set; }
     
-        public virtual ICollection<Profile> Profiles { get; set; }
+        public virtual ICollection<Career> Careers { get; set; }
     }
 }

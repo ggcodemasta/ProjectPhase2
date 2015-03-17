@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="05544176628645ec97a47dddb2b68392" Name="Diagram1">
+      <Diagram DiagramId="05544176628645ec97a47dddb2b68392" Name="Diagram1" ZoomLevel="95">
         <EntityTypeShape EntityType="EmployeesModel.Admin" Width="1.5" PointX="3.25" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmployeesModel.Career" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.Career" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EmployeesModel.Profile" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmployeesModel.Skill" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmployeesModel.SvcProfile" Width="1.5" PointX="6" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.Skill" Width="1.5" PointX="2.875" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeesModel.SvcProfile" Width="1.5" PointX="6" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="EmployeesModel.SvcType" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EmployeesModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="EmployeesModel.AspNetRole" Width="1.5" PointX="8.75" PointY="3.25" IsExpanded="true" />
@@ -26,6 +26,20 @@
         <AssociationConnector Association="EmployeesModel.ProfileSkill" ManuallyRouted="false" />
         <EntityTypeShape EntityType="EmployeesModel.Platform" Width="1.5" PointX="0.75" PointY="3.25" />
         <AssociationConnector Association="EmployeesModel.ProfilePlatform" />
+        <EntityTypeShape EntityType="EmployeesModel.Industry" Width="1.5" PointX="6.375" PointY="3.375" />
+        <AssociationConnector Association="EmployeesModel.fk_industry" ManuallyRouted="true" >
+          <ConnectorPoint PointX="6.375" PointY="4.0901126780702288" />
+          <ConnectorPoint PointX="6" PointY="5.3149816460479515" />
+          <ConnectorPoint PointX="6" PointY="5.2141043859208347" />
+          <ConnectorPoint PointX="5.114583333333333" PointY="5.2141043859208338" />
+          <ConnectorPoint PointX="4.947916666666667" PointY="5.2141043859208347" />
+          <ConnectorPoint PointX="4.677083333333333" PointY="5.2141043859208338" />
+          <ConnectorPoint PointX="4.510416666666667" PointY="5.2141043859208347" />
+          <ConnectorPoint PointX="3.5" PointY="5.2141043859208347" />
+          <ConnectorPoint PointX="3.5" PointY="5.75" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="EmployeesModel.Jobtitle" Width="1.5" PointX="6.375" PointY="5.25" />
+        <AssociationConnector Association="EmployeesModel.FK__Career__jobTitle__5EBF139D" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
