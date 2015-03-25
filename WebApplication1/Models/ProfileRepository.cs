@@ -139,5 +139,63 @@ namespace WebApplication1.Models
             EmployeesEntities db = new EmployeesEntities();
             return db.Profiles.ToList();
         }
+
+        public int AddOneSkill(int profileID1, string skillName)
+        {
+            EmployeesEntities context = new EmployeesEntities();
+
+
+            Profile profile = (from p in context.Profiles
+                               where p.profileID == profileID1
+                               select p).FirstOrDefault();
+
+            Skill skill = (from s in context.Skills
+                           where s.skillName == skillName
+                           select s).FirstOrDefault();
+            if (!profile.Skills.Contains(skill))
+            {
+                profile.Skills.Add(skill);
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    return -1;
+                }
+                return 1;
+            }
+            return 1;
+
+        }
+
+        public int DeleteOneSkill(int profileID1, string skillName)
+        {
+            EmployeesEntities context = new EmployeesEntities();
+            Profile profile = (from p in context.Profiles
+                               where p.profileID == profileID1
+                               select p).FirstOrDefault();
+
+            Skill skill = (from s in context.Skills
+                           where s.skillName == skillName
+                           select s).FirstOrDefault();
+            if (profile.Skills.Contains(skill))
+            {
+                profile.Skills.Remove(skill);
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    return -1;
+                }
+                return 1;
+            }
+
+            return 1;
+
+        }
+
     }
 }
