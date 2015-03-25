@@ -8,7 +8,7 @@ namespace WebApplication1.Models
 {
     public class CareerProfileRepository
     {
-
+        SearchRepo srepo = new SearchRepo();
         public CareerProfile FindProfile(int profileID)
         {
             EmployeesEntities context = new EmployeesEntities();
@@ -16,6 +16,7 @@ namespace WebApplication1.Models
             IEnumerable<Profile> query = (from p in context.Profiles
                                           where p.profileID == profileID
                                           select p);
+          
 
             List<CareerProfile> bac = new List<CareerProfile>();
             foreach (var item in query)
@@ -26,7 +27,7 @@ namespace WebApplication1.Models
                 }
                 bac.Add(new CareerProfile(item.profileID, item.firstName, item.lastName, item.linkedinURL,
                     item.portfolioURL, item.pictureURL, item.city, item.province, item.country,
-                    item.highestEducation, item.relocationYN));
+                    srepo.GetEducation(profileID), item.relocationYN));
             }
             bac = GetSkills(bac);
             bac = GetCareers(bac);
@@ -38,8 +39,7 @@ namespace WebApplication1.Models
         {
             EmployeesEntities context = new EmployeesEntities();
             var query = (from p in context.Profiles
-                         //from c in p.Careers
-                         //from s in p.Skills
+                         let e = p.Education
                          where p.country != null
                          select new
                          {
@@ -57,9 +57,8 @@ namespace WebApplication1.Models
                              //Company = c.company,
                              //JobTitle = c.jobTitle,
                              //Years = c.years,
-                             HighestEduction = p.highestEducation,
+                             HighestEduction = e.educationName,
                              Relocation = p.relocationYN
-
                          });
             List<CareerProfile> bac = new List<CareerProfile>();
             foreach (var item in query)
@@ -108,7 +107,7 @@ namespace WebApplication1.Models
                              City = p.city,
                              Province = p.province,
                              Country = p.country,
-                             HighestEduction = p.highestEducation,
+                             HighestEduction = srepo.GetEducation(p.profileID),
                              Relocation = p.relocationYN
                          });
             List<CareerProfile> bac = new List<CareerProfile>();

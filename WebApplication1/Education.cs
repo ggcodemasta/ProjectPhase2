@@ -12,15 +12,15 @@ namespace WebApplication1
     using System;
     using System.Collections.Generic;
     
-    public partial class Platform
+    public partial class Education
     {
-        public Platform()
+        public Education()
         {
             this.Profiles = new HashSet<Profile>();
         }
     
-        public int platformID { get; set; }
-        public string platformName { get; set; }
+        public int educationID { get; set; }
+        public string educationName { get; set; }
     
         public virtual ICollection<Profile> Profiles { get; set; }
     }

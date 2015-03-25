@@ -45,7 +45,7 @@ namespace WebApplication1.Models
             List<String> platformList = new List<string>();
 
             IEnumerable<String> ptlist = (from pt in context.Platforms
-                                             select pt.platform1).ToList();
+                                             select pt.platformName).ToList();
             platformList.AddRange(ptlist);
             platformList.Sort();
             return platformList;

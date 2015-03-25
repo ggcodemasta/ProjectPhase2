@@ -39,5 +39,6 @@ namespace WebApplication1
         public virtual DbSet<Platform> Platforms { get; set; }
         public virtual DbSet<Industry> Industries { get; set; }
         public virtual DbSet<Jobtitle> Jobtitles { get; set; }
+        public virtual DbSet<Education> Educations { get; set; }
     }
 }

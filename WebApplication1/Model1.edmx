@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="EmployeesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EmployeesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="adminID" />
@@ -24,6 +24,13 @@
           <Property Name="years" Type="int" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="Education">
+          <Key>
+            <PropertyRef Name="educationID" />
+          </Key>
+          <Property Name="educationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="educationName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Industry">
           <Key>
             <PropertyRef Name="industryName" />
@@ -41,7 +48,7 @@
             <PropertyRef Name="platformID" />
           </Key>
           <Property Name="platformID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="platform" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="platformName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -55,11 +62,11 @@
           <Property Name="linkedinURL" Type="varchar" MaxLength="255" />
           <Property Name="pictureURL" Type="varchar" MaxLength="255" />
           <Property Name="portfolioURL" Type="varchar" MaxLength="255" />
-          <Property Name="highestEducation" Type="varchar" MaxLength="30" />
           <Property Name="relocationYN" Type="varchar" MaxLength="10" />
           <Property Name="country" Type="varchar" MaxLength="30" />
           <Property Name="province" Type="varchar" MaxLength="30" />
           <Property Name="city" Type="varchar" MaxLength="30" />
+          <Property Name="educationID" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'cassieEmployees.cassie.ProfilePlatform' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -71,8 +78,6 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfilePlatform' does not h
           <Property Name="profileID" Type="int" Nullable="false" />
           <Property Name="platformID" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ProfileSkill">
           <Key>
             <PropertyRef Name="profileID" />
@@ -220,7 +225,19 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProfilePl__platf__4BAC3F29">
+        <Association Name="FK__Profile__educati__1CBC4616">
+          <End Role="Education" Type="Self.Education" Multiplicity="0..1" />
+          <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Education">
+              <PropertyRef Name="educationID" />
+            </Principal>
+            <Dependent Role="Profile">
+              <PropertyRef Name="educationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProfilePl__platf__70DDC3D8">
           <End Role="Platform" Type="Self.Platform" Multiplicity="1" />
           <End Role="ProfilePlatform" Type="Self.ProfilePlatform" Multiplicity="*" />
           <ReferentialConstraint>
@@ -232,7 +249,7 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProfilePl__profi__4AB81AF0">
+        <Association Name="FK__ProfilePl__profi__6FE99F9F">
           <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
           <End Role="ProfilePlatform" Type="Self.ProfilePlatform" Multiplicity="*" />
           <ReferentialConstraint>
@@ -244,7 +261,7 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProfileSk__profi__182C9B23">
+        <Association Name="FK__ProfileSk__profi__14270015">
           <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
           <End Role="ProfileSkill" Type="Self.ProfileSkill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -256,7 +273,7 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProfileSk__skill__1920BF5C">
+        <Association Name="FK__ProfileSk__skill__151B244E">
           <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
           <End Role="ProfileSkill" Type="Self.ProfileSkill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -351,10 +368,12 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
         <EntityContainer Name="EmployeesModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="cassie" store:Type="Tables" />
           <EntitySet Name="Career" EntityType="Self.Career" Schema="cassie" store:Type="Tables" />
+          <EntitySet Name="Education" EntityType="Self.Education" Schema="cassie" store:Type="Tables" />
           <EntitySet Name="Industry" EntityType="Self.Industry" Schema="cassie" store:Type="Tables" />
           <EntitySet Name="Jobtitle" EntityType="Self.Jobtitle" Schema="cassie" store:Type="Tables" />
           <EntitySet Name="Platform" EntityType="Self.Platform" Schema="cassie" store:Type="Tables" />
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="cassie" store:Type="Tables" />
+          <EntitySet Name="ProfileSkill" EntityType="Self.ProfileSkill" Schema="cassie" store:Type="Tables" />
           <EntitySet Name="Skill" EntityType="Self.Skill" Schema="cassie" store:Type="Tables" />
           <EntitySet Name="SvcProfile" EntityType="Self.SvcProfile" Schema="cassie" store:Type="Tables" />
           <EntitySet Name="SvcType" EntityType="Self.SvcType" Schema="cassie" store:Type="Tables" />
@@ -366,15 +385,9 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfilePlatform" EntityType="Self.ProfilePlatform" store:Type="Tables" store:Schema="cassie">
             <DefiningQuery>SELECT 
-    [ProfilePlatform].[profileID] AS [profileID], 
-    [ProfilePlatform].[platformID] AS [platformID]
-    FROM [cassie].[ProfilePlatform] AS [ProfilePlatform]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="ProfileSkill" EntityType="Self.ProfileSkill" store:Type="Tables" store:Schema="cassie">
-            <DefiningQuery>SELECT 
-    [ProfileSkill].[profileID] AS [profileID], 
-    [ProfileSkill].[skillID] AS [skillID]
-    FROM [cassie].[ProfileSkill] AS [ProfileSkill]</DefiningQuery>
+[ProfilePlatform].[profileID] AS [profileID], 
+[ProfilePlatform].[platformID] AS [platformID]
+FROM [cassie].[ProfilePlatform] AS [ProfilePlatform]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__Admin__profileID__22AA2996" Association="Self.FK__Admin__profileID__22AA2996">
             <End Role="Profile" EntitySet="Profile" />
@@ -392,19 +405,23 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
             <End Role="Profile" EntitySet="Profile" />
             <End Role="Career" EntitySet="Career" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProfilePl__platf__4BAC3F29" Association="Self.FK__ProfilePl__platf__4BAC3F29">
+          <AssociationSet Name="FK__Profile__educati__1CBC4616" Association="Self.FK__Profile__educati__1CBC4616">
+            <End Role="Education" EntitySet="Education" />
+            <End Role="Profile" EntitySet="Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProfilePl__platf__70DDC3D8" Association="Self.FK__ProfilePl__platf__70DDC3D8">
             <End Role="Platform" EntitySet="Platform" />
             <End Role="ProfilePlatform" EntitySet="ProfilePlatform" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProfilePl__profi__4AB81AF0" Association="Self.FK__ProfilePl__profi__4AB81AF0">
+          <AssociationSet Name="FK__ProfilePl__profi__6FE99F9F" Association="Self.FK__ProfilePl__profi__6FE99F9F">
             <End Role="Profile" EntitySet="Profile" />
             <End Role="ProfilePlatform" EntitySet="ProfilePlatform" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProfileSk__profi__182C9B23" Association="Self.FK__ProfileSk__profi__182C9B23">
+          <AssociationSet Name="FK__ProfileSk__profi__14270015" Association="Self.FK__ProfileSk__profi__14270015">
             <End Role="Profile" EntitySet="Profile" />
             <End Role="ProfileSkill" EntitySet="ProfileSkill" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProfileSk__skill__1920BF5C" Association="Self.FK__ProfileSk__skill__1920BF5C">
+          <AssociationSet Name="FK__ProfileSk__skill__151B244E" Association="Self.FK__ProfileSk__skill__151B244E">
             <End Role="Skill" EntitySet="Skill" />
             <End Role="ProfileSkill" EntitySet="ProfileSkill" />
           </AssociationSet>
@@ -472,7 +489,6 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
           <Property Name="linkedinURL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="pictureURL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="portfolioURL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="highestEducation" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="relocationYN" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="country" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="province" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
@@ -482,6 +498,8 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
           <NavigationProperty Name="SvcProfiles" Relationship="Self.FK__SvcProfil__profi__1ED998B2" FromRole="Profile" ToRole="SvcProfile" />
           <NavigationProperty Name="Skills" Relationship="Self.ProfileSkill" FromRole="Profile" ToRole="Skill" />
           <NavigationProperty Name="Platforms" Relationship="EmployeesModel.ProfilePlatform" FromRole="Profile" ToRole="Platform" />
+          <Property Name="educationID" Type="Int32" />
+          <NavigationProperty Name="Education" Relationship="EmployeesModel.FK__Profile__educati__1CBC4616" FromRole="Profile" ToRole="Education" />
         </EntityType>
         <EntityType Name="Skill">
           <Key>
@@ -719,14 +737,19 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
             <End Role="Jobtitle" EntitySet="Jobtitles" />
             <End Role="Career" EntitySet="Careers" />
           </AssociationSet>
+          <EntitySet Name="Educations" EntityType="EmployeesModel.Education" />
+          <AssociationSet Name="FK__Profile__educati__1CBC4616" Association="EmployeesModel.FK__Profile__educati__1CBC4616">
+            <End Role="Education" EntitySet="Educations" />
+            <End Role="Profile" EntitySet="Profiles" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Platform">
           <Key>
             <PropertyRef Name="platformID" />
           </Key>
           <Property Name="platformID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="platform1" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Profiles" Relationship="EmployeesModel.ProfilePlatform" FromRole="Platform" ToRole="Profile" />
+          <Property Name="platformName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="ProfilePlatform">
           <End Type="EmployeesModel.Platform" Role="Platform" Multiplicity="*" />
@@ -770,6 +793,26 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Education">
+          <Key>
+            <PropertyRef Name="educationID" />
+          </Key>
+          <Property Name="educationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="educationName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Profiles" Relationship="EmployeesModel.FK__Profile__educati__1CBC4616" FromRole="Education" ToRole="Profile" />
+        </EntityType>
+        <Association Name="FK__Profile__educati__1CBC4616">
+          <End Type="EmployeesModel.Education" Role="Education" Multiplicity="0..1" />
+          <End Type="EmployeesModel.Profile" Role="Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Education">
+              <PropertyRef Name="educationID" />
+            </Principal>
+            <Dependent Role="Profile">
+              <PropertyRef Name="educationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -800,6 +843,7 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
           <EntitySetMapping Name="Profiles">
             <EntityTypeMapping TypeName="EmployeesModel.Profile">
               <MappingFragment StoreEntitySet="Profile">
+                <ScalarProperty Name="educationID" ColumnName="educationID" />
                 <ScalarProperty Name="profileID" ColumnName="profileID" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="password" ColumnName="password" />
@@ -808,7 +852,6 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
                 <ScalarProperty Name="linkedinURL" ColumnName="linkedinURL" />
                 <ScalarProperty Name="pictureURL" ColumnName="pictureURL" />
                 <ScalarProperty Name="portfolioURL" ColumnName="portfolioURL" />
-                <ScalarProperty Name="highestEducation" ColumnName="highestEducation" />
                 <ScalarProperty Name="relocationYN" ColumnName="relocationYN" />
                 <ScalarProperty Name="country" ColumnName="country" />
                 <ScalarProperty Name="province" ColumnName="province" />
@@ -923,7 +966,7 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
           <EntitySetMapping Name="Platforms">
             <EntityTypeMapping TypeName="EmployeesModel.Platform">
               <MappingFragment StoreEntitySet="Platform">
-                <ScalarProperty Name="platform1" ColumnName="platform" />
+                <ScalarProperty Name="platformName" ColumnName="platformName" />
                 <ScalarProperty Name="platformID" ColumnName="platformID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -950,6 +993,14 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Educations">
+            <EntityTypeMapping TypeName="EmployeesModel.Education">
+              <MappingFragment StoreEntitySet="Education">
+                <ScalarProperty Name="educationName" ColumnName="educationName" />
+                <ScalarProperty Name="educationID" ColumnName="educationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -966,7 +1017,7 @@ warning 6002: The table/view 'cassieEmployees.cassie.ProfileSkill' does not have
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

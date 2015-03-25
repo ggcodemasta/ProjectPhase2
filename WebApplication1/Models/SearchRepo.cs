@@ -15,8 +15,27 @@ namespace WebApplication1.Models
 //    platformID INTEGER IDENTITY(1,1) PRIMARY KEY,
 //    platform VARCHAR(250) NOT NULL
 //);
+
+
     public class SearchRepo
     {
+        EmployeesEntities context = new EmployeesEntities();
+        public String GetEducation(int profileID) 
+        {
+            var query = (from p in context.Profiles
+                         from e in context.Educations
+                         where p.educationID == e.educationID
+                         select e.educationName).FirstOrDefault();
+            return query;
+        }
+        public int SaveEducation(String education)
+        {
+            var query = (from p in context.Profiles
+                         let e = p.Education
+                         where e.educationName == education
+                         select e.educationID).FirstOrDefault();
+            return query;
+        }
         public List<CareerProfile> AdvancedSearchQuery(string jobtitle, string industry, string country,
             string province, string city, string relocate, string education, string experience, List<string> platforms, List<string> languages)
         {
@@ -30,7 +49,7 @@ namespace WebApplication1.Models
             //}else {
             //    relocation = "no";
             //}
-            EmployeesEntities context = new EmployeesEntities();
+          
 
                 int yearmin = 0;
                 int yearmax = 0;
@@ -127,7 +146,7 @@ namespace WebApplication1.Models
                     {
                         var platformfilter = (from p in profilelist
                                               from pl in p.Platforms
-                                              where pl.platform1 == platforms[i]
+                                              where pl.platformName == platforms[i]
                                               select p.profileID).ToList();
 
                         ptfilterlist.AddRange(platformfilter);
@@ -190,7 +209,7 @@ namespace WebApplication1.Models
 
                     candidates.Add(new CareerProfile(query.profileID, query.firstName, query.lastName, query.linkedinURL,
                         query.portfolioURL, query.pictureURL, query.city, query.province, query.country,
-                        query.highestEducation, query.relocationYN));
+                        GetEducation(query.profileID), query.relocationYN));
                 }
                 
                 return candidates;

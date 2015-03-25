@@ -8,6 +8,7 @@ namespace WebApplication1.Models
 {
     public class ProfileRepository
     {
+        SearchRepo srepo = new SearchRepo();
         public int GetProfileID(Login login)
         {
 
@@ -53,7 +54,7 @@ namespace WebApplication1.Models
         public int HandleRegistration(Register register)
         {
             Profile profile = new Profile();
-
+            
             profile.email = register.Email;
             // more... 
             profile.password = "none";
@@ -62,7 +63,7 @@ namespace WebApplication1.Models
             profile.linkedinURL = register.LinkedinURL;
             profile.pictureURL = register.PictureURL;
             profile.portfolioURL = register.PortfolioURL;
-            profile.highestEducation = register.HighestEducation;
+            profile.educationID = srepo.SaveEducation(register.HighestEducation);
             profile.relocationYN = register.RelocationYN;
             profile.country = register.Country;
             profile.province = register.Province;
@@ -84,7 +85,7 @@ namespace WebApplication1.Models
             profile.linkedinURL = jobSeekers.LinkedinURL;
             profile.pictureURL = jobSeekers.PictureURL;
             profile.portfolioURL = jobSeekers.PortfolioURL;
-            profile.highestEducation = jobSeekers.HighestEducation;
+            profile.educationID = srepo.SaveEducation(jobSeekers.HighestEducation);
             profile.relocationYN = jobSeekers.RelocationYN;
             profile.country = jobSeekers.Country;
             profile.province = jobSeekers.Province;
@@ -116,7 +117,7 @@ namespace WebApplication1.Models
             profile.linkedinURL = basicInfo.linkedinURL;
             profile.pictureURL = basicInfo.pictureURL;
             profile.portfolioURL = basicInfo.portfolioURL;
-            profile.highestEducation = basicInfo.highestEducation;
+            profile.educationID = basicInfo.educationID;
             profile.relocationYN = basicInfo.relocationYN;
             profile.country = basicInfo.country;
             profile.province = basicInfo.province;

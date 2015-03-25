@@ -31,16 +31,17 @@ namespace WebApplication1
         public string linkedinURL { get; set; }
         public string pictureURL { get; set; }
         public string portfolioURL { get; set; }
-        public string highestEducation { get; set; }
         public string relocationYN { get; set; }
         public string country { get; set; }
         public string province { get; set; }
         public string city { get; set; }
+        public Nullable<int> educationID { get; set; }
     
         public virtual ICollection<Admin> Admins { get; set; }
         public virtual ICollection<Career> Careers { get; set; }
         public virtual ICollection<SvcProfile> SvcProfiles { get; set; }
         public virtual ICollection<Skill> Skills { get; set; }
         public virtual ICollection<Platform> Platforms { get; set; }
+        public virtual Education Education { get; set; }
     }
 }
