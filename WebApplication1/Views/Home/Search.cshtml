@@ -105,14 +105,12 @@ BLUE WRAP
                 <label for="education" class="col-sm-2 control-label">Education</label>
                 <div class="col-sm-6">
                     <select class="form-control" name="education">
-                        <option value="none required">None</option>
-                        <option value="highschool">High School</option>
-                        <option value="certificate">Certificate</option>
-                        <option value="diploma">Diploma</option>
-                        <option value="bachelor">Bachelors Degree</option>
-                        <option value="graduate">Graduate Degree</option>
-                        <option value="postgraduate">Post-Graduate Degree</option>
-                        <option value="phd">Phd</option>
+                        @{
+                                for (int i = 0; i < ViewBag.industries.Count; i++)
+                                {
+                                    <option value="@ViewBag.educations[i]">@ViewBag.educations[i]</option>
+                                }
+                        }
                     </select> (minimum education required)
                 </div>
                 <div class="col-sm-4">

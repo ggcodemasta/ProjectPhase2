@@ -102,12 +102,11 @@ namespace WebApplication1.Models
             return db.Profiles.Where(r => r.email == email).SingleOrDefault();
         }
 
-        public int SaveProfile(Profile basicInfo, string email)
+        public int SaveProfile(Profile basicInfo, string email, int education)
         {
             EmployeesEntities db = new EmployeesEntities();
 
             Profile profile = new Profile();
-
             profile = db.Profiles.Where(r => r.email == email).SingleOrDefault();
             profile.email = basicInfo.email;
             // more... 
@@ -117,7 +116,7 @@ namespace WebApplication1.Models
             profile.linkedinURL = basicInfo.linkedinURL;
             profile.pictureURL = basicInfo.pictureURL;
             profile.portfolioURL = basicInfo.portfolioURL;
-            profile.educationID = basicInfo.educationID;
+            profile.educationID = education;
             profile.relocationYN = basicInfo.relocationYN;
             profile.country = basicInfo.country;
             profile.province = basicInfo.province;
