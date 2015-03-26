@@ -280,6 +280,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <None Include="Properties\PublishProfiles\employee-array.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -421,8 +422,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Scripts\bootstrap\config.json" />
-    <Content Include="Views\Shared\z_LayoutMain.cshtml" />
-    <Content Include="Views\Home\Index-old.cshtml" />
     <Content Include="Views\Home\DisplaySearchResults.cshtml" />
     <Content Include="Views\Home\IndividualProfile.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
