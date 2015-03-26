@@ -96,34 +96,35 @@ namespace WebApplication1.Models
             var query = (from p in context.Profiles
                          from svc in p.SvcProfiles
                          where p.profileID == svc.profileID
-                         select new
-                         {
-                             ProfileID = p.profileID,
-                             FirstName = p.firstName,
-                             LastName = p.lastName,
-                             Linkedin = p.linkedinURL,
-                             Portfolio = p.portfolioURL,
-                             Picture = p.pictureURL,
-                             City = p.city,
-                             Province = p.province,
-                             Country = p.country,
-                             HighestEduction = srepo.GetEducation(p.profileID),
-                             Relocation = p.relocationYN
-                         });
+                         select p).ToList();
+                         //select new
+                         //{
+                         //    ProfileID = p.profileID,
+                         //    FirstName = p.firstName,
+                         //    LastName = p.lastName,
+                         //    Linkedin = p.linkedinURL,
+                         //    Portfolio = p.portfolioURL,
+                         //    Picture = p.pictureURL,
+                         //    City = p.city,
+                         //    Province = p.province,
+                         //    Country = p.country,
+                         //    HighestEduction = srepo.GetEducation(p.profileID),
+                         //    Relocation = p.relocationYN
+                         //});
             List<CareerProfile> bac = new List<CareerProfile>();
             foreach (var item in query)
             {
-                if (item.Picture == null || item.Picture.IndexOf(".jpg", 0, StringComparison.CurrentCultureIgnoreCase) == -1 && item.Picture.IndexOf(".png", 0, StringComparison.CurrentCultureIgnoreCase) == -1)
+                if (item.pictureURL == null || item.pictureURL.IndexOf(".jpg", 0, StringComparison.CurrentCultureIgnoreCase) == -1 && item.pictureURL.IndexOf(".png", 0, StringComparison.CurrentCultureIgnoreCase) == -1)
                 {
-                    bac.Add(new CareerProfile(item.ProfileID, item.FirstName, item.LastName, item.Linkedin,
-                    item.Portfolio, "/Content/images/person-placeholder2.jpg", item.City, item.Province, item.Country,
-                    item.HighestEduction, item.Relocation));
+                    bac.Add(new CareerProfile(item.profileID, item.firstName, item.lastName, item.linkedinURL,
+                    item.portfolioURL, "/Content/images/person-placeholder2.jpg", item.city, item.province, item.country,
+                    srepo.GetEducation(item.profileID), item.relocationYN));
                 }
                 else
                 {
-                    bac.Add(new CareerProfile(item.ProfileID, item.FirstName, item.LastName, item.Linkedin,
-                    item.Portfolio, item.Picture, item.City, item.Province, item.Country,
-                    item.HighestEduction, item.Relocation));
+                    bac.Add(new CareerProfile(item.profileID, item.firstName, item.lastName, item.linkedinURL,
+                    item.portfolioURL, item.pictureURL, item.city, item.province, item.country,
+                    srepo.GetEducation(item.profileID), item.relocationYN));
                 }
 
 
@@ -139,49 +140,80 @@ namespace WebApplication1.Models
         public IEnumerable<CareerProfile> QuickSearchProfiles(string jobTitle, string city)
         {
             List<CareerProfile> bac = new List<CareerProfile>();
+            EmployeesEntities context = new EmployeesEntities();
 
             IEnumerable<CareerProfile> allProfiles = GetAllProfiles();
+            string dbcity = city.Trim().ToLower();
 
-            if (jobTitle == "" && city == "")
+            if (jobTitle == "ALL" && city == "")
             {
                 foreach (CareerProfile cp in allProfiles)
                 {
                     return (allProfiles);
                 }
-
             }
-            else if (jobTitle == "" && city != "")
-            {
-                foreach (CareerProfile cp in allProfiles)
-                {
-                    if (cp.City.Trim().ToLower() == city.Trim().ToLower())
-                    {
-                        bac.Add(cp);
-                    }
-                }
 
-            }
-            else if (city == "" && jobTitle != "")
+            if (jobTitle != "ALL")
             {
-                foreach (CareerProfile cp in allProfiles)
-                {
-                    if (cp.JobTitle.IndexOf(jobTitle, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
-                    {
-                        bac.Add(cp);
-                    }
-                }
+                var quicksearchresult = (from c in context.Careers
+                                         let p = c.Profile
+                                         let e = p.Education
+                                         where c.jobTitle == jobTitle
+                                         where p.city == dbcity
+                                         select new CareerProfile
+                                         {
+                                             ProfileID = p.profileID,
+                                             FirstName = p.firstName,
+                                             LastName = p.lastName,
+                                             LinkedinURL = p.linkedinURL,
+                                             PortfolioURL = p.portfolioURL,
+                                             PictureURL = p.pictureURL,
+                                             City = p.city,
+                                             Province = p.province,
+                                             Country = p.country,
+                                             HighestEducation = e.educationName,
+                                             Relocation = p.relocationYN
+                                         });
 
-            }
-            else
-            {
-                foreach (CareerProfile cp in allProfiles)
+                foreach (CareerProfile cp in quicksearchresult)
                 {
-                    if (cp.City.Trim().ToLower() == city.Trim().ToLower() && cp.JobTitle.IndexOf(jobTitle, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
-                    {
-                        bac.Add(cp);
-                    }
+                    bac.Add(cp);
                 }
             }
+
+
+            //else if (jobTitle == "" && city != "")
+            //{
+            //    foreach (CareerProfile cp in allProfiles)
+            //    {
+            //        if (cp.City.Trim().ToLower() == city.Trim().ToLower())
+            //        {
+            //            bac.Add(cp);
+            //        }
+            //    }
+
+            //}
+            //else if (city == "" && jobTitle != "")
+            //{
+            //    foreach (CareerProfile cp in allProfiles)
+            //    {
+            //        if (cp.JobTitle.IndexOf(jobTitle, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
+            //        {
+            //            bac.Add(cp);
+            //        }
+            //    }
+
+            //}
+            //else
+            //{
+            //    foreach (CareerProfile cp in allProfiles)
+            //    {
+            //        if (cp.City.Trim().ToLower() == city.Trim().ToLower() && cp.JobTitle.IndexOf(jobTitle, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
+            //        {
+            //            bac.Add(cp);
+            //        }
+            //    }
+            //}
 
             return bac;
         }

@@ -106,7 +106,7 @@ BLUE WRAP
                 <div class="col-sm-6">
                     <select class="form-control" name="education">
                         @{
-                                for (int i = 0; i < ViewBag.industries.Count; i++)
+                            for (int i = 0; i < ViewBag.educations.Count; i++)
                                 {
                                     <option value="@ViewBag.educations[i]">@ViewBag.educations[i]</option>
                                 }
