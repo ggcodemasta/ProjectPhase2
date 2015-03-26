@@ -1,0 +1,241 @@
+﻿@model WebApplication1.ViewModels.Skills
+
+@{
+    ViewBag.Title = "Career";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+<!-- *****************************************************************************************************************
+BLUE WRAP
+***************************************************************************************************************** -->
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Skills.</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" align="center">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <table style="width:80%">
+            <tr>
+                <td>
+                    <label class="control-label" for="Ajax">Ajax</label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Ajax)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="AngularJS">AngularJS</label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.AngularJS)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="AspectCPlusPlus">AspectCPlusPlus</label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.AspectCPlusPlus)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="Assembly">Assembly</label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Assembly)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="AspdotNet">AspdotNet</label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.AspdotNet)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="BASIC">BASIC</label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.BASIC)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="C">C</label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.C)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label" for="CPlusPlus">CPlusPlus</label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.CPlusPlus)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="CSharp">CSharp</label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.CSharp)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="C_RIMM">C_RIMM</label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.C_RIMM)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="CSS">CSS</label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.CSS)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="Fortran">Fortran</label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Fortran)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="Java">Java</label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Java)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="Javascript">Javascript</label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Javascript)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label" for=" MySQL">MySQL </label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.MySQL)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="NodeJS "> NodeJS</label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.NodeJS)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for=" ObjectiveC"> ObjectiveC</label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.ObjectiveC)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="Perl"> Perl</label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Perl)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="PHP">PHP </label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.PHP)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="Python">Python </label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Python)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="Ruby">Ruby </label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Ruby)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label" for="SQLVariations">SQLVariations  </label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.SQLVariations)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="VisualBasic">VisualBasic  </label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.VisualBasic)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="XML"> XML </label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.XML)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="Laravel">Laravel  </label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Laravel)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="JQuery"> JQuery </label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.JQuery)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="AdobeSuite "> AdobeSuite </label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.AdobeSuite)
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label" for="Json">Json  </label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Json)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label" for="TwitterBootStrap">TwitterBootStrap  </label>
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.TwitterBootStrap)
+                    </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+
+        </table>
+
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+ 

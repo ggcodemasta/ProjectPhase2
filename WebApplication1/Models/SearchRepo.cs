@@ -20,7 +20,7 @@ namespace WebApplication1.Models
     public class SearchRepo
     {
         EmployeesEntities context = new EmployeesEntities();
-        public String GetEducation(int profileID) 
+        public String GetEducation(int? profileID) 
         {
             var query = (from p in context.Profiles
                          from e in context.Educations
@@ -77,10 +77,8 @@ namespace WebApplication1.Models
                         break;
                 }
 
-
                 var filterbasic = (from c in context.Careers
                                    let p = c.Profile
-                                   //where p.highestEducation == education
                                    where c.years >= yearmin
                                    where c.years <= yearmax
                                    select p).Distinct();
@@ -215,5 +213,7 @@ namespace WebApplication1.Models
                 return candidates;
 
         }
+
+
     }
 }

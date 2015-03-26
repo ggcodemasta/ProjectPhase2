@@ -50,5 +50,17 @@ namespace WebApplication1.Models
             platformList.Sort();
             return platformList;
         }
+
+        public List<String> GetEducationList()
+        {
+            List<String> eduList = new List<string>();
+
+            IEnumerable<String> query = (from e in context.Educations
+                                              select e.educationName).ToList();
+            eduList.AddRange(query);
+            return eduList;
+
+        }
+
     }
 }

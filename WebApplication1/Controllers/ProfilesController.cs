@@ -43,18 +43,26 @@ namespace WebApplication1.Controllers
         }
 
 
-        //THIS DOESN'T WORK
+        //NOT WORKING YET - Mar25
         // GET: api/Profiles/5
         //[ResponseType(typeof(Profile))]
-        //public IEnumerable<CareerProfile> GetProfiles(string city)
-        //{
-        //    CareerProfileRepository cpr = new CareerProfileRepository();
-        //    IEnumerable<CareerProfile> profileList = cpr.QuickSearchProfiles("", city);
+        public IEnumerable<CareerProfile> GetProfiles(string jobTitle, string city)
+        {
+            CareerProfileRepository cpr = new CareerProfileRepository();
+            IEnumerable<CareerProfile> profileList = cpr.QuickSearchProfiles(jobTitle, city);
 
-        //    return profileList;
-        //}
+            return profileList;
+        }
 
+        // GET: api/Profiles/5
+        //[ResponseType(typeof(Profile))]
+        public IEnumerable<CareerProfile> GetProfilesCity(string city)
+        {
+            CareerProfileRepository cpr = new CareerProfileRepository();
+            IEnumerable<CareerProfile> profileList = cpr.QuickSearchProfiles("", city);
 
+            return profileList;
+        }
 
 
 

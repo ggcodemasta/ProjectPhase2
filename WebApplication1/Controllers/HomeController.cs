@@ -25,7 +25,7 @@ namespace WebApplication1.Controllers
         {
             manager.UserTokenProvider = new EmailTokenProvider<IdentityUser>();
         }
-
+       
         public ActionResult Index()
         {
             //CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
@@ -61,6 +61,7 @@ namespace WebApplication1.Controllers
             ViewBag.industries =  repo.GetIndustries();
             ViewBag.platforms = repo.GetPlatforms();
             ViewBag.jobtitles = repo.GetJobtitles();
+            ViewBag.educations = repo.GetEducationList();
             ViewBag.skills = repo.GetSkills();
             return View("Search");
         }
@@ -509,12 +510,12 @@ namespace WebApplication1.Controllers
         public ActionResult BasicInfo()
         {
             ProfileRepository profileRepository = new ProfileRepository();
-
+            DropdownPopulateRepo repo = new DropdownPopulateRepo();
+            SearchRepo srepo = new SearchRepo();
             string email = HttpContext.User.Identity.Name; // userid
-
-
-
             Profile currentProfile = profileRepository.GetProfile(email);
+            ViewBag.educations = repo.GetEducationList();
+            ViewBag.defaultvalue = srepo.GetEducation(currentProfile.educationID);
 
             return View(currentProfile);
         }
@@ -526,9 +527,12 @@ namespace WebApplication1.Controllers
 
 
             ProfileRepository profileRepository = new ProfileRepository();
+            SearchRepo srepo = new SearchRepo();
             string email = HttpContext.User.Identity.Name; // userid
+            int education = srepo.SaveEducation(Request.Form["education"]);
 
-            if (profileRepository.SaveProfile(profile, email) < 0)
+
+            if (profileRepository.SaveProfile(profile, email, education) < 0)
             {
                 return RedirectToAction("ShowMsg", new { msg = "[FAIL] HandleCareer" });
             }
@@ -590,24 +594,7 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult ResetPassword(string password, string passwordConfirm,
-                                          string passwordToken, string userID)
-        {
-
-            var userStore = new UserStore<IdentityUser>();
-            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
-            var user = manager.FindById(userID);
-            CreateTokenProvider(manager, PASSWORD_RESET);
-
-            IdentityResult result = manager.ResetPassword(userID, passwordToken, password);
-
-            string message = ""; 
-            if (result.Succeeded)
-                message = "The password has been reset.";
-            else
-                message = "The password has not been reset.";
-
+      
             return RedirectToAction("ShowMsg", new { msg = message });
         }
 

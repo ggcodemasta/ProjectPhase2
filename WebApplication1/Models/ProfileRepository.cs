@@ -102,12 +102,11 @@ namespace WebApplication1.Models
             return db.Profiles.Where(r => r.email == email).SingleOrDefault();
         }
 
-        public int SaveProfile(Profile basicInfo, string email)
+        public int SaveProfile(Profile basicInfo, string email, int education)
         {
             EmployeesEntities db = new EmployeesEntities();
 
             Profile profile = new Profile();
-
             profile = db.Profiles.Where(r => r.email == email).SingleOrDefault();
             profile.email = basicInfo.email;
             // more... 
@@ -117,7 +116,7 @@ namespace WebApplication1.Models
             profile.linkedinURL = basicInfo.linkedinURL;
             profile.pictureURL = basicInfo.pictureURL;
             profile.portfolioURL = basicInfo.portfolioURL;
-            profile.educationID = basicInfo.educationID;
+            profile.educationID = education;
             profile.relocationYN = basicInfo.relocationYN;
             profile.country = basicInfo.country;
             profile.province = basicInfo.province;
@@ -140,5 +139,63 @@ namespace WebApplication1.Models
             EmployeesEntities db = new EmployeesEntities();
             return db.Profiles.ToList();
         }
+
+        public int AddOneSkill(int profileID1, string skillName)
+        {
+            EmployeesEntities context = new EmployeesEntities();
+
+
+            Profile profile = (from p in context.Profiles
+                               where p.profileID == profileID1
+                               select p).FirstOrDefault();
+
+            Skill skill = (from s in context.Skills
+                           where s.skillName == skillName
+                           select s).FirstOrDefault();
+            if (!profile.Skills.Contains(skill))
+            {
+                profile.Skills.Add(skill);
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    return -1;
+                }
+                return 1;
+            }
+            return 1;
+
+        }
+
+        public int DeleteOneSkill(int profileID1, string skillName)
+        {
+            EmployeesEntities context = new EmployeesEntities();
+            Profile profile = (from p in context.Profiles
+                               where p.profileID == profileID1
+                               select p).FirstOrDefault();
+
+            Skill skill = (from s in context.Skills
+                           where s.skillName == skillName
+                           select s).FirstOrDefault();
+            if (profile.Skills.Contains(skill))
+            {
+                profile.Skills.Remove(skill);
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    return -1;
+                }
+                return 1;
+            }
+
+            return 1;
+
+        }
+
     }
 }
