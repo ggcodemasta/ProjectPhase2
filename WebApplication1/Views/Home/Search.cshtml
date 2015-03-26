@@ -137,7 +137,7 @@ BLUE WRAP
                 <label for="platform" class="col-sm-2 control-label">Platforms</label>
                 <div class="col-sm-6">
                     <select multiple class="form-control" name="platform">
-                        <option value="ALL">ALL</option>
+                        <option value="ALL" selected="selected">ALL</option>
                         @{  
                             for (int i = 0; i < ViewBag.platforms.Count; i++)
                             {
@@ -157,11 +157,11 @@ BLUE WRAP
                 <label for="language" class="col-sm-2 control-label">Languages</label>
                 <div class="col-sm-6">
                     <select multiple class="form-control" name="language">
-                        <option value="ALL">ALL</option>
+                        <option value="ALL" selected="selected">ALL</option>
                         @{
                             for (int i = 0; i < ViewBag.skills.Count; i++)
                             {
-                             <option value="@ViewBag.skills[i]">@ViewBag.skills[i]</option>
+                             <option value="@ViewBag.skills[i]" >@ViewBag.skills[i]</option>
                             }
                         }
                     </select>

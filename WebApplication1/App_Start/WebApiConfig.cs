@@ -20,12 +20,12 @@ namespace WebApplication1
                 defaults: new { jobTitle = RouteParameter.Optional, city = RouteParameter.Optional }
             );
 
-            //find city
-            config.Routes.MapHttpRoute(
-                name: "OneValueApi",
-                routeTemplate: "api/{controller}/{city}",
-                defaults: new { city = RouteParameter.Optional }
-            );
+            //find city THIS WORKS
+            //config.Routes.MapHttpRoute(
+            //    name: "OneValueApi",
+            //    routeTemplate: "api/{controller}/{city}",
+            //    defaults: new { city = RouteParameter.Optional }
+            //);
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

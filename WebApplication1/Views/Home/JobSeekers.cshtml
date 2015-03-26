@@ -7,12 +7,15 @@
     .seekerHead {
         text-align: center;
     }
+
     .lessMarginLeft {
         margin-left: -15px;
     }
+
     .lessPaddingLeft {
         padding: 0 0;
     }
+
     .btn-themeSeek {
         font-weight: bold;
         width: 160px !important;
@@ -22,16 +25,31 @@
         border-color: #00b3fe;
         margin: 4px;
     }
-    .btn-themeSeek:hover,
-    .btn-themeSeek:focus,
-    .btn-themeSeek:active,
-    .btn-themeSeek.active,
-    .open .dropdown-toggle.themeSeek {
-        font-weight: bold;
-        color: #fff;
-        background-color: #384452;
-        border-color: #384452;
-    }
+
+        .btn-themeSeek:hover,
+        .btn-themeSeek:focus,
+        .btn-themeSeek:active,
+        .btn-themeSeek.active,
+        .open .dropdown-toggle.themeSeek {
+            font-weight: bold;
+            color: #fff;
+            background-color: #384452;
+            border-color: #384452;
+        }
+
+        .panel-default > .panel-heading {
+            padding: 20px 0;
+            background-color: #00b3fe;
+        }
+        .panel-title > a:link {
+            color: white;
+        }
+
+        .panel-title > a:hover,
+        .panel-title > a:visited
+         {
+            color: black;
+        }
 </style>
 
 <!-- *****************************************************************************************************************
@@ -59,7 +77,7 @@ AGENCY ABOUT
             @using (Html.BeginForm())
             {
                 @*
-                @Html.AntiForgeryToken()
+                    @Html.AntiForgeryToken()
                 *@
                 <div class="form">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -97,66 +115,123 @@ AGENCY ABOUT
     </div>
 </div>
 
-    <!-- *****************************************************************************************************************
-     SERVICE LOGOS
-     ***************************************************************************************************************** -->
-    <div id="service">
-        <div class="container">
-            <div class="row centered">
-                <div class="col-md-4">
-                    <i class="fa fa-eye"></i>
-                    <h4>Be Seen</h4>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+<!-- *****************************************************************************************************************
+ SERVICE LOGOS
+ ***************************************************************************************************************** -->
+<div id="service">
+    <div class="container">
+        <div class="row centered">
+            <div class="col-md-4">
+                <i class="fa fa-eye"></i>
+                <h4>Be Seen</h4>
+                <p>Get your work profile in front of employers looking for people just like you! By adding your profile to EmployeeArray, you can ensure that employers can easily find you whenever they have a new job opening that matches your skills!</p>
+            </div>
+            <div class="col-md-4">
+                <i class="fa fa-clock-o"></i>
+                <h4>Save Time</h4>
+                <p>Why spend endless hours searching job boards and filling out hundreds of applications when you can just create one EmployeeArray profile and have it viewed by hundreds of employers looking to hire.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="fa fa-linkedin-square"></i>
+                <h4>Connect Linkedin</h4>
+                <p>EmployeeArray makes it easy to connect your EA[ ] profile to your Linkedin account and/or include your portfolio website to make your profile even more appealing to potential employers.</p>
+            </div>
+        </div>
+    </div><! --/container -->
+</div><! --/service -->
+
+
+<div id="service">
+    <h2 class="seekerHead">Get Started in 3 Easy Steps.</h2>
+    <div class="container">
+        <div class="row centered">
+            
+
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                STEP #1: Register an EmployeeArray Profile
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <i class="fa fa-clock-o"></i>
-                    <h4>Save Time</h4>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                STEP #2: Add your Career/Work Experience
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <i class="fa fa-linkedin-square"></i>
-                    <h4>Connect Linkedin</h4>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                STEP #3: Add your Linkedin Account & Portfolio Webiste
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div><! --/container -->
-    </div><! --/service -->
 
-    <!-- *****************************************************************************************************************
-    TESTIMONIALS
-    ***************************************************************************************************************** -->
-    <div id="twrap">
-        <div class="container centered">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <i class="fa fa-comment-o"></i>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                    <h4><br />Marcel Newman</h4>
-                    <p>WEB DESIGNER - BLACKTIE.CO</p>
-                </div>
-            </div><! --/row -->
-        </div><! --/container -->
-    </div><! --/twrap -->
 
-    <!-- *****************************************************************************************************************
-    OUR CLIENTS
-    ***************************************************************************************************************** -->
-    <div id="cwrap">
-        <div class="container">
-            <div class="row centered">
-                <h3>COMPANIES USING EMPLOYEE ARRAY[ ]</h3>
-                <div class="col-lg-3 col-md-3 col-sm-3">
-                    <img src="~/Content/solid-theme/img/clients/client01.png" class="img-responsive">
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-3">
-                    <img src="~/Content/solid-theme/img/clients/client02.png" class="img-responsive">
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-3">
-                    <img src="~/Content/solid-theme/img/clients/client03.png" class="img-responsive">
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-3">
-                    <img src="~/Content/solid-theme/img/clients/client04.png" class="img-responsive">
-                </div>
-            </div><! --/row -->
-        </div><! --/container -->
-    </div><! --/cwrap -->
+        </div>
+    </div><! --/container -->
+</div><! --/service -->
+
+<!-- *****************************************************************************************************************
+TESTIMONIALS
+***************************************************************************************************************** -->
+<div id="twrap">
+    <div class="container centered">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <i class="fa fa-comment-o"></i>
+                <p>Ever since I was introduced to EmployeeArray it has quickly become the first place I go whenever I am tasked with recruiting a new IT professional. EmployeeArray allows me to get instant screened results, which saves me time and the business money.</p>
+                <h4><br />John Doe</h4>
+                <p>Human Resources Professional</p>
+            </div>
+        </div><! --/row -->
+    </div><! --/container -->
+</div><! --/twrap -->
+
+<!-- *****************************************************************************************************************
+OUR CLIENTS
+***************************************************************************************************************** -->
+<div id="cwrap">
+    <div class="container">
+        <div class="row centered">
+            <h3>COMPANIES USING EMPLOYEE ARRAY[ ]</h3>
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <img src="~/Content/solid-theme/img/clients/client01.png" class="img-responsive">
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <img src="~/Content/solid-theme/img/clients/client02.png" class="img-responsive">
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <img src="~/Content/solid-theme/img/clients/client03.png" class="img-responsive">
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <img src="~/Content/solid-theme/img/clients/client04.png" class="img-responsive">
+            </div>
+        </div><! --/row -->
+    </div><! --/container -->
+</div><! --/cwrap -->
