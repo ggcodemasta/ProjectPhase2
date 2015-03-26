@@ -43,7 +43,6 @@ namespace WebApplication1.Controllers
         }
 
 
-        //NOT WORKING YET - Mar25
         // GET: api/Profiles/jobtitle/string   
         public IEnumerable<CareerProfile> GetProfiles(string jobTitle, string city)
         {
@@ -64,13 +63,13 @@ namespace WebApplication1.Controllers
 
         //THIS WORKS
         // GET: api/Profiles/city
-        public IEnumerable<CareerProfile> GetProfilesCity(string city)
-        {
-            CareerProfileRepository cpr = new CareerProfileRepository();
-            IEnumerable<CareerProfile> profileList = cpr.QuickSearchProfiles("", city);
+        //public IEnumerable<CareerProfile> GetProfilesCity(string city)
+        //{
+        //    CareerProfileRepository cpr = new CareerProfileRepository();
+        //    IEnumerable<CareerProfile> profileList = cpr.QuickSearchProfiles("", city);
 
-            return profileList;
-        }
+        //    return profileList;
+        //}
 
 
 
@@ -129,48 +128,48 @@ namespace WebApplication1.Controllers
         //}
 
         // POST: api/Profiles
-        [ResponseType(typeof(Profile))]
-        public IHttpActionResult PostProfile(Profile profile)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //[ResponseType(typeof(Profile))]
+        //public IHttpActionResult PostProfile(Profile profile)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            db.Profiles.Add(profile);
-            db.SaveChanges();
+        //    db.Profiles.Add(profile);
+        //    db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = profile.profileID }, profile);
-        }
+        //    return CreatedAtRoute("DefaultApi", new { id = profile.profileID }, profile);
+        //}
 
-        // DELETE: api/Profiles/5
-        [ResponseType(typeof(Profile))]
-        public IHttpActionResult DeleteProfile(int id)
-        {
-            Profile profile = db.Profiles.Find(id);
-            if (profile == null)
-            {
-                return NotFound();
-            }
+        //// DELETE: api/Profiles/5
+        //[ResponseType(typeof(Profile))]
+        //public IHttpActionResult DeleteProfile(int id)
+        //{
+        //    Profile profile = db.Profiles.Find(id);
+        //    if (profile == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            db.Profiles.Remove(profile);
-            db.SaveChanges();
+        //    db.Profiles.Remove(profile);
+        //    db.SaveChanges();
 
-            return Ok(profile);
-        }
+        //    return Ok(profile);
+        //}
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
 
-        private bool ProfileExists(int id)
-        {
-            return db.Profiles.Count(e => e.profileID == id) > 0;
-        }
+        //private bool ProfileExists(int id)
+        //{
+        //    return db.Profiles.Count(e => e.profileID == id) > 0;
+        //}
     }
 }
