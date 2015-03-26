@@ -323,6 +323,8 @@ namespace WebApplication1.Controllers
             }
 
             var userStore = new UserStore<IdentityUser>();
+            string message = "";
+            string callbackUrl = "" ; 
 
             // var manager = new UserManager<IdentityUser>(userStore);
             // auth2
@@ -354,7 +356,7 @@ namespace WebApplication1.Controllers
                 CreateTokenProvider(manager, EMAIL_CONFIRMATION);
 
                 var code = manager.GenerateEmailConfirmationToken(identityUser.Id);
-                var callbackUrl = Url.Action("ConfirmEmail", "Home",
+                callbackUrl = Url.Action("ConfirmEmail", "Home",
                                                 new { userId = identityUser.Id, code = code },
                                                     protocol: Request.Url.Scheme);
 
@@ -365,7 +367,7 @@ namespace WebApplication1.Controllers
                 string response = mailer.EmailFromArvixe(
                                            new Message("EmployeeArray", "EmployeeArray", "noreply@ea.com",
                                                "You need to comfirm this email", email, jobSeekers.Email));
-                string message = "";
+               
                 if (response.IndexOf("Success", StringComparison.CurrentCultureIgnoreCase) > -1)
                 {
                     message = "We've emailed you. Please check it"; 
@@ -377,7 +379,7 @@ namespace WebApplication1.Controllers
 
                 // more...??
                 // return RedirectToAction("ShowMsg", new { msg = message});
-                return RedirectToAction("ShowMsg", new { msg = message, url = callbackUrl });
+                // return RedirectToAction("ShowMsg", new { msg = message, url = callbackUrl });
             }
 
             ProfileRepository profileRepository = new ProfileRepository();
@@ -387,7 +389,10 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("ShowMsg", new { msg = "[FAIL] HandleRegistration" });
             }
 
-            return RedirectToAction("Index", "Home");
+            // return RedirectToAction("Index", "Home");
+            // return RedirectToAction("ShowMsg", new { msg = message});
+            
+            return RedirectToAction("ShowMsg", new { msg = message, url = callbackUrl });
         }
 
         public ActionResult ConfirmEmail(string userID, string code)
