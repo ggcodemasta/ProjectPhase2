@@ -79,15 +79,15 @@ TESTIMONIALS
                 <form class="form-inline" action="~/home/DisplaySearchResults" method="post">
                     <div class="form-group">
                         <label for="jobTitle">Job Title</label>
-                        <input type="text" class="form-control" id="jobTitle" name="jobTitle" placeholder="Job Title">
-                        @*<select class="form-control" id="jobTitle">
-                    <option></option>
-                    <option>Programmer</option>
-                    <option>Project Manager</option>
-                    <option>Network Administrator</option>
-                    <option>Quality Control</option>
-                    <option>Supervisor</option>
-                </select>*@&nbsp;
+                       <select class="form-control" name="jobTitle">
+                            <option value="ALL">ALL</option>
+                            @{
+                                for (int i = 0; i < ViewBag.jobtitles.Count; i++)
+                                {
+                                    <option value="@ViewBag.jobtitles[i]">@ViewBag.jobtitles[i]</option>
+                                }
+                            }
+                        </select>&nbsp;
                     </div>
                     <div class="form-group">
                         <label for="city">City</label>
