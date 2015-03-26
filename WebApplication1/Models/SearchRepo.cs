@@ -33,7 +33,7 @@ namespace WebApplication1.Models
             var query = (from p in context.Profiles
                          let e = p.Education
                          where e.educationName == education
-                         select e.educationID).FirstOrDefault();
+                         select e.educationID).SingleOrDefault();
             return query;
         }
         public List<CareerProfile> AdvancedSearchQuery(string jobtitle, string industry, string country,
