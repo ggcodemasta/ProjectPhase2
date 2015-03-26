@@ -181,7 +181,7 @@ namespace WebApplication1.Controllers
             }
             else if (res == -3)
             {
-                message = "Sorry, but you didn't confirm your email address, or it was an invlid login.";
+                message = "Sorry, but you didn't confirm your email address, or it was an invalid login.";
             }
             else if (res == -4)
             {
@@ -207,59 +207,59 @@ namespace WebApplication1.Controllers
             {
                 IsPersistent = false
             }, identity);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("BasicInfo", "Home");
         }
 
-        [HttpGet]
-        public ActionResult Register()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //public ActionResult Register()
+        //{
+        //    return View();
+        //}
 
-        [HttpPost]
-        public ActionResult Register(Register register)
-        {
-            if (!ModelState.IsValid)
-            {
-                return RedirectToAction("ShowMsg", new { msg = "[ERR] invalid input" });
-            }
+        //[HttpPost]
+        //public ActionResult Register(Register register)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return RedirectToAction("ShowMsg", new { msg = "[ERR] invalid input" });
+        //    }
 
-            var userStore = new UserStore<IdentityUser>();
+        //    var userStore = new UserStore<IdentityUser>();
 
-            // var manager = new UserManager<IdentityUser>(userStore);
-            // auth2
-            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore)
-            {
-                UserLockoutEnabledByDefault = true,
-                DefaultAccountLockoutTimeSpan = new TimeSpan(0, 10, 0),
-                MaxFailedAccessAttemptsBeforeLockout = 3
-            };
+        //    // var manager = new UserManager<IdentityUser>(userStore);
+        //    // auth2
+        //    UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore)
+        //    {
+        //        UserLockoutEnabledByDefault = true,
+        //        DefaultAccountLockoutTimeSpan = new TimeSpan(0, 10, 0),
+        //        MaxFailedAccessAttemptsBeforeLockout = 3
+        //    };
 
-            var identityUser = new IdentityUser()
-            {
-                UserName = register.Email,
-                Email = register.Email
-            };
-            IdentityResult result = manager.Create(identityUser, register.Password);
+        //    var identityUser = new IdentityUser()
+        //    {
+        //        UserName = register.Email,
+        //        Email = register.Email
+        //    };
+        //    IdentityResult result = manager.Create(identityUser, register.Password);
 
-            if (result.Succeeded)
-            {
-                var authenticationManager
-                                  = HttpContext.Request.GetOwinContext().Authentication;
-                var userIdentity = manager.CreateIdentity(identityUser,
-                                           DefaultAuthenticationTypes.ApplicationCookie);
-                authenticationManager.SignIn(new AuthenticationProperties() { },
-                                             userIdentity);
-            }
+        //    if (result.Succeeded)
+        //    {
+        //        var authenticationManager
+        //                          = HttpContext.Request.GetOwinContext().Authentication;
+        //        var userIdentity = manager.CreateIdentity(identityUser,
+        //                                   DefaultAuthenticationTypes.ApplicationCookie);
+        //        authenticationManager.SignIn(new AuthenticationProperties() { },
+        //                                     userIdentity);
+        //    }
 
-            ProfileRepository profileRepository = new ProfileRepository();
-            if (profileRepository.HandleRegistration(register) < 0)
-            {
-                return RedirectToAction("ShowMsg", new { msg = "[FAIL] HandleRegistration" });
-            }
+        //    ProfileRepository profileRepository = new ProfileRepository();
+        //    if (profileRepository.HandleRegistration(register) < 0)
+        //    {
+        //        return RedirectToAction("ShowMsg", new { msg = "[FAIL] HandleRegistration" });
+        //    }
 
-            return RedirectToAction("Index", "Home");
-        }
+        //    return RedirectToAction("Index", "Home");
+        //}
 
         [HttpGet]
         public ActionResult ShowMsg(string msg, string url="")
@@ -281,6 +281,9 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult DisplaySearchResults(string jobTitle, string city)
         {
+            if (jobTitle == "ALL") {
+                jobTitle = "";
+            }
             CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
             ViewBag.PremiumUsers = careerProfileRepository.GetAllPremiumProfiles();
 
@@ -320,6 +323,8 @@ namespace WebApplication1.Controllers
             }
 
             var userStore = new UserStore<IdentityUser>();
+            string message = "";
+            string callbackUrl = "" ; 
 
             // var manager = new UserManager<IdentityUser>(userStore);
             // auth2
@@ -351,7 +356,7 @@ namespace WebApplication1.Controllers
                 CreateTokenProvider(manager, EMAIL_CONFIRMATION);
 
                 var code = manager.GenerateEmailConfirmationToken(identityUser.Id);
-                var callbackUrl = Url.Action("ConfirmEmail", "Home",
+                callbackUrl = Url.Action("ConfirmEmail", "Home",
                                                 new { userId = identityUser.Id, code = code },
                                                     protocol: Request.Url.Scheme);
 
@@ -362,7 +367,7 @@ namespace WebApplication1.Controllers
                 string response = mailer.EmailFromArvixe(
                                            new Message("EmployeeArray", "EmployeeArray", "noreply@ea.com",
                                                "You need to comfirm this email", email, jobSeekers.Email));
-                string message = "";
+               
                 if (response.IndexOf("Success", StringComparison.CurrentCultureIgnoreCase) > -1)
                 {
                     message = "We've emailed you. Please check it"; 
@@ -374,7 +379,7 @@ namespace WebApplication1.Controllers
 
                 // more...??
                 // return RedirectToAction("ShowMsg", new { msg = message});
-                return RedirectToAction("ShowMsg", new { msg = message, url = callbackUrl });
+                // return RedirectToAction("ShowMsg", new { msg = message, url = callbackUrl });
             }
 
             ProfileRepository profileRepository = new ProfileRepository();
@@ -384,7 +389,10 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("ShowMsg", new { msg = "[FAIL] HandleRegistration" });
             }
 
-            return RedirectToAction("Index", "Home");
+            // return RedirectToAction("Index", "Home");
+            // return RedirectToAction("ShowMsg", new { msg = message});
+            
+            return RedirectToAction("ShowMsg", new { msg = message, url = callbackUrl });
         }
 
         public ActionResult ConfirmEmail(string userID, string code)
@@ -554,7 +562,7 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("ShowMsg", new { msg = "[FAIL] HandleCareer" });
             }
 
-            return RedirectToAction("Career", "Home");
+            return RedirectToAction("BasicInfo", "Home");
         }
 
 
