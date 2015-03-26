@@ -168,7 +168,19 @@
             <li><a href="/UserLogin/MyPremium">MY PREMIUM SVC</a></li>
         </ul>
     </li>*@
-    <li><a href="~/Home/Logout">LOGOUT (@HttpContext.Current.User.Identity.Name)</a></li>
+    
+    <li class="dropdown">
+        <a href="/Home/Register" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+             @HttpContext.Current.User.Identity.Name<b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="~/Home/Logout">LOGOUT (@HttpContext.Current.User.Identity.Name)</a></li>
+            <li><a href="~/Home/ResetPassword">RESET PASSWORD</a></li>
+        </ul>
+    </li>
+
+    @*<li><a href="~/Home/Logout">LOGOUT (@HttpContext.Current.User.Identity.Name)</a></li>*@
     if (HttpContext.Current.User.IsInRole("Admin"))
     {
         <li class="dropdown">

@@ -23,6 +23,15 @@ BLUE WRAP
             @ViewBag.msg
         </div>
     }
+    
+    <!--s:temporary-->
+    @if (ViewBag.url != "")
+    {
+        <div class="alert alert-info" role="alert">
+            <a href="@(ViewBag.url)">@(ViewBag.url)</a>
+        </div>
+    }
+    <!--e:temporary-->
 </div>
 
 <div class="voffset7"></div>

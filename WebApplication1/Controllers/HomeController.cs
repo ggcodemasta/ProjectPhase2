@@ -18,7 +18,13 @@ namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
-       
+        // Auth2
+        const string EMAIL_CONFIRMATION = "EmailConfirmation";
+        const string PASSWORD_RESET = "ResetPassword";
+        void CreateTokenProvider(UserManager<IdentityUser> manager, string tokenType)
+        {
+            manager.UserTokenProvider = new EmailTokenProvider<IdentityUser>();
+        }
 
         public ActionResult Index()
         {
@@ -92,6 +98,51 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        // auth2
+        int ValidLogin(Login login)
+        {
+            UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
+            UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(userStore)
+            {
+                UserLockoutEnabledByDefault = true,
+                DefaultAccountLockoutTimeSpan = new TimeSpan(0, 10, 0),
+                MaxFailedAccessAttemptsBeforeLockout = 3
+            };
+            var user = userManager.FindByName(login.Email);
+
+            if (user == null)
+                return -1;
+
+            // User is locked out.
+            if (userManager.SupportsUserLockout && userManager.IsLockedOut(user.Id))
+                return -2;
+
+            // Validated user was locked out but now can be reset.
+            // if (userManager.CheckPassword(user, login.Password))
+            if (userManager.CheckPassword(user, login.Password)
+                            && userManager.IsEmailConfirmed(user.Id))
+            {
+                if (userManager.SupportsUserLockout
+                 && userManager.GetAccessFailedCount(user.Id) > 0)
+                {
+                    userManager.ResetAccessFailedCount(user.Id);
+                }
+            }
+            // Login is invalid so increment failed attempts.
+            else
+            {
+                bool lockoutEnabled = userManager.GetLockoutEnabled(user.Id);
+                if (userManager.SupportsUserLockout && userManager.GetLockoutEnabled(user.Id))
+                {
+                    userManager.AccessFailed(user.Id);
+                    return -3;
+                }
+                return -4; 
+            }
+            return 0;
+        }
+
+
 
         [HttpGet]
         public ActionResult Login()
@@ -112,9 +163,30 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("ShowMsg", new { msg = "[ERR] invalid input" });
             }
 
-            if (identityUser == null)
+            // if (identityUser == null)
+            // auth2
+            int res = ValidLogin(login);
+            string message = ""; 
+            if ( res == -1 )
             {
-                return RedirectToAction("ShowMsg", new { msg = "Sorry, try it again" });
+                message = "Sorry, but we don't have your data. Please, register first."; 
+            }
+            else if (res == -2)
+            {
+                message = "Sorry, but you are locked for 10 minutes due to previous 3 failed logins";
+            }
+            else if (res == -3)
+            {
+                message = "Sorry, but you havn't confirmed it by email or it was a invlid login.";
+            }
+            else if (res == -4)
+            {
+                message = "Sorry, but it was a invalid login. ";
+            }
+
+            if ( res < 0 ) 
+            {
+                return RedirectToAction("ShowMsg", new { msg = message });
             }
 
             IAuthenticationManager authenticationManager
@@ -149,7 +221,16 @@ namespace WebApplication1.Controllers
             }
 
             var userStore = new UserStore<IdentityUser>();
-            var manager = new UserManager<IdentityUser>(userStore);
+
+            // var manager = new UserManager<IdentityUser>(userStore);
+            // auth2
+            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore)
+            {
+                UserLockoutEnabledByDefault = true,
+                DefaultAccountLockoutTimeSpan = new TimeSpan(0, 10, 0),
+                MaxFailedAccessAttemptsBeforeLockout = 3
+            };
+
             var identityUser = new IdentityUser()
             {
                 UserName = register.Email,
@@ -177,9 +258,10 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet]
-        public ActionResult ShowMsg(string msg)
+        public ActionResult ShowMsg(string msg, string url="")
         {
             ViewBag.msg = msg;
+            ViewBag.url = url; 
             return View();
         }
 
@@ -234,7 +316,16 @@ namespace WebApplication1.Controllers
             }
 
             var userStore = new UserStore<IdentityUser>();
-            var manager = new UserManager<IdentityUser>(userStore);
+
+            // var manager = new UserManager<IdentityUser>(userStore);
+            // auth2
+            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore)
+            {
+                UserLockoutEnabledByDefault = true,
+                DefaultAccountLockoutTimeSpan = new TimeSpan(0, 10, 0),
+                MaxFailedAccessAttemptsBeforeLockout = 3
+            };
+
             var identityUser = new IdentityUser()
             {
                 UserName = jobSeekers.Email,
@@ -244,12 +335,28 @@ namespace WebApplication1.Controllers
 
             if (result.Succeeded)
             {
+                /*
                 var authenticationManager
                                   = HttpContext.Request.GetOwinContext().Authentication;
                 var userIdentity = manager.CreateIdentity(identityUser,
                                            DefaultAuthenticationTypes.ApplicationCookie);
                 authenticationManager.SignIn(new AuthenticationProperties() { },
                                              userIdentity);
+                 */
+                // auth2
+                CreateTokenProvider(manager, EMAIL_CONFIRMATION);
+
+                var code = manager.GenerateEmailConfirmationToken(identityUser.Id);
+                var callbackUrl = Url.Action("ConfirmEmail", "Home",
+                                                new { userId = identityUser.Id, code = code },
+                                                    protocol: Request.Url.Scheme);
+
+                string email = "Please confirm your account by clicking this link: <a href=\""
+                                + callbackUrl + "\">Confirm Registration</a>";
+                // more... ?? s:temporary-----------
+                return RedirectToAction("ShowMsg", new { msg = "test email link", url = callbackUrl });
+                //-- e:temporary --------------------
+
             }
 
             ProfileRepository profileRepository = new ProfileRepository();
@@ -260,6 +367,27 @@ namespace WebApplication1.Controllers
             }
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult ConfirmEmail(string userID, string code)
+        {
+            var userStore = new UserStore<IdentityUser>();
+            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
+            var user = manager.FindById(userID);
+            CreateTokenProvider(manager, EMAIL_CONFIRMATION);
+            string message = ""; 
+            try
+            {
+                IdentityResult result = manager.ConfirmEmail(userID, code);
+                if (result.Succeeded)
+                    message = "You are now registered!";
+            }
+            catch
+            {
+                message = "Validation attempt failed!";
+            }
+
+            return RedirectToAction("ShowMsg", new { msg = message });
         }
 
 
@@ -408,7 +536,80 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Career", "Home");
         }
 
-      
+
+        [HttpGet]
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPassword(string email)
+        {
+            if (String.IsNullOrWhiteSpace(email))
+            {
+                return RedirectToAction("ShowMsg", new { msg = "[ERR] invalid input" });
+            }
+
+            var userStore = new UserStore<IdentityUser>();
+            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
+            var user = manager.FindByEmail(email);
+            if (user == null)
+            {
+                return RedirectToAction("ShowMsg", new { msg = "Sorry, but we don't have your email." });
+            }
+            CreateTokenProvider(manager, PASSWORD_RESET);
+
+            var code = manager.GeneratePasswordResetToken(user.Id);
+            var callbackUrl = Url.Action("ResetPassword", "Home",
+                                         new { userId = user.Id, code = code },
+                                         protocol: Request.Url.Scheme);
+            ViewBag.FakeEmailMessage = "Please reset your password by clicking <a href=\""
+                                     + callbackUrl + "\"> " + callbackUrl + " </a>";
+            // more... ??? email .... 
+            return RedirectToAction("ShowMsg", new { msg = "We've sent an email. Please check it.",
+                                                        url = callbackUrl });
+
+        }
+
+        [HttpGet]
+        public ActionResult ResetPassword(string userID="", string code="")
+        {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                var userStore = new UserStore<IdentityUser>();
+                UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
+                var user = manager.FindByEmail(HttpContext.User.Identity.Name);
+                CreateTokenProvider(manager, PASSWORD_RESET);
+                userID = user.Id; 
+                code = manager.GeneratePasswordResetToken(user.Id);
+            }
+
+            ViewBag.PasswordToken = code;
+            ViewBag.UserID = userID;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ResetPassword(string password, string passwordConfirm,
+                                          string passwordToken, string userID)
+        {
+
+            var userStore = new UserStore<IdentityUser>();
+            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
+            var user = manager.FindById(userID);
+            CreateTokenProvider(manager, PASSWORD_RESET);
+
+            IdentityResult result = manager.ResetPassword(userID, passwordToken, password);
+
+            string message = ""; 
+            if (result.Succeeded)
+                message = "The password has been reset.";
+            else
+                message = "The password has not been reset.";
+
+            return RedirectToAction("ShowMsg", new { msg = message });
+        }
 
 	}
 }
