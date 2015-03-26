@@ -594,9 +594,25 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-      
+        [HttpPost]
+        public ActionResult ResetPassword(string password, string passwordConfirm,
+                                          string passwordToken, string userID)
+        {
+
+            var userStore = new UserStore<IdentityUser>();
+            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
+            var user = manager.FindById(userID);
+            CreateTokenProvider(manager, PASSWORD_RESET);
+
+            IdentityResult result = manager.ResetPassword(userID, passwordToken, password);
+
+            string message = "";
+            if (result.Succeeded)
+                message = "The password has been reset.";
+            else
+                message = "The password has not been reset.";
+
             return RedirectToAction("ShowMsg", new { msg = message });
         }
-
 	}
 }
