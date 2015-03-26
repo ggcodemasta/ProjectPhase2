@@ -13,6 +13,20 @@ namespace WebApplication1
 
             config.MapHttpAttributeRoutes();
 
+            //find jobtitle & city
+            config.Routes.MapHttpRoute(
+                name: "TwoValueApi",
+                routeTemplate: "api/{controller}/{jobTitle}/{city}",
+                defaults: new { jobTitle = RouteParameter.Optional, city = RouteParameter.Optional }
+            );
+
+            //find city
+            config.Routes.MapHttpRoute(
+                name: "OneValueApi",
+                routeTemplate: "api/{controller}/{city}",
+                defaults: new { city = RouteParameter.Optional }
+            );
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

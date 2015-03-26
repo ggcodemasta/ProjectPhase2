@@ -307,6 +307,11 @@ namespace WebApplication1.Models
             return bac;
         }
 
+        //public IEnumerable<CareerProfile> APIGetByCity(string city)
+        //{
+
+        //}
+
 
 
     }
