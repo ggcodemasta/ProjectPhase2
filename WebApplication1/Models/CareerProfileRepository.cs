@@ -96,34 +96,35 @@ namespace WebApplication1.Models
             var query = (from p in context.Profiles
                          from svc in p.SvcProfiles
                          where p.profileID == svc.profileID
-                         select new
-                         {
-                             ProfileID = p.profileID,
-                             FirstName = p.firstName,
-                             LastName = p.lastName,
-                             Linkedin = p.linkedinURL,
-                             Portfolio = p.portfolioURL,
-                             Picture = p.pictureURL,
-                             City = p.city,
-                             Province = p.province,
-                             Country = p.country,
-                             HighestEduction = srepo.GetEducation(p.profileID),
-                             Relocation = p.relocationYN
-                         });
+                         select p).ToList();
+                         //select new
+                         //{
+                         //    ProfileID = p.profileID,
+                         //    FirstName = p.firstName,
+                         //    LastName = p.lastName,
+                         //    Linkedin = p.linkedinURL,
+                         //    Portfolio = p.portfolioURL,
+                         //    Picture = p.pictureURL,
+                         //    City = p.city,
+                         //    Province = p.province,
+                         //    Country = p.country,
+                         //    HighestEduction = srepo.GetEducation(p.profileID),
+                         //    Relocation = p.relocationYN
+                         //});
             List<CareerProfile> bac = new List<CareerProfile>();
             foreach (var item in query)
             {
-                if (item.Picture == null || item.Picture.IndexOf(".jpg", 0, StringComparison.CurrentCultureIgnoreCase) == -1 && item.Picture.IndexOf(".png", 0, StringComparison.CurrentCultureIgnoreCase) == -1)
+                if (item.pictureURL == null || item.pictureURL.IndexOf(".jpg", 0, StringComparison.CurrentCultureIgnoreCase) == -1 && item.pictureURL.IndexOf(".png", 0, StringComparison.CurrentCultureIgnoreCase) == -1)
                 {
-                    bac.Add(new CareerProfile(item.ProfileID, item.FirstName, item.LastName, item.Linkedin,
-                    item.Portfolio, "/Content/images/person-placeholder2.jpg", item.City, item.Province, item.Country,
-                    item.HighestEduction, item.Relocation));
+                    bac.Add(new CareerProfile(item.profileID, item.firstName, item.lastName, item.linkedinURL,
+                    item.portfolioURL, "/Content/images/person-placeholder2.jpg", item.city, item.province, item.country,
+                    srepo.GetEducation(item.profileID), item.relocationYN));
                 }
                 else
                 {
-                    bac.Add(new CareerProfile(item.ProfileID, item.FirstName, item.LastName, item.Linkedin,
-                    item.Portfolio, item.Picture, item.City, item.Province, item.Country,
-                    item.HighestEduction, item.Relocation));
+                    bac.Add(new CareerProfile(item.profileID, item.firstName, item.lastName, item.linkedinURL,
+                    item.portfolioURL, item.pictureURL, item.city, item.province, item.country,
+                    srepo.GetEducation(item.profileID), item.relocationYN));
                 }
 
 

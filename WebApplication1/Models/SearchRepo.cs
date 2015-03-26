@@ -20,7 +20,15 @@ namespace WebApplication1.Models
     public class SearchRepo
     {
         EmployeesEntities context = new EmployeesEntities();
-        public String GetEducation(int? profileID) 
+        public String GetEducation(int? profile) 
+        {
+            var query = (from p in context.Profiles
+                         from e in context.Educations
+                         where p.educationID == e.educationID
+                         select e.educationName).FirstOrDefault();
+            return query;
+        }
+        public String GetEducation(int profile)
         {
             var query = (from p in context.Profiles
                          from e in context.Educations
