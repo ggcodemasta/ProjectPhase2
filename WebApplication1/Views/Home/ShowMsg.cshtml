@@ -18,9 +18,14 @@ BLUE WRAP
 <div class="container voffset5">
     @if (ViewBag.msg != null)
     {
-        <div class="alert alert-info" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            @ViewBag.msg
+        <div class="alert alert-warning" role="alert">
+            <br />
+            <br />
+                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>&nbsp;&nbsp;
+                @ViewBag.msg
+            <br />
+            <br />
+            <br />
         </div>
     }
     
@@ -28,6 +33,7 @@ BLUE WRAP
     @if (ViewBag.url != "")
     {
         <div class="alert alert-info" role="alert">
+            [TEST]<br />
             <a href="@(ViewBag.url)">@(ViewBag.url)</a>
         </div>
     }

@@ -354,10 +354,24 @@ namespace WebApplication1.Controllers
 
                 string email = "Please confirm your account by clicking this link: <a href=\""
                                 + callbackUrl + "\">Confirm Registration</a>";
-                // more... ?? s:temporary-----------
-                return RedirectToAction("ShowMsg", new { msg = "test email link", url = callbackUrl });
-                //-- e:temporary --------------------
 
+                MailHelper mailer = new MailHelper();
+                string response = mailer.EmailFromArvixe(
+                                           new Message("EmployeeArray", "EmployeeArray", "noreply@ea.com",
+                                               "You need to comfirm this email", email, jobSeekers.Email));
+                string message = "";
+                if (response.IndexOf("Success", StringComparison.CurrentCultureIgnoreCase) > -1)
+                {
+                    message = "We've emailed you. Please check it"; 
+                }
+                else
+                {
+                    message = "Sorry, we couldn't email you. Please retry it.";
+                }
+
+                // more...??
+                // return RedirectToAction("ShowMsg", new { msg = message});
+                return RedirectToAction("ShowMsg", new { msg = message, url = callbackUrl });
             }
 
             ProfileRepository profileRepository = new ProfileRepository();
@@ -568,12 +582,26 @@ namespace WebApplication1.Controllers
             var callbackUrl = Url.Action("ResetPassword", "Home",
                                          new { userId = user.Id, code = code },
                                          protocol: Request.Url.Scheme);
-            ViewBag.FakeEmailMessage = "Please reset your password by clicking <a href=\""
-                                     + callbackUrl + "\"> " + callbackUrl + " </a>";
-            // more... ??? email .... 
-            return RedirectToAction("ShowMsg", new { msg = "We've sent an email. Please check it.",
-                                                        url = callbackUrl });
+            string emailContent = "Please reset your password by clicking <a href=\""
+                                     + callbackUrl + "\"> Reset Password </a>";
 
+            MailHelper mailer = new MailHelper();
+            string response = mailer.EmailFromArvixe(
+                                        new Message("EmployeeArray", "EmployeeArray", "noreply@ea.com",
+                                            "You can reset your password.", emailContent, email));
+            string message = "";
+            if (response.IndexOf("Success", StringComparison.CurrentCultureIgnoreCase) > -1)
+            {
+                message = "We've emailed you. Please check it"; 
+            }
+            else
+            {
+                message = "Sorry, we couldn't email you. Please retry it.";
+            }
+
+            // more... ??
+            // return RedirectToAction("ShowMsg");
+            return RedirectToAction("ShowMsg", new { msg = message, url = callbackUrl });
         }
 
         [HttpGet]
@@ -589,6 +617,9 @@ namespace WebApplication1.Controllers
                 code = manager.GeneratePasswordResetToken(user.Id);
             }
 
+            AspNetUsersRepository aspNetUsersRepository = new AspNetUsersRepository();
+            AspNetUser aspNetUser = aspNetUsersRepository.GetAspNetUserById(userID);
+            ViewBag.Email = aspNetUser.Email; 
             ViewBag.PasswordToken = code;
             ViewBag.UserID = userID;
             return View();
@@ -598,7 +629,19 @@ namespace WebApplication1.Controllers
         public ActionResult ResetPassword(string password, string passwordConfirm,
                                           string passwordToken, string userID)
         {
+            if (String.IsNullOrWhiteSpace(password) || String.IsNullOrWhiteSpace(passwordConfirm) ||
+                String.IsNullOrWhiteSpace(passwordToken) || String.IsNullOrWhiteSpace(userID) )
+            {
+                return RedirectToAction("ShowMsg", new { msg = "[ERR] invalid input" });
+            }
 
+            CaptchaHelper captchaHelper = new CaptchaHelper();
+            // string captchaResponse = captchaHelper.CheckRecaptcha();
+            if ( captchaHelper.CheckRecaptcha() < 0 )
+            {
+                return RedirectToAction("ShowMsg", new { msg = "Sorry, but please click reCAPTCHA." });
+            }
+            
             var userStore = new UserStore<IdentityUser>();
             UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
             var user = manager.FindById(userID);
