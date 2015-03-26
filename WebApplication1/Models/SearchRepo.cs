@@ -88,15 +88,17 @@ namespace WebApplication1.Models
                         yearmax = 200;
                         break;
                 }
+                int edu = SaveEducation(education);
 
                 var filterbasic = (from c in context.Careers
                                    let p = c.Profile
                                    where c.years >= yearmin
                                    where c.years <= yearmax
+                                   where p.educationID == edu
                                    select p).Distinct();
 
                 IQueryable<Profile> filterjobtitles;
-                if (jobtitle != "all")
+                if (jobtitle != "ALL")
                 {
                     filterjobtitles = (from p in filterbasic
                                        from c in p.Careers
@@ -109,7 +111,7 @@ namespace WebApplication1.Models
                 }
 
                 IQueryable<Profile> filterindustry;
-                if (industry != "all")
+                if (industry != "ALL")
                 {
                     filterindustry = (from p in filterjobtitles
                                       from c in p.Careers
@@ -148,7 +150,7 @@ namespace WebApplication1.Models
                     profilelist.AddRange(filterlocation1);
                 }
 
-                if (platforms[0] != "all")
+                if (platforms[0] != "ALL")
                 {
 
                     List<int> ptfilterlist = new List<int>();
@@ -173,7 +175,7 @@ namespace WebApplication1.Models
                     removenonmatchesindustry.AddRange(platformfilter);
                 }
             
-                if (languages[0] != "all")
+                if (languages[0] != "ALL")
                 {
                     List<Profile> int2profile = new List<Profile>();
                     foreach (int profileid in removenonmatchesindustry)

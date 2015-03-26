@@ -210,56 +210,56 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet]
-        public ActionResult Register()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //public ActionResult Register()
+        //{
+        //    return View();
+        //}
 
-        [HttpPost]
-        public ActionResult Register(Register register)
-        {
-            if (!ModelState.IsValid)
-            {
-                return RedirectToAction("ShowMsg", new { msg = "[ERR] invalid input" });
-            }
+        //[HttpPost]
+        //public ActionResult Register(Register register)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return RedirectToAction("ShowMsg", new { msg = "[ERR] invalid input" });
+        //    }
 
-            var userStore = new UserStore<IdentityUser>();
+        //    var userStore = new UserStore<IdentityUser>();
 
-            // var manager = new UserManager<IdentityUser>(userStore);
-            // auth2
-            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore)
-            {
-                UserLockoutEnabledByDefault = true,
-                DefaultAccountLockoutTimeSpan = new TimeSpan(0, 10, 0),
-                MaxFailedAccessAttemptsBeforeLockout = 3
-            };
+        //    // var manager = new UserManager<IdentityUser>(userStore);
+        //    // auth2
+        //    UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore)
+        //    {
+        //        UserLockoutEnabledByDefault = true,
+        //        DefaultAccountLockoutTimeSpan = new TimeSpan(0, 10, 0),
+        //        MaxFailedAccessAttemptsBeforeLockout = 3
+        //    };
 
-            var identityUser = new IdentityUser()
-            {
-                UserName = register.Email,
-                Email = register.Email
-            };
-            IdentityResult result = manager.Create(identityUser, register.Password);
+        //    var identityUser = new IdentityUser()
+        //    {
+        //        UserName = register.Email,
+        //        Email = register.Email
+        //    };
+        //    IdentityResult result = manager.Create(identityUser, register.Password);
 
-            if (result.Succeeded)
-            {
-                var authenticationManager
-                                  = HttpContext.Request.GetOwinContext().Authentication;
-                var userIdentity = manager.CreateIdentity(identityUser,
-                                           DefaultAuthenticationTypes.ApplicationCookie);
-                authenticationManager.SignIn(new AuthenticationProperties() { },
-                                             userIdentity);
-            }
+        //    if (result.Succeeded)
+        //    {
+        //        var authenticationManager
+        //                          = HttpContext.Request.GetOwinContext().Authentication;
+        //        var userIdentity = manager.CreateIdentity(identityUser,
+        //                                   DefaultAuthenticationTypes.ApplicationCookie);
+        //        authenticationManager.SignIn(new AuthenticationProperties() { },
+        //                                     userIdentity);
+        //    }
 
-            ProfileRepository profileRepository = new ProfileRepository();
-            if (profileRepository.HandleRegistration(register) < 0)
-            {
-                return RedirectToAction("ShowMsg", new { msg = "[FAIL] HandleRegistration" });
-            }
+        //    ProfileRepository profileRepository = new ProfileRepository();
+        //    if (profileRepository.HandleRegistration(register) < 0)
+        //    {
+        //        return RedirectToAction("ShowMsg", new { msg = "[FAIL] HandleRegistration" });
+        //    }
 
-            return RedirectToAction("Index", "Home");
-        }
+        //    return RedirectToAction("Index", "Home");
+        //}
 
         [HttpGet]
         public ActionResult ShowMsg(string msg, string url="")
@@ -281,6 +281,9 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult DisplaySearchResults(string jobTitle, string city)
         {
+            if (jobTitle == "ALL") {
+                jobTitle = "";
+            }
             CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
             ViewBag.PremiumUsers = careerProfileRepository.GetAllPremiumProfiles();
 

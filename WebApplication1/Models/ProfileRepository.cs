@@ -9,6 +9,7 @@ namespace WebApplication1.Models
     public class ProfileRepository
     {
         SearchRepo srepo = new SearchRepo();
+        EmployeesEntities db = new EmployeesEntities();
         public int GetProfileID(Login login)
         {
 
@@ -22,7 +23,7 @@ namespace WebApplication1.Models
         public string GetProfileEmail(int profileID)
         {
 
-            EmployeesEntities db = new EmployeesEntities();
+
             string profileEmail = (from p in db.Profiles
                              where p.profileID == profileID
                              select p.email).SingleOrDefault();
@@ -99,7 +100,10 @@ namespace WebApplication1.Models
         {
 
             EmployeesEntities db = new EmployeesEntities();
-            return db.Profiles.Where(r => r.email == email).SingleOrDefault();
+            var query = (from p in db.Profiles
+                             where p.email == email
+                             select p).FirstOrDefault();
+            return query;
         }
 
         public int SaveProfile(Profile basicInfo, string email, int education)
