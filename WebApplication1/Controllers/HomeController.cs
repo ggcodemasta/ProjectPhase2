@@ -38,6 +38,9 @@ namespace WebApplication1.Controllers
         }
         public ActionResult Employers()
         {
+            DropdownPopulateRepo ddrepo = new DropdownPopulateRepo();
+            ViewBag.jobtitles =   ddrepo.GetJobtitles();
+          
             return View();
         }
         //[HttpPost]
@@ -515,7 +518,7 @@ namespace WebApplication1.Controllers
             string email = HttpContext.User.Identity.Name; // userid
             Profile currentProfile = profileRepository.GetProfile(email);
             ViewBag.educations = repo.GetEducationList();
-            ViewBag.defaultvalue = srepo.GetEducation(currentProfile.educationID);
+            ViewBag.defaultvalue = currentProfile.educationID;
 
             return View(currentProfile);
         }
@@ -529,8 +532,8 @@ namespace WebApplication1.Controllers
             ProfileRepository profileRepository = new ProfileRepository();
             SearchRepo srepo = new SearchRepo();
             string email = HttpContext.User.Identity.Name; // userid
-            int education = srepo.SaveEducation(Request.Form["education"]);
 
+            int education = srepo.SaveEducation(Request.Form["education"]);
 
             if (profileRepository.SaveProfile(profile, email, education) < 0)
             {

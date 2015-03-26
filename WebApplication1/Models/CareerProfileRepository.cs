@@ -140,49 +140,80 @@ namespace WebApplication1.Models
         public IEnumerable<CareerProfile> QuickSearchProfiles(string jobTitle, string city)
         {
             List<CareerProfile> bac = new List<CareerProfile>();
+            EmployeesEntities context = new EmployeesEntities();
 
             IEnumerable<CareerProfile> allProfiles = GetAllProfiles();
+            string dbcity = city.Trim().ToLower();
 
-            if (jobTitle == "" && city == "")
+            if (jobTitle == "ALL" && city == "")
             {
                 foreach (CareerProfile cp in allProfiles)
                 {
                     return (allProfiles);
                 }
-
             }
-            else if (jobTitle == "" && city != "")
-            {
-                foreach (CareerProfile cp in allProfiles)
-                {
-                    if (cp.City.Trim().ToLower() == city.Trim().ToLower())
-                    {
-                        bac.Add(cp);
-                    }
-                }
 
-            }
-            else if (city == "" && jobTitle != "")
+            if (jobTitle != "ALL")
             {
-                foreach (CareerProfile cp in allProfiles)
-                {
-                    if (cp.JobTitle.IndexOf(jobTitle, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
-                    {
-                        bac.Add(cp);
-                    }
-                }
+                var quicksearchresult = (from c in context.Careers
+                                         let p = c.Profile
+                                         let e = p.Education
+                                         where c.jobTitle == jobTitle
+                                         where p.city == dbcity
+                                         select new CareerProfile
+                                         {
+                                             ProfileID = p.profileID,
+                                             FirstName = p.firstName,
+                                             LastName = p.lastName,
+                                             LinkedinURL = p.linkedinURL,
+                                             PortfolioURL = p.portfolioURL,
+                                             PictureURL = p.pictureURL,
+                                             City = p.city,
+                                             Province = p.province,
+                                             Country = p.country,
+                                             HighestEducation = e.educationName,
+                                             Relocation = p.relocationYN
+                                         });
 
-            }
-            else
-            {
-                foreach (CareerProfile cp in allProfiles)
+                foreach (CareerProfile cp in quicksearchresult)
                 {
-                    if (cp.City.Trim().ToLower() == city.Trim().ToLower() && cp.JobTitle.IndexOf(jobTitle, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
-                    {
-                        bac.Add(cp);
-                    }
+                    bac.Add(cp);
                 }
             }
+
+
+            //else if (jobTitle == "" && city != "")
+            //{
+            //    foreach (CareerProfile cp in allProfiles)
+            //    {
+            //        if (cp.City.Trim().ToLower() == city.Trim().ToLower())
+            //        {
+            //            bac.Add(cp);
+            //        }
+            //    }
+
+            //}
+            //else if (city == "" && jobTitle != "")
+            //{
+            //    foreach (CareerProfile cp in allProfiles)
+            //    {
+            //        if (cp.JobTitle.IndexOf(jobTitle, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
+            //        {
+            //            bac.Add(cp);
+            //        }
+            //    }
+
+            //}
+            //else
+            //{
+            //    foreach (CareerProfile cp in allProfiles)
+            //    {
+            //        if (cp.City.Trim().ToLower() == city.Trim().ToLower() && cp.JobTitle.IndexOf(jobTitle, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
+            //        {
+            //            bac.Add(cp);
+            //        }
+            //    }
+            //}
 
             return bac;
         }

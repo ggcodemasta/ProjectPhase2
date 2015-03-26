@@ -38,11 +38,15 @@ namespace WebApplication1.Models
         }
         public int SaveEducation(String education)
         {
-            var query = (from p in context.Profiles
-                         let e = p.Education
-                         where e.educationName == education
-                         select e.educationID).FirstOrDefault();
-            return query;
+            int id = 0;
+                         List<Education> allRows = context.Educations.ToList();
+                         foreach (var row in allRows) {
+                             if (education == row.educationName) {
+                                 id = row.educationID;
+                             }
+                         }
+
+            return id;
         }
         public List<CareerProfile> AdvancedSearchQuery(string jobtitle, string industry, string country,
             string province, string city, string relocate, string education, string experience, List<string> platforms, List<string> languages)
