@@ -181,7 +181,7 @@ namespace WebApplication1.Controllers
             }
             else if (res == -3)
             {
-                message = "Sorry, but you didn't confirm your email address, or it was an invlid login.";
+                message = "Sorry, but you didn't confirm your email address, or it was an invalid login.";
             }
             else if (res == -4)
             {
@@ -207,7 +207,7 @@ namespace WebApplication1.Controllers
             {
                 IsPersistent = false
             }, identity);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("BasicInfo", "Home");
         }
 
         //[HttpGet]
@@ -562,7 +562,7 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("ShowMsg", new { msg = "[FAIL] HandleCareer" });
             }
 
-            return RedirectToAction("Career", "Home");
+            return RedirectToAction("BasicInfo", "Home");
         }
 
 
