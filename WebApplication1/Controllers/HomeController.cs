@@ -174,15 +174,15 @@ namespace WebApplication1.Controllers
             }
             else if (res == -2)
             {
-                message = "Sorry, but you are locked for 10 minutes due to previous 3 failed logins";
+                message = "Sorry, but you are locked around 10 minutes due to previous 3 failed logins";
             }
             else if (res == -3)
             {
-                message = "Sorry, but you havn't confirmed it by email or it was a invlid login.";
+                message = "Sorry, but you didn't confirm your email address, or it was an invlid login.";
             }
             else if (res == -4)
             {
-                message = "Sorry, but it was a invalid login. ";
+                message = "Sorry, but it was an invalid login. ";
             }
 
             if ( res < 0 ) 
