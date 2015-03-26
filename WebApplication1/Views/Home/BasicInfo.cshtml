@@ -92,10 +92,10 @@ BLUE WRAP
                     <div class="col-md-3">
                         <select class="form-control" name="education">
                             @{
-                                    for (int i = 0; i < ViewBag.educations.Count; i++)
-                                    {
-                                        <option value="@ViewBag.educations[i]">@ViewBag.educations[i]</option>
-                                    }
+        for (int i = 0; i < ViewBag.educations.Count; i++)
+        {
+            <option value="@ViewBag.educations[i]" @if (ViewBag.defaultvalue == i) { @Html.Raw("selected='selected'") ; }>@ViewBag.educations[i]</option>
+        }
                             }
                         </select>
                     </div>
