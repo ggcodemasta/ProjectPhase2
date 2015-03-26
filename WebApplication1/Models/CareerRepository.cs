@@ -40,7 +40,7 @@ namespace WebApplication1.Models
         {
             Career career = new Career();
 
-            career.careerID = careers.CareerID;
+          //  career.careerID = careers.CareerID;
 
             career.profileID = careers.ProfileID;
 
