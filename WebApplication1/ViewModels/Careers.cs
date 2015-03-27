@@ -8,6 +8,7 @@ namespace WebApplication1.ViewModels
     public class Careers
     {
 
+
         public int CareerID { get; set; }
         public int ProfileID { get; set; }
         public string Industry { get; set; }
