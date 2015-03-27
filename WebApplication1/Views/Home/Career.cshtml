@@ -5,6 +5,12 @@
     Layout = "~/Views/Shared/LayoutMain.cshtml";
 }
 
+<style>
+    .verticalSpace {
+        margin-bottom: 70px;
+    }
+</style>
+
 <!-- *****************************************************************************************************************
 BLUE WRAP
 ***************************************************************************************************************** -->
@@ -20,7 +26,7 @@ BLUE WRAP
 
 @Html.Partial("~/Views/Shared/Partials/ProfileLinks.cshtml")
 
-<!DOCTYPE html>
+@*<!DOCTYPE html>
 
 <html>
 <head>
@@ -29,7 +35,7 @@ BLUE WRAP
 <body>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
 
     <div class="container verticalSpace">
         @using (Html.BeginForm())
@@ -39,9 +45,9 @@ BLUE WRAP
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Industry, new { @class = "control-label col-md-2" })
-
-                    @Html.DropDownListFor(model => model.Industry, new SelectList(
-                  new List<Object>{
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Industry, new SelectList(
+                        new List<Object>{
                        new { value = "Banking" , text = "Banking"  },
                        new { value =  "Computer Hardware" , text = "Computer Hardware" },
                        new { value = "Educational services" , text = "Educational services"},
@@ -53,24 +59,24 @@ BLUE WRAP
                        new { value = "Telecommunications" , text = "Telecommunications"},
                        new { value = "Transportation" , text = "Transportation" },
                        new { value = "Video Game" , text = "Video Game"}
-                    },
-                  "value",
-                  "text",
-                   0))                 
+                         },
+                        "value",
+                        "text",
+                        0), new { @class = "form-control" })
+                    </div>
 
+                        @*   @Html.DropDownListFor(model => model.Industry, new SelectList(
+            new List<Object>{
+                 new { value = 0 , text = "Red"  },
+                 new { value = 1 , text = "Blue" },
+                 new { value = 2 , text = "Green"}
+              },
+            "value",
+            "text",
+             0))*@
 
-                     @*   @Html.DropDownListFor(model => model.Industry, new SelectList(
-    new List<Object>{
-         new { value = 0 , text = "Red"  },
-         new { value = 1 , text = "Blue" },
-         new { value = 2 , text = "Green"}
-      },
-    "value",
-    "text",
-     0))*@ 
-
-                  @*      @Html.EditorFor(model => model.Industry, new { htmlAttributes = new { @class = "form-control" } })
-    @Html.ValidationMessageFor(model => model.Industry)*@ 
+                        @*      @Html.EditorFor(model => model.Industry, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Industry)*@
                     </div>
                 @*</div>*@
 
@@ -84,8 +90,8 @@ BLUE WRAP
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.JobTitle, new { @class = "control-label col-md-2" })
-
-                    @Html.DropDownListFor(model => model.JobTitle, new SelectList(
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.JobTitle, new SelectList(
                   new List<Object>{
                        new { value = "Analyst"  , text = "Analyst"  },
                        new { value = "Back end Developer" , text = "Back end Developer" },
@@ -94,17 +100,17 @@ BLUE WRAP
                        new { value = "Project Manager" , text = "Project Manager" },
                        new { value = "Supervisor" , text = "Supervisor"},
                        new { value = "Tester" , text = "Tester" },
- 
+
                     },
                   "value",
                   "text",
-                   0))
-                    
-                 @*   <div class="col-md-10">
-        @Html.EditorFor(model => model.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.JobTitle)
-    </div>*@ 
-                </div>
+            0), new { @class = "form-control" })
+                        </div>
+                        @*   <div class="col-md-10">
+                @Html.EditorFor(model => model.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.JobTitle)
+            </div>*@
+                    </div>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Years, new { @class = "control-label col-md-2" })
@@ -140,8 +146,8 @@ BLUE WRAP
             </div>
         }
     </div>  <!-- /container -->
-</body>
-</html>
+@*</body>
+</html>*@
 
 
 

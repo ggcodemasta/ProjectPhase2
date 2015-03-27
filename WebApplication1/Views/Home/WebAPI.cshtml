@@ -28,7 +28,7 @@
 <div class="container verticalSpace">
     <!--Show all manufacturers-->
     <div>
-        <h4>Tap Into the Power of EmployeeArray[ ] with our Developer API</h4>
+        <h2>Tap Into the Power of EmployeeArray[ ] with our Developer API</h2>
         <p>Get access to all of our job seeker profiles using the EA[ ] API. Simply use the HTML & Javascript below to search and list all of our job seekers.</p>
         <div class="form-group">
             <textarea class="form-control" id="htmlSample" rows="18">
@@ -100,40 +100,51 @@ Javascript Sample Code:
 
         </div>
     </div>
-    <div>
+    <div class="row">
         <br />
         <!--Search profiles by job title and/or city-->
-        <div>
-            <h4>Sample Results: Find EmployeeArray[ ] Profiles by Job Title & City</h4>
+        
+        <h4>Sample Results: Find EmployeeArray[ ] Profiles by Job Title & City</h4>
+        <div class="col-xs-5">
             <label for="jobTitleFind">Enter Job Title:</label>
-            <input type="text" id="jobTitleFind" size="5" />
+            <input type="text" class="form-control" id="jobTitleFind" size="5" />
+        </div>
+        @*<div class="col-xs-1"></div>*@
+        <div class="col-xs-5">
             <label for="cityFind">Enter City:</label>
-            <input type="text" id="cityFind" size="5" />
-            <input type="button" value="Search" onclick="find();" />
+            <input type="text" class="form-control" id="cityFind" size="5" />
+            
+        </div>
+        <div class="col-xs-12">
+            <br />
+            <input type="button" class="btn btn-default" value="Search" onclick="find();" />
+        </div>
+        <div class="col-xs-12">
             <p>You may need to wait a few seconds for search results to populate.</p>
             <ul id="findProfiles" />
         </div>
 
-        @*//THIS WORKS!
-        <div>
-            <h4>Sample Results: Find EmployeeArray[ ] Profiles by City</h4>
-            <label for="jobTitleFind">Enter Job Title:</label>
-            <input type="text" id="jobTitleFind" size="5" />
-            <label for="cityFind">Enter City:</label>
-            <input type="text" id="cityFind" size="5" />
-            <input type="button" value="Search" onclick="findCity();" />
-            <p>You may need to wait a few seconds for search results to populate.</p>
-            <ul id="findProfiles" />
-        </div>*@
-
-
+            @*//THIS WORKS!
+            <div>
+                <h4>Sample Results: Find EmployeeArray[ ] Profiles by City</h4>
+                <label for="jobTitleFind">Enter Job Title:</label>
+                <input type="text" id="jobTitleFind" size="5" />
+                <label for="cityFind">Enter City:</label>
+                <input type="text" id="cityFind" size="5" />
+                <input type="button" value="Search" onclick="findCity();" />
+                <p>You may need to wait a few seconds for search results to populate.</p>
+                <ul id="findProfiles" />
+            </div>*@
+        </div>
+    <hr />
+    <div class="row">
         <br />
         <h4>Sample Results: All EmployeeArray[ ] Profiles</h4>
         <p>You may need to wait a few seconds to see the list.</p>
         <ul id="profiles" />
     </div>
-
 </div>
+
 
 
 <script src="~/Scripts/jquery-2.1.3.min.js"></script>

@@ -5,6 +5,15 @@
     Layout = "~/Views/Shared/LayoutMain.cshtml";
 }
 
+<style>
+    .verticalSpace {
+        margin-bottom: 70px;
+    }
+    .paddingRow {
+        padding-top: 20px;
+    }
+</style>
+
 <!-- *****************************************************************************************************************
 BLUE WRAP
 ***************************************************************************************************************** -->
@@ -16,7 +25,7 @@ BLUE WRAP
     </div> <!-- /container -->
 </div><!-- /blue -->
 @Html.Partial("~/Views/Shared/Partials/ProfileTab.cshtml")
-<div class="container voffset5">
+<div class="container voffset5 verticalSpace">
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -216,14 +225,14 @@ BLUE WRAP
                     <td></td>
                 </tr>
                 <tr>
-                    <td></td>
+                    <td class="paddingRow"><input type="submit" value="Save" class="btn btn-default" /></td>
 
                     <td>
-                        <div class="form-group">
+                        @*<div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
                                 <input type="submit" value="Save" class="btn btn-default" />
                             </div>
-                        </div>
+                        </div>*@
                     </td>
                     <td></td>
                     <td></td>
@@ -235,10 +244,10 @@ BLUE WRAP
 
             </table>
         </div>
-             
+
     }
 
-    </div>
+</div>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

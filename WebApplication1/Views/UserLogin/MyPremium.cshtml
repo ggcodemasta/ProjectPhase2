@@ -9,6 +9,12 @@
     Layout = "~/Views/Shared/LayoutMain.cshtml";
 }
 
+<style>
+    .verticalSpace {
+        //margin-bottom: 70px;
+    }
+</style>
+
 <!-- *****************************************************************************************************************
 BLUE WRAP
 ***************************************************************************************************************** -->
@@ -22,7 +28,7 @@ BLUE WRAP
 
 @Html.Partial("~/Views/Shared/Partials/ProfileTab.cshtml")
 
-<div class="container voffset5">
+<div class="container voffset5 verticalSpace">
     <table class="table table-striped table-hover">
         <tr>
             <th></th>
@@ -33,18 +39,18 @@ BLUE WRAP
             <th>Billing Method</th>
             <th></th>
         </tr>
-@foreach (var item in Model)
-{
-    <tr>
-        <td></td>
-        <td>@Html.DisplayFor(modelItem => item.SvcType.svcName)</td>
-        <td>@Html.DisplayFor(modelItem => item.svcStartDate)</td>
-        <td>@Html.DisplayFor(modelItem => item.svcEndDate)</td>
-        <td>@Html.DisplayFor(modelItem => item.billingDate)</td>
-        <td>@Html.DisplayFor(modelItem => item.billingMethod)</td>
-        <td></td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td></td>
+                <td>@Html.DisplayFor(modelItem => item.SvcType.svcName)</td>
+                <td>@Html.DisplayFor(modelItem => item.svcStartDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.svcEndDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.billingDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.billingMethod)</td>
+                <td></td>
+            </tr>
+        }
     </table>
 </div>
 <div class="container text-center">

@@ -5,6 +5,12 @@
     Layout = "~/Views/Shared/LayoutMain.cshtml";
 }
 
+<style>
+    .verticalSpace {
+        margin-bottom: 50px;
+    }
+</style>
+
 <link href="~/Content/custom.css" rel="stylesheet" />
 
 <!-- *****************************************************************************************************************
@@ -20,12 +26,12 @@ BLUE WRAP
 
 @Html.Partial("~/Views/Shared/Partials/ProfileTab.cshtml")
 
-<div class="container voffset5">
+<div class="container voffset5 verticalSpace">
     @*<h2> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span> </h2>*@
     <div class="jumbotron voffset3">
         <p>Let opportunities come to you.</p>
         <p>
-            When you upgrade to Premium, you can let any member see your full profile and 
+            When you upgrade to Premium, you can let any member see your full profile and
             reach out to you for free, so you'll never miss an opportunity.
         </p>
     </div>
@@ -67,39 +73,39 @@ BLUE WRAP
                         <td>&nbsp;</td>
                     </tr>
                 }
-</table>
+        </table>
     </div>
     <div class="voffset5">
         <h3>2. Payment</h3>
-        
+
         <div class="container voffset4">
             <h4><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Pay by credit card</h4>
 
-                <div class="form-group col-lg-7">
-                    <label>Card Number</label>
-                    <input type="number" class="form-control input-sm" name="card-number" id="card-number" 
-                           placeholder="Debit/Credit Card Number: (ex) 8571 8972 6773 8894"
-                           required>
-                </div>
-                <div class="form-group col-lg-7">
-                    <label>Name on Card</label>
-                    <input type="text" class="form-control input-sm" name="card-holder-name" id="card-holder-name" 
-                           placeholder="Card Holder's Name: (ex) Deanna Mcarthor" required>
-                </div>
-                <div class="form-group col-lg-7">
-                    <label>Expiration Date</label>
-                    <input type="number" class="form-control input-sm" name="expiry-month" id="expiry-month" placeholder="Month: (ex) 03" required>
-                    <input type="number" class="form-control input-sm" name="expiry-month" id="expiry-month" placeholder="Year: (ex) 2017" required>
-                </div>
-                <div class="form-group col-lg-7">
-                    <label>Card CVV</label>
-                    <input type="number" class="form-control input-sm" name="cvv" id="cvv" 
-                           placeholder="Security Code: (ex) 187" required>
-                </div>
-                <div class="form-group col-lg-12">
-                    <button type="submit" class="btn btn-warning">Pay Now</button>
-                </div>
-                
+            <div class="form-group col-lg-7">
+                <label>Card Number</label>
+                <input type="number" class="form-control input-sm" name="card-number" id="card-number"
+                       placeholder="Debit/Credit Card Number: (ex) 8571 8972 6773 8894"
+                       required>
+            </div>
+            <div class="form-group col-lg-7">
+                <label>Name on Card</label>
+                <input type="text" class="form-control input-sm" name="card-holder-name" id="card-holder-name"
+                       placeholder="Card Holder's Name: (ex) Deanna Mcarthor" required>
+            </div>
+            <div class="form-group col-lg-7">
+                <label>Expiration Date</label>
+                <input type="number" class="form-control input-sm" name="expiry-month" id="expiry-month" placeholder="Month: (ex) 03" required>
+                <input type="number" class="form-control input-sm" name="expiry-month" id="expiry-month" placeholder="Year: (ex) 2017" required>
+            </div>
+            <div class="form-group col-lg-7">
+                <label>Card CVV</label>
+                <input type="number" class="form-control input-sm" name="cvv" id="cvv"
+                       placeholder="Security Code: (ex) 187" required>
+            </div>
+            <div class="form-group col-lg-12">
+                <button type="submit" class="btn btn-warning">Pay Now</button>
+            </div>
+
             </form>
         </div>
 
