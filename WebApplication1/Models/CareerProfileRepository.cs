@@ -279,7 +279,7 @@ namespace WebApplication1.Models
 
 
 
-        private List<CareerProfile> GetSkills(List<CareerProfile> careerProfile)
+        public List<CareerProfile> GetSkills(List<CareerProfile> careerProfile)
         {
             EmployeesEntities context = new EmployeesEntities();
             var query = (from p in context.Profiles
@@ -317,7 +317,7 @@ namespace WebApplication1.Models
             return careerProfileSkill;
         }
 
-        private List<CareerProfile> GetCareers(List<CareerProfile> careerProfile)
+        public List<CareerProfile> GetCareers(List<CareerProfile> careerProfile)
         {
             EmployeesEntities context = new EmployeesEntities();
             var query = (from c in context.Careers

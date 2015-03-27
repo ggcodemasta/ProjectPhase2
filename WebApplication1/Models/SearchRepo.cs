@@ -19,7 +19,9 @@ namespace WebApplication1.Models
 
     public class SearchRepo
     {
+
         EmployeesEntities context = new EmployeesEntities();
+   
         public String GetEducation(int? profile) 
         {
             var query = (from p in context.Profiles
@@ -88,28 +90,35 @@ namespace WebApplication1.Models
                         yearmax = 200;
                         break;
                 }
+
+
                 int edu = SaveEducation(education);
-
-                var filterbasic = (from c in context.Careers
-                                   let p = c.Profile
-                                   where c.years >= yearmin
-                                   where c.years <= yearmax
-                                   where p.educationID == edu
-                                   select p).Distinct();
-
+            //education
+                IQueryable<Profile> filtereducation = (from p in context.Profiles
+                                                       where p.educationID >= edu
+                                       select p);
+            //years experience
+                IQueryable<Profile> filteryears = (from p in filtereducation
+                                                   from c in p.Careers
+                                                   where c.years >= yearmin
+                                                   where c.years <= yearmax
+                                                   select p).Distinct();
+            //jobtitle
                 IQueryable<Profile> filterjobtitles;
                 if (jobtitle != "ALL")
                 {
-                    filterjobtitles = (from p in filterbasic
+                    filterjobtitles = (from p in filteryears
                                        from c in p.Careers
                                        where c.jobTitle == jobtitle
                                        select p);
                 }
                 else
                 {
-                    filterjobtitles = filterbasic;
+                    filterjobtitles = filteryears;
                 }
-
+            
+            
+            //industry
                 IQueryable<Profile> filterindustry;
                 if (industry != "ALL")
                 {
@@ -122,34 +131,60 @@ namespace WebApplication1.Models
                     filterindustry = filterjobtitles;
                 }
 
-                IQueryable<Profile> filterlocation1;
 
-                if (relocate == "on")
-                {
-                    //query for those in the area
-                    filterlocation1 = (from p in filterindustry
-                                      where p.country == country
-                                      where p.province == province
-                                      where p.city == city 
-                                      select p);
-                    //query for those not in area but willing to relocate
-                    var filterlocation2 = (from p in filterindustry
-                                       where p.relocationYN == "yes"
-                                       select p).ToList();
-                    filterlocation2.AddRange(filterlocation1);
-                        profilelist.AddRange(filterlocation2);
-                  
-                }
-                else
-                {//only get those in the area
-                    filterlocation1 = (from p in filterindustry
-                                      where p.country == country
-                                      where p.province == province
-                                      where p.city == city
-                                      select p);
-                    profilelist.AddRange(filterlocation1);
-                }
+                List<Profile> filtercountry = new List<Profile>();
+                List<Profile> filterprovince = new List<Profile>();
+                List<Profile> filtercity = new List<Profile>();
+            IQueryable<Profile> filterrelocation;
+            //relocate
 
+            if (country != "")
+            {
+
+                filtercountry = (from p in filterindustry
+                                 where p.country.ToLower() == country.ToLower()
+                                 select p).ToList();
+            }
+            else 
+            {
+                filtercountry = filterindustry.ToList();
+            }
+
+
+            if (province != "")
+            {
+                filterprovince = (from p in filtercountry
+                                  where p.province.ToLower() == province.ToLower()
+                                  select p).ToList();
+            }
+            else { filterprovince = filtercountry; }
+
+            if (city != "")
+            {
+
+                filtercity = (from p in filterprovince
+                              where p.city.ToLower() == city.ToLower()
+                              select p).ToList();
+            }
+            else { filtercity = filterprovince; }
+                 
+                    if (relocate == "on")
+                    {
+                        //query for those not in area but willing to relocate
+                        filterrelocation = (from p in filterindustry
+                                            where p.city.ToLower() != city.ToLower()
+                                            where p.province.ToLower() != province.ToLower()
+                                            where p.relocationYN.ToLower() == "yes"
+                                            select p);
+                        profilelist.AddRange(filterrelocation);
+                        profilelist.AddRange(filtercity);
+                    }
+                    else {
+                        profilelist.AddRange(filtercity);
+                    }
+                    
+                    
+        
                 if (platforms[0] != "ALL")
                 {
 
@@ -222,8 +257,11 @@ namespace WebApplication1.Models
                     candidates.Add(new CareerProfile(query.profileID, query.firstName, query.lastName, query.linkedinURL,
                         query.portfolioURL, query.pictureURL, query.city, query.province, query.country,
                         GetEducation(query.profileID), query.relocationYN));
+
                 }
-                
+                CareerProfileRepository cprepo = new CareerProfileRepository();
+            candidates = cprepo.GetSkills(candidates);
+                candidates = cprepo.GetCareers(candidates);
                 return candidates;
 
         }
