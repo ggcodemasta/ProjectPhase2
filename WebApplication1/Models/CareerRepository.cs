@@ -71,5 +71,43 @@ namespace WebApplication1.Models
         }
 
 
+        public Careers GetOneCareer(int CareerID)
+        {
+            EmployeesEntities db = new EmployeesEntities();
+            Career career = db.Careers.Where(r => r.careerID == CareerID).FirstOrDefault();
+            Careers careers = new Careers();
+            careers.ProfileID = career.profileID;
+            careers.Industry = career.industry;
+            careers.Company = career.company;
+            careers.JobTitle = career.jobTitle;
+            careers.Years = career.years;
+            careers.Description = career.description;
+            return careers;
+        }
+
+
+        public int UpdateCareer(Careers careers)
+        {
+            EmployeesEntities db = new EmployeesEntities();
+            Career career = ( from c in db.Careers
+                              where c.careerID == careers.CareerID
+                              select c).FirstOrDefault();
+            career.profileID = careers.ProfileID;
+            career.industry = careers.Industry;
+            career.company = careers.Company;
+            career.jobTitle = careers.JobTitle;
+            career.years = careers.Years;
+            career.description = careers.Description;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return -1;
+            }
+            return 1;
+        }
+
     }
 }

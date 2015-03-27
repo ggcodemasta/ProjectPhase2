@@ -416,7 +416,85 @@ namespace WebApplication1.Controllers
             return RedirectToAction("ShowMsg", new { msg = message });
         }
 
+     
+        [HttpGet]
+        public ActionResult CareerEdit(int careerID)
+        {
+            CareerRepository careerRepository = new CareerRepository();
 
+            Careers careers = new Careers();
+
+
+
+            return View(careerRepository.GetOneCareer(careerID));
+        }
+
+        [HttpPost]
+        public ActionResult CareerEdit(Careers careers)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("ShowMsg", new { msg = "[ERR] invalid input" });
+            }
+
+
+            CareerRepository careerRepository = new CareerRepository();
+
+          
+            string email = HttpContext.User.Identity.Name; // userid
+
+            EmployeesEntities db = new EmployeesEntities();
+            int profileID = (from p in db.Profiles
+                             where p.email == email
+                             select p.profileID).SingleOrDefault();
+
+
+            careers.ProfileID = profileID;
+
+
+            if (careerRepository.UpdateCareer(careers) < 0)
+            {
+                return RedirectToAction("ShowMsg", new { msg = "[FAIL] HandleCareer" });
+            }
+
+            return RedirectToAction("ViewCareers", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult CareerDelete(int careerID)
+        {
+            CareerRepository careerRepository = new CareerRepository();
+            Careers careers = new Careers();
+            return View(careerRepository.GetOneCareer(careerID));
+        }
+
+        [HttpPost]
+        public ActionResult CareerDelete(Careers careers)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("ShowMsg", new { msg = "[ERR] invalid input" });
+            }
+
+            EmployeesEntities db = new EmployeesEntities();
+            Career career = ( from c in db.Careers
+                              where c.careerID == careers.CareerID
+                              select c).FirstOrDefault();
+            if (career!= null)
+                db.Careers.Remove(career);                     
+              try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                     return RedirectToAction("ShowMsg", new { msg = "[FAIL] HandleCareer" });
+                }
+               return RedirectToAction("ViewCareers", "Home");
+        }
+
+
+        [HttpGet]
         public ActionResult Career()
         {
             return View();
@@ -429,10 +507,7 @@ namespace WebApplication1.Controllers
             {
                 return RedirectToAction("ShowMsg", new { msg = "[ERR] invalid input" });
             }
-
-
             CareerRepository careerRepository = new CareerRepository();
-
             careers.CareerID = 0;
             string email = HttpContext.User.Identity.Name; // userid
 
@@ -440,11 +515,7 @@ namespace WebApplication1.Controllers
             int profileID = (from p in db.Profiles
                              where p.email == email
                              select p.profileID).SingleOrDefault();
-
-
             careers.ProfileID = profileID;
-
-
             if (careerRepository.HandleCareer(careers) < 0)
             {
                 return RedirectToAction("ShowMsg", new { msg = "[FAIL] HandleCareer" });

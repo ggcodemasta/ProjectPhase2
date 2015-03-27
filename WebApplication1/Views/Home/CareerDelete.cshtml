@@ -1,0 +1,117 @@
+﻿@model WebApplication1.ViewModels.Careers
+
+@{
+    ViewBag.Title = "Career";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+<!-- *****************************************************************************************************************
+BLUE WRAP
+***************************************************************************************************************** -->
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>CAREER DELETE.</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+@Html.Partial("~/Views/Shared/Partials/ProfileTab.cshtml")
+
+@Html.Partial("~/Views/Shared/Partials/ProfileLinks.cshtml")
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <div class="container verticalSpace">
+        @using (Html.BeginForm())
+        {
+            <div class="form-horizontal">
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Industry, new { @class = "control-label col-md-2" })
+
+                    @Html.DropDownListFor(model => model.Industry, new SelectList(
+                  new List<Object>{
+                       new { value = "Banking" , text = "Banking"  },
+                       new { value =  "Computer Hardware" , text = "Computer Hardware" },
+                       new { value = "Educational services" , text = "Educational services"},
+                       new { value = "Finance" , text = "Finance"},
+                       new { value = "Health Care and Social Services" , text = "Health Care and Social Services"  },
+                       new { value = "Manufacturing"  , text = "Manufacturing" },
+                       new { value = "Networking" , text = "Networking"},
+                       new { value = "Retail" , text = "Retail" },
+                       new { value = "Telecommunications" , text = "Telecommunications"},
+                       new { value = "Transportation" , text = "Transportation" },
+                       new { value = "Video Game" , text = "Video Game"}
+                    },
+                  "value",
+                  "text",
+                   0))
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Company, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Company, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Company)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.JobTitle, new { @class = "control-label col-md-2" })
+
+                    @Html.DropDownListFor(model => model.JobTitle, new SelectList(
+                  new List<Object>{
+                       new { value = "Analyst"  , text = "Analyst"  },
+                       new { value = "Back end Developer" , text = "Back end Developer" },
+                       new { value = "Front end Developer" , text = "Front end Developer"},
+                       new { value = "Full Stack Developer" , text = "Full Stack Developer"  },
+                       new { value = "Project Manager" , text = "Project Manager" },
+                       new { value = "Supervisor" , text = "Supervisor"},
+                       new { value = "Tester" , text = "Tester" },
+                    },
+                  "value",
+                  "text",
+                   0))
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Years, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Years, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Years)
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="DELETE" class="btn btn-default" />
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>  <!-- /container -->
+</body>
+</html>
+
+
+
+
