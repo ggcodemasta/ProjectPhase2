@@ -51,7 +51,6 @@ BLUE WRAP
                     @Html.DisplayFor(modelItem => item.company)
                 </td>
                 <td>
-                    gd
                     @Html.DisplayFor(modelItem => item.jobTitle)
                 </td>
                 <td>
@@ -61,11 +60,14 @@ BLUE WRAP
                     @Html.DisplayFor(modelItem => item.description)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "CareerEdit", new { id = item.careerID }) |
-                    @Html.ActionLink("Delete", "CareerDelete", new { id = item.careerID })
-
+                    @Html.ActionLink("Edit", "CareerEdit", new { careerID = item.careerID }) |
+                    @Html.ActionLink("Delete", "CareerDelete", new { careerID = item.careerID }) 
+   
                 </td>
             </tr>
         }
     </table>
+ 
 </div>
+
+ 

@@ -463,6 +463,8 @@
     <Content Include="Views\Shared\Partials\ProfileTab.cshtml" />
     <Content Include="Views\Home\SearchError.cshtml" />
     <Content Include="Views\Home\Skills.cshtml" />
+    <Content Include="Views\Home\CareerEdit.cshtml" />
+    <Content Include="Views\Home\CareerDelete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

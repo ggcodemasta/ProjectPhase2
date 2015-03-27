@@ -57,23 +57,7 @@ BLUE WRAP
                   "value",
                   "text",
                    0))                 
-
-
-                     @*   @Html.DropDownListFor(model => model.Industry, new SelectList(
-    new List<Object>{
-         new { value = 0 , text = "Red"  },
-         new { value = 1 , text = "Blue" },
-         new { value = 2 , text = "Green"}
-      },
-    "value",
-    "text",
-     0))*@ 
-
-                  @*      @Html.EditorFor(model => model.Industry, new { htmlAttributes = new { @class = "form-control" } })
-    @Html.ValidationMessageFor(model => model.Industry)*@ 
                     </div>
-                @*</div>*@
-
                 <div class="form-group">
                     @Html.LabelFor(model => model.Company, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -94,31 +78,17 @@ BLUE WRAP
                        new { value = "Project Manager" , text = "Project Manager" },
                        new { value = "Supervisor" , text = "Supervisor"},
                        new { value = "Tester" , text = "Tester" },
- 
                     },
                   "value",
                   "text",
                    0))
-                    
-                 @*   <div class="col-md-10">
-        @Html.EditorFor(model => model.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.JobTitle)
-    </div>*@ 
+ 
                 </div>
-
                 <div class="form-group">
                     @Html.LabelFor(model => model.Years, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                       @Html.EditorFor(model => model.Years, new { htmlAttributes = new { @class = "form-control" } })
-    @Html.ValidationMessageFor(model => model.Years)
-                     @*   <select name="Years1">
-        <option value="1">1 to 2 years</option>
-        <option value="2">2 to 3 years</option>
-        <option value="3">3 to 4 years</option>
-        <option value="4">4 to 5 years</option>
-        <option value="4">5+ years</option>
-    </select>*@ 
-
+                      @Html.ValidationMessageFor(model => model.Years)        
                     </div>
                 </div>
 
