@@ -25,7 +25,7 @@ namespace WebApplication1.Models
         public IEnumerable<AspNetRole> GetAllAspNetRoles()
         {
             EmployeesEntities db = new EmployeesEntities();
-            return db.AspNetRoles.ToList();
+            return db.AspNetRoles.OrderBy(r=>r.Id).ToList();
         }
     }
 }

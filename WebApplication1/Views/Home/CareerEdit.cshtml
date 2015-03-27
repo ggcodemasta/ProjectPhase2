@@ -31,14 +31,12 @@ BLUE WRAP
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
     <div class="container verticalSpace">
-        @using (Html.BeginForm())
-        {
-            <div class="form-horizontal">
-
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Industry, new { @class = "control-label col-md-2" })
-
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Industry, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
                     @Html.DropDownListFor(model => model.Industry, new SelectList(
                   new List<Object>{
                        new { value = "Banking" , text = "Banking"  },
@@ -55,19 +53,20 @@ BLUE WRAP
                     },
                   "value",
                   "text",
-                   0))
+                   0), new { @class = "form-control" })
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Company, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Company, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Company)
-                    </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Company, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Company, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Company)
                 </div>
+            </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.JobTitle, new { @class = "control-label col-md-2" })
-
+            <div class="form-group">
+                @Html.LabelFor(model => model.JobTitle, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
                     @Html.DropDownListFor(model => model.JobTitle, new SelectList(
                   new List<Object>{
                        new { value = "Analyst"  , text = "Analyst"  },
@@ -80,34 +79,34 @@ BLUE WRAP
                     },
                   "value",
                   "text",
-                   0))
-
+                  0), new { @class = "form-control" })
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Years, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Years, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Years)
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Description)
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="UPDATE" class="btn btn-default" />
-                    </div>
-
-                </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Years, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Years, new { htmlAttributes = new { @class = "form-control" ,  type = "number",min ="1",max="20", required = "required"} })
+                @Html.ValidationMessageFor(model => model.Years)
             </div>
-        }
+        </div>
+
+     
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="UPDATE" class="btn btn-default" />
+            </div>
+
+        </div>
+    </div>
+    }
     </div>  <!-- /container -->
 </body>
 </html>
