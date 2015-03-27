@@ -18,7 +18,6 @@ namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
-        // Auth2
         const string EMAIL_CONFIRMATION = "EmailConfirmation";
         const string PASSWORD_RESET = "ResetPassword";
         void CreateTokenProvider(UserManager<IdentityUser> manager, string tokenType)
@@ -28,8 +27,6 @@ namespace WebApplication1.Controllers
        
         public ActionResult Index()
         {
-            //CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
-            //return View(careerProfileRepository.GetAllProfiles());
             return View();
         }
         public ActionResult JobSeekers()
@@ -43,14 +40,6 @@ namespace WebApplication1.Controllers
           
             return View();
         }
-        //[HttpPost]
-        //public ActionResult Employers(string jobTitle, string city)
-        //{
-        //    CareerProfileRepository careerProfileRepository = new CareerProfileRepository();
-        //    IEnumerable<int> quickSearchResults = careerProfileRepository.QuickSearchProfiles(jobTitle, city);
-
-        //    return RedirectToAction("DisplaySearchResults", "Home", new { displayList = quickSearchResults });
-        //}
 
         [HttpGet]
         public ActionResult SearchError()
@@ -102,7 +91,6 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        // auth2
         int ValidLogin(Login login)
         {
             UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
@@ -167,8 +155,6 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("ShowMsg", new { msg = "[ERR] invalid input" });
             }
 
-            // if (identityUser == null)
-            // auth2
             int res = ValidLogin(login);
             string message = ""; 
             if ( res == -1 )
@@ -209,57 +195,6 @@ namespace WebApplication1.Controllers
             }, identity);
             return RedirectToAction("BasicInfo", "Home");
         }
-
-        //[HttpGet]
-        //public ActionResult Register()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public ActionResult Register(Register register)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return RedirectToAction("ShowMsg", new { msg = "[ERR] invalid input" });
-        //    }
-
-        //    var userStore = new UserStore<IdentityUser>();
-
-        //    // var manager = new UserManager<IdentityUser>(userStore);
-        //    // auth2
-        //    UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore)
-        //    {
-        //        UserLockoutEnabledByDefault = true,
-        //        DefaultAccountLockoutTimeSpan = new TimeSpan(0, 10, 0),
-        //        MaxFailedAccessAttemptsBeforeLockout = 3
-        //    };
-
-        //    var identityUser = new IdentityUser()
-        //    {
-        //        UserName = register.Email,
-        //        Email = register.Email
-        //    };
-        //    IdentityResult result = manager.Create(identityUser, register.Password);
-
-        //    if (result.Succeeded)
-        //    {
-        //        var authenticationManager
-        //                          = HttpContext.Request.GetOwinContext().Authentication;
-        //        var userIdentity = manager.CreateIdentity(identityUser,
-        //                                   DefaultAuthenticationTypes.ApplicationCookie);
-        //        authenticationManager.SignIn(new AuthenticationProperties() { },
-        //                                     userIdentity);
-        //    }
-
-        //    ProfileRepository profileRepository = new ProfileRepository();
-        //    if (profileRepository.HandleRegistration(register) < 0)
-        //    {
-        //        return RedirectToAction("ShowMsg", new { msg = "[FAIL] HandleRegistration" });
-        //    }
-
-        //    return RedirectToAction("Index", "Home");
-        //}
 
         [HttpGet]
         public ActionResult ShowMsg(string msg, string url="")
@@ -308,12 +243,6 @@ namespace WebApplication1.Controllers
         }
 
 
-        //public ActionResult UserDelete() 
-        //{
-        //    return View();
-        //}
-
-
         [HttpPost]
         public ActionResult JobSeekers(JobSeekers jobSeekers)
         {
@@ -326,8 +255,6 @@ namespace WebApplication1.Controllers
             string message = "";
             string callbackUrl = "" ; 
 
-            // var manager = new UserManager<IdentityUser>(userStore);
-            // auth2
             UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore)
             {
                 UserLockoutEnabledByDefault = true,
@@ -344,15 +271,6 @@ namespace WebApplication1.Controllers
 
             if (result.Succeeded)
             {
-                /*
-                var authenticationManager
-                                  = HttpContext.Request.GetOwinContext().Authentication;
-                var userIdentity = manager.CreateIdentity(identityUser,
-                                           DefaultAuthenticationTypes.ApplicationCookie);
-                authenticationManager.SignIn(new AuthenticationProperties() { },
-                                             userIdentity);
-                 */
-                // auth2
                 CreateTokenProvider(manager, EMAIL_CONFIRMATION);
 
                 var code = manager.GenerateEmailConfirmationToken(identityUser.Id);
@@ -376,10 +294,6 @@ namespace WebApplication1.Controllers
                 {
                     message = "Sorry, we couldn't email you. Please retry it.";
                 }
-
-                // more...??
-                // return RedirectToAction("ShowMsg", new { msg = message});
-                // return RedirectToAction("ShowMsg", new { msg = message, url = callbackUrl });
             }
 
             ProfileRepository profileRepository = new ProfileRepository();
@@ -389,8 +303,6 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("ShowMsg", new { msg = "[FAIL] HandleRegistration" });
             }
 
-            // return RedirectToAction("Index", "Home");
-            // return RedirectToAction("ShowMsg", new { msg = message});
             
             return RedirectToAction("ShowMsg", new { msg = message, url = callbackUrl });
         }
@@ -681,8 +593,6 @@ namespace WebApplication1.Controllers
                 message = "Sorry, we couldn't email you. Please retry it.";
             }
 
-            // more... ??
-            // return RedirectToAction("ShowMsg");
             return RedirectToAction("ShowMsg", new { msg = message, url = callbackUrl });
         }
 
@@ -718,7 +628,7 @@ namespace WebApplication1.Controllers
             }
 
             CaptchaHelper captchaHelper = new CaptchaHelper();
-            // string captchaResponse = captchaHelper.CheckRecaptcha();
+
             if ( captchaHelper.CheckRecaptcha() < 0 )
             {
                 return RedirectToAction("ShowMsg", new { msg = "Sorry, but please click reCAPTCHA." });
