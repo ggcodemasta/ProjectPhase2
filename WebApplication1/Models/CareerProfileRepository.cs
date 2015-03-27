@@ -154,20 +154,26 @@ namespace WebApplication1.Models
             {
                 foreach (CareerProfile cp in allProfiles)
                 {
-                    if (cp.City.Trim().ToLower() == city.Trim().ToLower())
-                    {
-                        bac.Add(cp);
+                    if (cp.City != null) { 
+                        if (cp.City.Trim().ToLower() == city.Trim().ToLower())
+                        {
+                            bac.Add(cp);
+                        }
                     }
                 }
 
             }
             else if (city == "" && jobTitle != "")
             {
+
                 foreach (CareerProfile cp in allProfiles)
                 {
-                    if (cp.JobTitle.IndexOf(jobTitle, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
+                    if (cp.City != null)
                     {
-                        bac.Add(cp);
+                        if (cp.JobTitle.IndexOf(jobTitle, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
+                        {
+                            bac.Add(cp);
+                        }
                     }
                 }
 
@@ -176,9 +182,12 @@ namespace WebApplication1.Models
             {
                 foreach (CareerProfile cp in allProfiles)
                 {
-                    if (cp.City.Trim().ToLower() == city.Trim().ToLower() && cp.JobTitle.IndexOf(jobTitle, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
+                    if (cp.City != null)
                     {
-                        bac.Add(cp);
+                        if (cp.City.Trim().ToLower() == city.Trim().ToLower() && cp.JobTitle.IndexOf(jobTitle, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
+                        {
+                            bac.Add(cp);
+                        }
                     }
                 }
             }
