@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication1.ViewModels
 {
@@ -12,6 +13,8 @@ namespace WebApplication1.ViewModels
         public string Industry { get; set; }
         public string Company { get; set; }
         public string JobTitle { get; set; }
+        [Required]
+        [Range(1, 20)]
         public int Years { get; set; }
         public string Description { get; set; }
 
