@@ -1,5 +1,6 @@
 ﻿//var webApiURL = "http://ea.greepinetree1.com/api/Profiles/";
-var webApiURL = "http://localhost:31220/api/Profiles/";
+// var webApiURL = "http://localhost:31220/api/Profiles/";
+var webApiURL = window.location.hostname + "/api/Profiles/";
 
 // List all manufacturers when the browser loads.
 $(document).ready(function () {
